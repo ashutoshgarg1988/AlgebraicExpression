@@ -1,0 +1,58 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  overflow: hidden;
+  /* font-family: Arial, sans-serif; */
+}
+
+/* ===========================
+   LANDSCAPE ENFORCER
+=========================== */
+@media screen and (orientation: portrait) {
+  body {
+    overflow: hidden; /* avoid scrolling behind */
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    text-align: center;
+    z-index: 99999;
+
+    /* ADD BACKGROUND IMAGE */
+    background-image: url('../assets/images/common/rotate-device.png'); /* change path */
+    background-size: cover;       /* makes it fill the screen */
+    background-position: center;  /* centers the image */
+    background-repeat: no-repeat; /* no tiling */
+    padding: 20px; /* optional */
+  }
+}
+
+/* FIXED DESIGN SIZE (1920 × 1080) */
+#stage {
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #4CAF50;
+}
+
+/* Common Background */
+#global-background {
+    position: fixed;
+    inset: 0;
+    background-image: url(../assets/images/common/bg-green.svg);
+    background-size: 109%;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    width: 100%;
+}

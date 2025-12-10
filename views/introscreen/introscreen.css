@@ -1,0 +1,133 @@
+/* #intro-screen:not(.start) .fade-in {
+    opacity: 0 !important;
+} */
+
+.fade-in {
+    opacity: 0;
+    /* transform: translateY(10px); */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: var(--d, 0.8s);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        /* transform: translateY(10px); */
+    }
+    to {
+        opacity: 1;
+        /* transform: translateY(0); */
+    }
+}
+
+.intro-title {
+    position: absolute;
+    top: 20px;
+    left: 215px;
+    width: 400px;
+    transform: translateX(-50%);
+}
+
+/* Skip Button */
+.skip-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    width: 9%;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.skip-btn:hover {
+  transform: scale(1.1);
+}
+
+/* White Box */
+.intro-box {
+    background: #ffffff;
+    padding: 6px 27px;
+    border-radius: 18px;
+    width: 90%;
+    margin: 0%;
+    font-family: "Poppins", sans-serif;
+    color: #1b2b3a;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    top: 19%;
+    bottom: 18%;
+}
+
+.maintxt {
+    font-size: 37px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.subtext {
+    font-size: 27px;
+}
+
+.bold-eq {
+    font-weight: 700;
+    font-size: 28px;
+}
+
+/* Two Column Section */
+.two-col {
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 40px;
+}
+
+.two-col > div {
+    width: 50%;
+}
+
+/* Example Row */
+.example-row {
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 92px;
+}
+
+.example-row .workings {
+    text-align: left;
+}
+
+/* Equation diagram */
+.equation-section {
+    position: absolute;
+    left: 72%;
+    top: 50%;
+    width: 610px;
+    height: 388px;
+}
+
+.equation {
+    width: 42%;
+    position: absolute;
+    left: 15%;
+    top: 22%;
+}
+
+.coefcient {
+    left: 10%;
+    top: -8%;
+    width: 20%;
+    position: absolute;
+}
+
+.constant {
+    left: 43%;
+    top: -9%;
+    width: 20%;
+    position: absolute;
+}
+
+.variable {
+    left: 17%;
+    top: 48%;
+    width: 20%;
+    position: absolute;
+}

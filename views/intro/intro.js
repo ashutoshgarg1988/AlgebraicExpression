@@ -1,0 +1,23 @@
+/***************************************************************
+ *  Author      : Ashutosh Garg
+ *  Email       : ashutoshgarg1987@gmail.com
+ *  File        : intro.js
+ *  Description : Handeler for Intro screen
+ *  Date        : 4-Dec-2025
+ ***************************************************************/
+
+(function initIntro() {
+  // When play button is clicked → go to quiz / next screen
+  let playBtn = document.querySelector(".intro-play-btn");
+  playBtn.addEventListener("click", () => {
+    loadView("menu");
+  });
+
+  setCommonUI({
+    btnHome: false,
+    btnPlay: false,
+    btnBook: false,
+    musicBtn: true,
+    copyright: false
+  });
+})();

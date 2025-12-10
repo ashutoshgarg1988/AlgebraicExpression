@@ -1,0 +1,46 @@
+/* Titles */
+.intro-title-maths {
+    position: absolute;
+    top: 93px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+}
+
+.intro-title-sim {
+    position: absolute;
+    top: 323px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 750px;
+}
+
+.intro-title-types {
+    position: absolute;
+    top: 593px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 673px;
+}
+
+/* Play Button */
+.intro-play-btn {
+    position: absolute;
+    top: 828px;
+    left: 43%;
+    width: 227px;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.intro-play-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Characters Bottom */
+.intro-boy {
+    position: absolute;
+    bottom: -33px;
+    height: 650px;
+    left: 119px;
+}
