@@ -1,0 +1,303 @@
+.content-area {
+  position: absolute;
+  top: 180px;
+  width: 97%;
+  left: 28px;
+  height: 820px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* LEFT PANEL */
+.bg-panel {
+  top: 66px;
+  height: 648px;
+  background: white;
+  border-radius: 35px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* --- TOOLBOX PANEL --- */
+.toolbox {
+  width: 240px;
+  background: #fff;
+  border-radius: 22px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tool-title {
+  text-align: center;
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.tool-section-title {
+  text-align: center;
+  font-weight: 700;
+  color: #444;
+  margin: 10px;
+  font-size: 25px;
+}
+
+/* Layout helpers */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid grey;
+  border-radius: 16px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border: 1px solid grey;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+/* COINS */
+.coin {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+.gold {
+  background: linear-gradient(#ffd44f, #e6b325);
+}
+
+.silver {
+  background: linear-gradient(#dcdcdc, #b5b5b5);
+}
+
+.bronze {
+  background: linear-gradient(#d9a066, #b47b45);
+}
+
+/* ALGEBRA BUTTONS */
+.alg-btn {
+  height: 55px;
+  border-radius: 14px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.x {
+  background: #ff4d4f;
+}
+
+.y {
+  background: #3b82f6;
+}
+
+.one {
+  background: #facc15;
+  color: #222;
+}
+
+.neg-one {
+  background: #22c55e;
+}
+
+/* WEIGHTS */
+.weight {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background: #1e3a8a;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* CLEAR BUTTON */
+.clear-btn {
+  width: 100%;
+  padding: 14px 0;
+  background: #ff4d4f;
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #b32b2d;
+}
+
+
+/* WORK AREA */
+/* .work-area {
+  flex: 1;
+  background: #fff;
+  border-radius: 22px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+} */
+
+.expression-box {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 94%;
+  height: 75px;
+  border: 1px solid grey;
+  border-radius: 14px;
+}
+
+/* VARIABLES PANEL */
+.variables {
+  width: 240px;
+  background: #fff;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.total-box {
+  margin-top: 26px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 15px;
+  text-align: center;
+  font-size: 71px;
+  font-weight: 700;
+  border: 1px solid grey;
+}
+
+.bottom-nav {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.round-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* RESET default slider UI */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 35px;
+  background: transparent;
+  margin-top: 10px;
+}
+
+/* TRACK (background bar) */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 35px;
+  background: #e5e5e5;
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.15);
+}
+
+/* KNOB (Main draggable slider handle) */
+/* Default Thumb (X Slider = red) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 50px;
+  width: 20px;
+  border-radius: 5px;
+  background: #ff4d4d; /* Red */
+  cursor: pointer;
+  margin-top: -8px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+}
+
+/* Y Slider Thumb = Blue */
+input.slider-y::-webkit-slider-thumb {
+  background: #3b82f6 !important;
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 50px;
+  width: 20px;
+  border-radius: 5px;
+  background: #ff4d4d; /* Red */
+  border: none;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+}
+
+input.slider-y::-moz-range-thumb {
+  background: #3b82f6 !important;
+}
+
+
+/* Remove browser default checkbox */
+.checkboxes div {
+  display: flex;
+  align-items: center;
+  font-size: 34px;
+  font-weight: 600;
+  margin: 28px 0;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #cfcfcf;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* Checked state */
+input[type="checkbox"]:checked {
+  background: #ff8a3d; /* orange like screenshot */
+  border-color: #ff8a3d;
+}
+
+/* Checkmark */
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 10px;
+  height: 18px;
+  border: solid #fff;
+  border-width: 0 4px 4px 0;
+  transform: rotate(45deg);
+}

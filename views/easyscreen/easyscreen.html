@@ -1,0 +1,97 @@
+<!-- 
+  ------------------------------------------------------------
+  Author: Ashutosh Garg
+  Email: ashutoshgarg1987@gmail.com
+  File: easyscreen.html
+  Description: easy screen view
+  Created On: 03/Dec/2025
+  ------------------------------------------------------------
+-->
+
+<div id="easy-screen">
+  <!-- TOP BANNER -->
+  <div class="top-banner">
+    <span>Let’s learn how to build algebraic expressions using coins, weights, and variables.</span>
+
+    <div class="sound-wrapper">
+      <img src="assets/images/common/sound-btn.svg" class="sound-btn" id="soundBtn">
+      <div class="mute-tag">Mute</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-area">
+    <!-- LEFT: TOOLBOX PANEL -->
+    <!-- TOOLBOX -->
+    <div class="bg-panel" style="width: 17%; padding: 18px;">
+      <div class="tool-title">Toolbox</div>
+
+      <!-- Coins Row -->
+      <div class="tool-section coins">
+        <div class="row">
+          <div class="coin gold"></div>
+          <div class="coin silver"></div>
+          <div class="coin bronze"></div>
+        </div>
+        <div class="tool-section-title">Coins</div>
+      </div>
+
+      <!-- Algebra Buttons -->
+      <div class="tool-section algebra">
+        <div class="grid-2">
+          <div class="alg-btn x">x</div>
+          <div class="alg-btn y">y</div>
+          <div class="alg-btn one">1</div>
+          <div class="alg-btn neg-one">-1</div>
+        </div>
+        <div class="tool-section-title">Algebra</div>
+      </div>
+
+      <!-- Weights Row -->
+      <div class="tool-section weights">
+        <div class="row">
+          <div class="weight w2">2</div>
+          <div class="weight w5">5</div>
+          <div class="weight w10">10</div>
+        </div>
+        <div class="tool-section-title">Weight</div>
+      </div>
+
+      <button class="clear-btn">Clear</button>
+    </div>
+
+    <!-- Center: Work PANEL -->
+    <div class="bg-panel" style="width: 58%; padding: 18px;" id="rightPanel">
+      <div class="expression-box"></div>
+    </div>
+
+    <!-- RIGHT: VARIABLES PANEL -->
+    <div class="bg-panel" style="width: 17%; padding: 18px;" id="rightPanel">
+      <div class="tool-title">Variables</div>
+        <div class="slider-box">
+          <input type="range" min="0" max="10" class="slider-x">
+          <div class="tool-section-title">x = 3</div>
+        </div>
+
+        <div class="slider-box">
+          <input type="range" min="0" max="10" class="slider-y">
+          <div class="tool-section-title">y = 1</div>
+        </div>
+
+        <div class="tool-title">Total</div>
+        <div class="total-box">25</div>
+
+       <div class="checkboxes">
+        <div><input type="checkbox" /> Show Coefficients</div>
+        <div><input type="checkbox" /> Show Variables</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM RIGHT BUTTONS -->
+  <div class="bottom-right-buttons">
+    <div id="easyResetBtn"><img src="assets/images/common/reset.svg" style="width: 90px;"></div>
+    <div id="easyNextBtn"><img src="assets/images/common/next.svg" style="width: 110px;"></div>
+  </div>
+
+</div>

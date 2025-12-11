@@ -1,0 +1,22 @@
+/* ---------------- MAIN CONTENT AREA ---------------- */
+.content-area {
+    position: absolute;
+    top: 180px;
+    width: 97%;
+    left: 28px;
+    height: 820px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* LEFT PANEL */
+.bg-panel {
+    top: 66px;
+    height: 690px;
+    background: white;
+    border-radius: 35px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
