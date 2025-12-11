@@ -7,6 +7,6 @@
  ***************************************************************/
 
 window.onload = function () {
-  // loadView("intro"); // LOAD INTRO FIRST
-  loadView("introscreen");
+  loadView("intro"); // LOAD INTRO FIRST
+  // loadView("warmupscreen");
 };
