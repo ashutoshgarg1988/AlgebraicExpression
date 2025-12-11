@@ -29,7 +29,7 @@
   });
 
   // Show info popup when screen loads
-  showPopup("info", { text: "Use the tiles at bottom to build an angle that matches the target angle" });
+  // showPopup("info", { text: "Use the tiles at bottom to build an angle that matches the target angle" });
 
   warmupNextBtn.addEventListener("click", () => {
     loadView("challengescreen");

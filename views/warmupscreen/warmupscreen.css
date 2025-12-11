@@ -1,4 +1,5 @@
 /* ---------------- MAIN CONTENT AREA ---------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial; }
 .content-area {
     position: absolute;
     top: 180px;
@@ -19,4 +20,132 @@
     overflow: hidden;
     background-size: cover;
     background-position: center;
+}
+
+/* MAIN LAYOUT */
+.main-area {
+    position: absolute;
+    top: 250px;
+    width: 97%;
+    left: 28px;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: flex-start; /* top-align panels */
+    gap: 29px;               /* space between toolbox, workspace, equations */
+    margin: 0 auto;          /* ensure it stays centered */
+}
+.workspace {
+    flex: 1;
+    height: 456px;          /* ensure px unit */
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+/* TOOLBOX LEFT */
+.toolbox {
+    width: 19%;
+    height: 665px;
+    background: white;
+    padding: 18px;
+    border-radius: 20px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+.toolbox h2 {
+    margin-bottom: 14px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border: 1px solid grey;
+  border-radius: 16px;
+  padding: 9px;
+  margin-bottom: 17px;
+}
+
+/* ALGEBRA BUTTONS */
+.alg-btn {
+  height: 55px;
+  border-radius: 14px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.x {
+  background: #ff4d4f;
+}
+
+.y {
+  background: #3b82f6;
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 0.5fr);
+    gap: 7px;
+    margin-bottom: 20px;
+}
+
+.numbers-grid div {
+    width: 70px;
+    height: 70px;
+    background: #333;
+    color: white;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+/* CLEAR BUTTON */
+.clear-btn {
+    width: 100%;
+    cursor: pointer;
+}
+
+/* WHITE WORKSPACE */
+.workspace {
+    flex: 1;
+    width: 60%;
+    height: 665px;
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+/* RIGHT EQUATIONS */
+.equations {
+    width: 19%;
+    height: 665px;
+}
+
+.eq-font {
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 17px;
+}
+
+.eq-box {
+    background: white;
+    padding: 14px;
+    height: 207px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+.eq-slot {
+    margin-top: 8px;
+    /* background: #f5f5f5; */
+    height: 105px;
+    border-radius: 12px;
+    border: 1px solid gainsboro;
 }

@@ -11,61 +11,62 @@
 <div id="warmup-screen">
     <!-- TOP BANNER -->
     <div class="top-banner">
-        <span>Let’s learn how to build algebraic expressions using coins, weights, and variables.</span>
+        <span>Drag the blocks to build the correct expression, then drop the completed expression into the matching box.</span>
 
         <div class="sound-wrapper">
             <img src="assets/images/common/sound-btn.svg" class="sound-btn" id="soundBtn">
-            <div class="mute-tag">Mute</div>
+            <!-- <div class="mute-tag">Mute</div> -->
         </div>
     </div>
 
     <!-- MAIN CONTENT -->
-    <div class="content-area">
-        <!-- LEFT: TOOLBOX PANEL -->
-        <div class="bg-panel" style="width: 19%;" id="rightPanel">
-            <div class="tool-title">Toolbox</div>
-            <div class="tool-section">
-                <div class="tool-section-title">Coins</div>
-                <div class="icon-grid">
-                    <div class="icon-item"></div>
-                    <div class="icon-item"></div>
-                    <div class="icon-item"></div>
-                </div>
+    <div class="main-area">
+
+        <!-- LEFT TOOLBOX -->
+        <div class="toolbox">
+            <h2 style="font-size: 50px;">Toolbox</h2>
+            <div class="grid-2">
+                <div class="alg-btn x">x</div>
+                <div class="alg-btn y">y</div>
+            </div>
+            <div class="numbers-grid">
+                <div>-10</div><div>-9</div><div>-8</div><div>-7</div>
+                <div>-6</div><div>-5</div><div>-4</div><div>-3</div>
+                <div>-2</div><div>-1</div><div>1</div><div>2</div>
+                <div>3</div><div>4</div><div>5</div><div>6</div>
+                <div>7</div><div>8</div><div>9</div><div>10</div>
+            </div>
+            <button class="clear-btn">
+                <img src="/assets/images/common/clear.svg" alt="Clear" class="clear-img">
+            </button>
+        </div>
+
+        <!-- CENTER WHITE WORKSPACE -->
+        <div class="workspace"></div>
+
+        <!-- RIGHT EQUATIONS -->
+        <div class="equations">
+            <div class="eq-box">
+                <div class="eq-font">Equation 1</div>
+                <div class="eq-slot"></div>
             </div>
 
-            <div class="tool-section">
-                <div class="tool-section-title">Algebra</div>
-                <div class="icon-grid">
-                    <div class="icon-item"></div>
-                    <div class="icon-item"></div>
-                    <div class="icon-item"></div>
-                    <div class="icon-item"></div>
-                </div>
+            <div class="eq-box">
+                <div class="eq-font">Equation 2</div>
+                <div class="eq-slot"></div>
             </div>
 
-            <div class="tool-section">
-                <div class="tool-section-title">Weights</div>
-                <div class="icon-grid">
-                    <div class="icon-item"></div>
-                    <div class="icon-item"></div>
-                    <div class="icon-item"></div>
-                </div>
+            <div class="eq-box">
+                <div class="eq-font">Equation 3</div>
+                <div class="eq-slot"></div>
             </div>
         </div>
 
-        <!-- RIGHT: VARIABLES PANEL -->
-        <div class="bg-panel" style="width: 60%;" id="rightPanel">
-
-        </div>
-
-        <!-- RIGHT: VARIABLES PANEL -->
-        <div class="bg-panel" style="width: 19%;" id="rightPanel">
-        </div>
     </div>
 
     <!-- BOTTOM RIGHT BUTTONS -->
     <div class="bottom-right-buttons">
-        <div id="challengeResetBtn"><img src="assets/images/common/reset.svg" style="width: 90px;"></div>
-        <div id="challengeNextBtn"><img src="assets/images/common/next.svg" style="width: 110px;"></div>
+        <div id="warmupResetBtn"><img src="assets/images/common/reset.svg" style="width: 90px;"></div>
+        <div id="warmupNextBtn"><img src="assets/images/common/next.svg" style="width: 110px;"></div>
     </div>
 </div>
