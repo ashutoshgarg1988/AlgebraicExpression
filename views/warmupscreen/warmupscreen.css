@@ -113,9 +113,12 @@
 
 /* WHITE WORKSPACE */
 .workspace {
-    flex: 1;
-    width: 60%;
+    position: relative;
+    width: 100%;
     height: 665px;
+    display: flex;
+    justify-content: center;   /* center horizontally */
+    align-items: center;       /* center vertically */
     background: white;
     border-radius: 22px;
     box-shadow: 0 5px 12px rgba(0,0,0,0.15);
@@ -145,7 +148,80 @@
 .eq-slot {
     margin-top: 8px;
     /* background: #f5f5f5; */
-    height: 105px;
+    min-height: 105px;
     border-radius: 12px;
     border: 1px solid gainsboro;
 }
+
+/* Drag n drop */
+/* DRAGGABLE TOOLBOX ITEMS */
+.draggable-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .08s ease, box-shadow .08s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.18);
+  font-weight: 700;
+}
+
+.grid-2 .draggable-block {
+  height: 55px;
+  border-radius: 14px;
+  font-size: 26px;
+  color: #fff;
+  padding: 0 18px;
+}
+
+/* each number token is circular and large */
+.numbers-grid .draggable-block {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #fff;
+  background: #333;
+}
+
+/* pressed state while dragging from toolbox (visual feedback) */
+.draggable-block:active {
+  cursor: grabbing;
+  transform: translateY(1px);
+}
+
+.workspace-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333;
+    color: white;
+    padding: 12px 20px;
+    font-size: 28px;
+    font-weight: 700;
+    border-radius: 14px;
+    user-select: none;
+}
+
+.expression-group {
+    display: flex;
+    gap: 12px;
+    background: #ffffff;
+    padding: 18px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    cursor: grab;
+}
+.expression-group:active {
+    cursor: grabbing;
+}
+
+.expression-group {
+    cursor: grab;
+}
+.expression-group:active {
+    cursor: grabbing;
+}
+

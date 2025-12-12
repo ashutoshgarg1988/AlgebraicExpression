@@ -3,7 +3,7 @@
  *  Email       : ashutoshgarg1987@gmail.com
  *  File        : easyscreen.js
  *  Description : Handeler and functionality for Challenge screen
- *  Date        : 4-Dec-2025
+ *  Date        : 12-Dec-2025
  ***************************************************************/
 
 (function initChallengeScreen() {

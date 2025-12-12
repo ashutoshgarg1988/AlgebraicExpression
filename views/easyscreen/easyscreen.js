@@ -52,7 +52,12 @@
     getTotalValue();
   });
 
-
+  document.querySelector(".clear-btn")?.addEventListener("click", () => {
+    workPanel.innerHTML = "";
+    totalTxt.innerText = 0;
+    expressionTxt.innerText = "-";
+    group = null;
+  });
 
   
 

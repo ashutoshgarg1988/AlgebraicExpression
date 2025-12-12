@@ -25,30 +25,30 @@
         <div class="toolbox">
             <h2 style="font-size: 50px;">Toolbox</h2>
             <div class="grid-2">
-                <div class="alg-btn x">x</div>
-                <div class="alg-btn y">y</div>
+                <div class="alg-btn x draggable-block" data-type="var" data-value="x">x</div>
+                <div class="alg-btn y draggable-block" data-type="var" data-value="y">y</div>
             </div>
             <div class="numbers-grid">
-                <div>-10</div>
-                <div>-9</div>
-                <div>-8</div>
-                <div>-7</div>
-                <div>-6</div>
-                <div>-5</div>
-                <div>-4</div>
-                <div>-3</div>
-                <div>-2</div>
-                <div>-1</div>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>5</div>
-                <div>6</div>
-                <div>7</div>
-                <div>8</div>
-                <div>9</div>
-                <div>10</div>
+                <div class="draggable-block" data-type="num" data-value="-10">-10</div>
+                <div class="draggable-block" data-type="num" data-value="-9">-9</div>
+                <div class="draggable-block" data-type="num" data-value="-8">-8</div>
+                <div class="draggable-block" data-type="num" data-value="-7">-7</div>
+                <div class="draggable-block" data-type="num" data-value="-6">-6</div>
+                <div class="draggable-block" data-type="num" data-value="-5">-5</div>
+                <div class="draggable-block" data-type="num" data-value="-4">-4</div>
+                <div class="draggable-block" data-type="num" data-value="-3">-3</div>
+                <div class="draggable-block" data-type="num" data-value="-2">-2</div>
+                <div class="draggable-block" data-type="num" data-value="-1">-1</div>
+                <div class="draggable-block" data-type="num" data-value="1">1</div>
+                <div class="draggable-block" data-type="num" data-value="2">2</div>
+                <div class="draggable-block" data-type="num" data-value="3">3</div>
+                <div class="draggable-block" data-type="num" data-value="4">4</div>
+                <div class="draggable-block" data-type="num" data-value="5">5</div>
+                <div class="draggable-block" data-type="num" data-value="6">6</div>
+                <div class="draggable-block" data-type="num" data-value="7">7</div>
+                <div class="draggable-block" data-type="num" data-value="8">8</div>
+                <div class="draggable-block" data-type="num" data-value="9">9</div>
+                <div class="draggable-block" data-type="num" data-value="10">10</div>
             </div>
             <button class="clear-btn">
                 <img src="/assets/images/common/clear.svg" alt="Clear" class="clear-img">
@@ -61,17 +61,17 @@
         <!-- RIGHT EQUATIONS -->
         <div class="equations">
             <div class="eq-box">
-                <div class="eq-font">Equation 1</div>
+                <div class="eq-font" id="equation1">Equation 1</div>
                 <div class="eq-slot"></div>
             </div>
 
             <div class="eq-box">
-                <div class="eq-font">Equation 2</div>
+                <div class="eq-font" id="equation2">Equation 2</div>
                 <div class="eq-slot"></div>
             </div>
 
             <div class="eq-box">
-                <div class="eq-font">Equation 3</div>
+                <div class="eq-font" id="equation3">Equation 3</div>
                 <div class="eq-slot"></div>
             </div>
         </div>
