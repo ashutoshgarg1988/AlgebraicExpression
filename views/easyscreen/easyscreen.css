@@ -78,7 +78,7 @@
   align-items: center;
   font-size: 22px;
   font-weight: 700;
-  border: 3px solid rgba(0, 0, 0, 0.2);
+  /* border: 3px solid rgba(0, 0, 0, 0.2); */
 }
 
 .gold {
@@ -127,14 +127,14 @@
   width: 60px;
   height: 60px;
   border-radius: 14px;
-  background: #1e3a8a;
+  /* background: #1e3a8a; */
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 22px;
   font-weight: 700;
-  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+  /* box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25); */
 }
 
 /* CLEAR BUTTON */

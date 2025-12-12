@@ -11,7 +11,8 @@
 <div id="easy-screen">
     <!-- TOP BANNER -->
     <div class="top-banner">
-        <span>Build the equation on the balance exactly as shown, then use balanced operations to find the value of the variable.</span>
+        <span>Build the equation on the balance exactly as shown, then use balanced operations to find the value of the
+            variable.</span>
         <div class="sound-wrapper">
             <img src="assets/images/common/sound-btn.svg" class="sound-btn" id="soundBtn">
             <!-- <div class="mute-tag">Mute</div> -->
@@ -22,23 +23,39 @@
     <div class="main-area">
         <!-- LEFT TOOLBOX -->
         <div class="toolbox">
-            <div class="slider-box">
-                <input type="range" min="0" max="10" class="slider-x vertical">
-                <div class="tool-section-title">x = 3</div>
+            <div class="slider-box-vertical">
+                <input type="range" min="0" max="10" class="slider-x vertical-slider" value="1">
+                <div class="tool-section-title">1x</div>
             </div>
 
-            <div class="slider-box">
-                <input type="range" min="0" max="10" class="slider-y vertical">
-                <div class="tool-section-title">y = 1</div>
+            <div class="slider-box-vertical">
+                <input type="range" min="0" max="10" class="slider-y vertical-slider" value="1">
+                <div class="tool-section-title">1</div>
             </div>
         </div>
 
         <!-- CENTER WHITE WORKSPACE -->
-        <div class="workspace"></div>
+        <div class="workspace">
+            <div id="equationTxt" class="equation-txt"> 2x + 5 = 15</div>
+            <div class="balance-scale-box">
+               <img src="assets/images/challengescreen/scalebase.svg" class="scale-base" style="top: 46%;"> 
+               <img src="assets/images/challengescreen/scalebase-line.svg" class="scale-base" style="top: 70%;">
+               <img src="assets/images/challengescreen/scale-arm.svg"  class="scale-arm">
+               <img src="assets/images/challengescreen/left-part.svg"  class="scale-weight" style="left: 33%;">
+               <img src="assets/images/challengescreen/right-part.svg"  class="scale-weight" style="left: 56%;">
+            </div>
+            <div class="x-value-box">
+                <div style="font-size: 39px;">x =</div>
+                <input id="xValue" style="width: 90px; border-radius: 9px;">
+            </div>
+        </div>
 
         <!-- RIGHT EQUATIONS -->
         <div class="toolbox">
-            
+            <div class="slider-box-vertical" style="position: relative; left: 77px;">
+                <input type="range" min="0" max="110" class="slider-z vertical-slider" value="1">
+                <div class="tool-section-title">1</div>
+            </div>
         </div>
 
     </div>

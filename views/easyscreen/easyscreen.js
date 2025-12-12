@@ -59,8 +59,6 @@
     group = null;
   });
 
-  
-
   // Make toolbox items draggable
   document.querySelectorAll(".drag-src").forEach(src => {
     src.setAttribute("draggable", "true");
@@ -93,6 +91,10 @@
         equationTxt += allElemsOnCenterStage[i].value+'x';
       } else if (allElemsOnCenterStage[i].symbol === 'y') {
         totalVal = totalVal + allElemsOnCenterStage[i].value * sliderY.value;
+        equationTxt += allElemsOnCenterStage[i].value+'y';
+      } else if (allElemsOnCenterStage[i].symbol === '1' || allElemsOnCenterStage[i].symbol === '-1') {
+        console.log("allElemsOnCenterStage[i].value::",allElemsOnCenterStage[i].value);
+        totalVal = totalVal + allElemsOnCenterStage[i].value;
         equationTxt += allElemsOnCenterStage[i].value+'y';
       }
     }
@@ -167,7 +169,6 @@
     // Calculate new value
     let newVal = Number(existing.dataset.value) + Number(incoming.dataset.value);
     existing.dataset.value = newVal;
-
     // Update display
     if (existing.dataset.symbol) {
       existing.innerHTML = `${newVal}${existing.dataset.symbol}`;
@@ -176,25 +177,19 @@
     }
   }
 
-
-
   // Allow moving inside work panel
   function enableMoveInsideWork(el) {
     let offsetX = 0, offsetY = 0;
-
     el.addEventListener("mousedown", e => {
       offsetX = e.offsetX;
       offsetY = e.offsetY;
-
       function move(ev) {
         el.style.left = (ev.pageX - workPanel.offsetLeft - offsetX) + "px";
         el.style.top = (ev.pageY - workPanel.offsetTop - offsetY) + "px";
       }
-
       function stop() {
         document.removeEventListener("mousemove", move);
       }
-
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", stop, { once: true });
     });
@@ -203,15 +198,12 @@
   // Delete by dragging back onto toolbox buttons
   function enableDeleteByDraggingBack(el) {
     el.setAttribute("draggable", "true");
-
     el.addEventListener("dragstart", e => {
       e.dataTransfer.setData("text/plain", "dragging");
       draggedData = el;
     });
-
     document.querySelectorAll(".drag-src").forEach(src => {
       src.addEventListener("dragover", e => e.preventDefault());
-
       src.addEventListener("drop", () => {
         if (draggedData.classList.contains("work-item")) {
           draggedData.remove();
