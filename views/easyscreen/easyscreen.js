@@ -8,6 +8,7 @@
 
 (function initEasyScreen() {
   let totalTxt = document.getElementById('totalTxt');
+  let expressionTxt = document.getElementById('expressionTxt');
   let allElemsOnCenterStage;
   // Select sliders
   const sliderX = document.querySelector(".slider-x");
@@ -77,14 +78,21 @@
   // Function to get total text value on right side panel
   function getTotalValue() {
     let totalVal = 0;
+    let equationTxt = '';
     for (let i = 0; i < allElemsOnCenterStage.length; i++) {
+      if (equationTxt !== "") {
+          equationTxt += " + ";
+      }
       if (allElemsOnCenterStage[i].symbol === 'x') {
         totalVal = totalVal + allElemsOnCenterStage[i].value * sliderX.value;
+        equationTxt += allElemsOnCenterStage[i].value+'x';
       } else if (allElemsOnCenterStage[i].symbol === 'y') {
         totalVal = totalVal + allElemsOnCenterStage[i].value * sliderY.value;
+        equationTxt += allElemsOnCenterStage[i].value+'y';
       }
     }
     totalTxt.innerText = totalVal;
+    expressionTxt.innerText = equationTxt + ' = ' + totalVal;
   }
 
   //Log everything currently on stage

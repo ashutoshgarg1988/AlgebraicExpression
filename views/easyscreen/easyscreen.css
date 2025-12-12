@@ -171,6 +171,9 @@
   height: 75px;
   border: 1px solid grey;
   border-radius: 14px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 600;
 }
 
 /* VARIABLES PANEL */
