@@ -3,7 +3,7 @@
  *  Email       : ashutoshgarg1987@gmail.com
  *  File        : intro.js
  *  Description : Handeler for Intro screen
- *  Date        : 4-Dec-2025
+ *  Date        : 10-Dec-2025
  ***************************************************************/
 
 (function initIntro() {

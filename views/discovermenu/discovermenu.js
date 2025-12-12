@@ -3,7 +3,7 @@
  *  Email       : ashutoshgarg1987@gmail.com
  *  File        : discovermenu.js.js
  *  Description : Handeler for Discover Menu screen
- *  Date        : 4-Dec-2025
+ *  Date        : 10-Dec-2025
  ***************************************************************/
 
 (function initDiscoverMenu() {

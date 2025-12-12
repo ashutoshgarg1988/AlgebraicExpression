@@ -1,0 +1,119 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial; }
+
+/* MAIN LAYOUT */
+.main-area {
+    position: absolute;
+    top: 250px;
+    width: 97%;
+    left: 28px;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: flex-start; /* top-align panels */
+    gap: 29px;               /* space between toolbox, workspace, equations */
+    margin: 0 auto;          /* ensure it stays centered */
+}
+.workspace {
+    flex: 1;
+    height: 456px;          /* ensure px unit */
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+/* TOOLBOX LEFT */
+.toolbox {
+    width: 19%;
+    height: 665px;
+    background: white;
+    padding: 18px;
+    border-radius: 20px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+.toolbox h2 {
+    margin-bottom: 14px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border: 1px solid grey;
+  border-radius: 16px;
+  padding: 9px;
+  margin-bottom: 17px;
+}
+
+
+/* WHITE WORKSPACE */
+.workspace {
+    flex: 1;
+    width: 60%;
+    height: 665px;
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+
+/* Container for vertical slider */
+.slider-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Turn slider vertical */
+input[type="range"].vertical {
+  writing-mode: bt-lr; /* bottom to top */
+  -webkit-appearance: slider-vertical;
+  width: 14px;
+  height: 160px; /* adjust height as needed */
+  padding: 0;
+}
+
+/* TRACK */
+input[type="range"].vertical::-webkit-slider-runnable-track {
+  width: 14px;
+  height: 100%;
+  background: #e5e5e5;
+  border-radius: 10px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.15);
+}
+
+/* THUMB */
+input[type="range"].vertical::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 28px;
+  width: 28px;
+  background: #ff4d4d; /* red for X */
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+/* Y slider (blue knob) */
+input.slider-y.vertical::-webkit-slider-thumb {
+  background: #3b82f6;
+}
+
+/* Firefox */
+input[type="range"].vertical::-moz-range-track {
+  width: 14px;
+  background: #e5e5e5;
+  border-radius: 10px;
+}
+
+input[type="range"].vertical::-moz-range-thumb {
+  height: 28px;
+  width: 28px;
+  background: #ff4d4d;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+}
+
+input.slider-y.vertical::-moz-range-thumb {
+  background: #3b82f6;
+}

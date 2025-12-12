@@ -3,7 +3,7 @@
  *  Email       : ashutoshgarg1987@gmail.com
  *  File        : menu.js
  *  Description : Handeler functionality for Menu screen
- *  Date        : 4-Dec-2025
+ *  Date        : 10-Dec-2025
  ***************************************************************/
 
 (function initMenu() {

@@ -4,7 +4,7 @@
   Email: ashutoshgarg1987@gmail.com
   File: easyscreen.html
   Description: easy screen view
-  Created On: 03/Dec/2025
+  Created On: 11/Dec/2025
   ------------------------------------------------------------
 -->
 
@@ -29,9 +29,9 @@
       <!-- Coins Row -->
       <div class="tool-section coins">
         <div class="row">
-          <div class="coin gold"></div>
-          <div class="coin silver"></div>
-          <div class="coin bronze"></div>
+          <div class="coin gold drag-src" data-type="coin" data-value="1"></div>
+          <div class="coin silver drag-src" data-type="coin" data-value="5"></div>
+          <div class="coin bronze drag-src" data-type="coin" data-value="10"></div>
         </div>
         <div class="tool-section-title">Coins</div>
       </div>
@@ -39,10 +39,10 @@
       <!-- Algebra Buttons -->
       <div class="tool-section algebra">
         <div class="grid-2">
-          <div class="alg-btn x">x</div>
-          <div class="alg-btn y">y</div>
-          <div class="alg-btn one">1</div>
-          <div class="alg-btn neg-one">-1</div>
+          <div class="alg-btn x drag-src" data-type="var" data-symbol="x" data-value="1">x</div>
+          <div class="alg-btn y drag-src" data-type="var" data-symbol="y" data-value="1">y</div>
+          <div class="alg-btn one drag-src" data-type="num" data-value="1">1</div>
+          <div class="alg-btn neg-one drag-src" data-type="num" data-value="-1">-1</div>
         </div>
         <div class="tool-section-title">Algebra</div>
       </div>
@@ -62,24 +62,26 @@
 
     <!-- Center: Work PANEL -->
     <div class="bg-panel" style="width: 58%; padding: 18px;" id="rightPanel">
+      <div id="workPanel" class="work-dropzone"></div>
       <div class="expression-box"></div>
     </div>
+
 
     <!-- RIGHT: VARIABLES PANEL -->
     <div class="bg-panel" style="width: 19%; padding: 18px;" id="rightPanel">
       <div class="tool-title">Variables</div>
         <div class="slider-box">
-          <input type="range" min="0" max="10" class="slider-x">
-          <div class="tool-section-title">x = 3</div>
+          <input type="range" min="0" max="10" class="slider-x" value="1">
+          <div class="tool-section-title">x = 1</div>
         </div>
 
         <div class="slider-box">
-          <input type="range" min="0" max="10" class="slider-y">
+          <input type="range" min="0" max="10" class="slider-y" value="1">
           <div class="tool-section-title">y = 1</div>
         </div>
 
         <div class="tool-title">Total</div>
-        <div class="total-box">25</div>
+        <div class="total-box" id="totalTxt">0</div>
 
        <div class="checkboxes">
         <div><input type="checkbox" /> Show Coefficients</div>
