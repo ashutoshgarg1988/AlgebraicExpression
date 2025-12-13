@@ -112,12 +112,16 @@ img {
   position: absolute;
   top: 40px;
   left: 40px;
-  background: #ff5b22;
   padding: 16px 40px;
   border-radius: 18px;
   font-size: 50px;
   font-weight: 900;
   color: #fff;
+  
+}
+
+.custom-title {
+  background: #ff5b22;
   box-shadow: 0 12px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -151,6 +155,11 @@ img {
 .sound-btn {
   width: 80px;
   cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.sound-btn:hover {
+  transform: scale(1.1);
 }
 
 .mute-tag {
