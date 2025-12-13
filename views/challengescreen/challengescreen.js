@@ -11,6 +11,7 @@
   const challengeNextBtn = document.getElementById("challengeNextBtn");
   const equalCheck = document.getElementById("equalCheck");
   const checkBtn = document.getElementById("checkBtn");
+  const xValueInput = document.getElementById("xValue");
   let equationTxt = document.getElementById("equationTxt");
   // Select sliders
   const sliderX = document.querySelector(".slider-x");
@@ -35,7 +36,16 @@
   // showPopup("info", { text: "Stop the moving arm as close as you can to the target angle." });
 
   challengeResetBtn.addEventListener("click", () => {
-
+    sliderX.value = 1;
+    labelX.textContent = `${sliderX.value}x`;
+    sliderY.value = 1;
+    labelY.textContent = `${sliderY.value}`;
+    sliderZ.value = 1;
+    labelZ.textContent = `${sliderZ.value}`;
+    xValueInput.value = "";
+    equalCheck.innerText = "=";
+    updateEquation();
+    updateScaleTilt();
   });
 
   checkBtn.addEventListener("click", () => {
@@ -71,7 +81,7 @@
     updateScaleTilt();
   });
 
-  document.getElementById("xValue").addEventListener("input", () => {
+  xValueInput.addEventListener("input", () => {
     updateScaleTilt();
   });
 
@@ -80,7 +90,7 @@
   }
 
   function getWeights() {
-    const x = Number(document.getElementById("xValue").value || 0);
+    const x = Number(xValueInput.value || 0);
     const X = Number(sliderX.value);
     const Y = Number(sliderY.value);
     const Z = Number(sliderZ.value);
