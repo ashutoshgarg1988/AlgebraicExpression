@@ -8,7 +8,7 @@
   ------------------------------------------------------------
 -->
 
-<div id="easy-screen">
+<div id="challenge-screen">
     <!-- TOP BANNER -->
     <div class="top-banner">
         <span>Build the equation on the balance exactly as shown, then use balanced operations to find the value of the
@@ -36,17 +36,17 @@
 
         <!-- CENTER WHITE WORKSPACE -->
         <div class="workspace">
-            <div id="equationTxt" class="equation-txt"> 2x + 5 = 15</div>
+            <div id="equationTxt" class="equation-txt"> 1x + 1 = 1</div>
             <div class="balance-scale-box">
                <img src="assets/images/challengescreen/scalebase.svg" class="scale-base" style="top: 46%;"> 
                <img src="assets/images/challengescreen/scalebase-line.svg" class="scale-base" style="top: 70%;">
                <img src="assets/images/challengescreen/scale-arm.svg"  class="scale-arm">
-               <img src="assets/images/challengescreen/left-part.svg"  class="scale-weight" style="left: 33%;">
-               <img src="assets/images/challengescreen/right-part.svg"  class="scale-weight" style="left: 56%;">
+               <img src="assets/images/challengescreen/left-part.svg" id="leftWeight" class="scale-weight">
+               <img src="assets/images/challengescreen/right-part.svg" id="rightWeight" class="scale-weight">
             </div>
             <div class="x-value-box">
                 <div style="font-size: 39px;">x =</div>
-                <input id="xValue" style="width: 90px; border-radius: 9px;">
+                <input id="xValue" class="x-value-input">
             </div>
         </div>
 

@@ -42,21 +42,59 @@
   sliderX.addEventListener("input", () => {
     labelX.textContent = `${sliderX.value}x`;
     updateEquation();
+    updateScaleTilt();
   });
 
   // Update Y slider value
   sliderY.addEventListener("input", () => {
     labelY.textContent = `${sliderY.value}`;
     updateEquation();
+    updateScaleTilt();
   });
 
   // Update Y slider value
   sliderZ.addEventListener("input", () => {
     labelZ.textContent = `${sliderZ.value}`;
     updateEquation();
+    updateScaleTilt();
+  });
+
+  document.getElementById("xValue").addEventListener("input", () => {
+    updateScaleTilt();
   });
 
   function updateEquation() {
     equationTxt.innerText = `${sliderX.value}x + ${sliderY.value} = ${sliderZ.value}`;
   }
+
+  function getWeights() {
+    const x = Number(document.getElementById("xValue").value || 0);
+    const X = Number(sliderX.value);
+    const Y = Number(sliderY.value);
+    const Z = Number(sliderZ.value);
+    const leftWeight = (X * x) + Y;  // LHS = Ax + B
+    const rightWeight = Z;           // RHS constant
+    return { leftWeight, rightWeight };
+  }
+
+  // Function to update the scale machine tilt animation
+  function updateScaleTilt() {
+    const arm = document.querySelector(".scale-arm");
+    const leftW = document.getElementById("leftWeight");
+    const rightW = document.getElementById("rightWeight");
+    const { leftWeight, rightWeight } = getWeights();
+    const diff = leftWeight - rightWeight;
+    const maxAngle = 18;
+    let angle = Math.max(-maxAngle, Math.min(maxAngle, diff * 2));
+    // Rotate ONLY the arm
+    arm.style.transform = `rotate(${angle}deg)`;
+    // Tray movement (they stay horizontal)
+    const baseTop = 39;  // original top %
+    const radius = 35;   // adjust depending on your graphics
+    const rad = angle * Math.PI / 180;
+    const verticalShift = Math.sin(rad) * radius;
+    leftW.style.top = `${baseTop - verticalShift}%`;  // left moves same direction as sin
+    rightW.style.top = `${baseTop + verticalShift}%`;  // right moves opposite
+  }
+
 })();

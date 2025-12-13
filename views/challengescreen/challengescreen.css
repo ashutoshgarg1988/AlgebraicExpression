@@ -13,13 +13,9 @@
   left: 28px;
   display: flex;
   justify-content: center;
-  /* center horizontally */
   align-items: flex-start;
-  /* top-align panels */
   gap: 29px;
-  /* space between toolbox, workspace, equations */
   margin: 0 auto;
-  /* ensure it stays centered */
 }
 
 .workspace {
@@ -84,6 +80,7 @@
   font-size: 40px;
 }
 
+/* X value box below balance scale */
 .x-value-box {
   position: relative;
   display: flex;
@@ -92,6 +89,14 @@
   /* top: 68%; */
 }
 
+.x-value-input {
+  width: 90px;
+  border-radius: 9px;
+  text-align: center;
+  font-size: 30px;
+}
+
+/* Balance scale */
 .balance-scale-box {
   text-align: center;
   width: 100%;
@@ -109,13 +114,18 @@
   left: 38.5%;
   position: absolute;
   top: 47%;
+  transform-origin: center 10px; /* pivot point */
+  transition: transform 0.6s ease-out; /* smooth animation */
 }
 
 .scale-weight {
   width: 11%;
   position: absolute;
   top: 39%;
+  transition: top 0.6s ease-out;
 }
+#leftWeight { left: 33%; }
+#rightWeight { left: 56%; }
 
 /* Vertical container */
 .slider-box-vertical {
