@@ -14,12 +14,16 @@
     musicBtn: true,
     copyright: true
   });
-
-  const eqs = generateRandomEquations();
   let correctCounter = 0;
-  document.getElementById("equation1").textContent = eqs[0];
-  document.getElementById("equation2").textContent = eqs[1];
-  document.getElementById("equation3").textContent = eqs[2];
+  let eqs = []; 
+
+  function genrateRandomEq() {
+    eqs = generateRandomEquations();
+    document.getElementById("equation1").textContent = eqs[0];
+    document.getElementById("equation2").textContent = eqs[1];
+    document.getElementById("equation3").textContent = eqs[2];
+  }
+  genrateRandomEq();
 
   // Show info popup when screen loads
   // showPopup("info", { text: "Use the tiles at bottom to build an angle that matches the target angle" });
@@ -32,6 +36,21 @@
   document.querySelector(".clear-btn")?.addEventListener("click", () => {
     workspace.innerHTML = "";
     group = null;
+  });
+
+  document.getElementById("warmupResetBtn").addEventListener("click", () => {
+    workspace.innerHTML = "";
+    group = null;
+    // 2️⃣ Clear all equation slots
+    document.querySelectorAll(".eq-slot").forEach(slot => {
+        slot.innerHTML = "";
+        slot.style.border = "1px solid grey";
+    });
+
+    // 3️⃣ Reset internal drag state
+    dragged = null;
+    group = null;
+    genrateRandomEq();
   });
 
   // Function to genrate 3 random equations to show in right panel
