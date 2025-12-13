@@ -76,7 +76,6 @@
   const eqSlots = document.querySelectorAll(".eq-slot");
   eqSlots.forEach(slot => {
     slot.addEventListener("dragover", e => e.preventDefault());
-
     slot.addEventListener("drop", e => {
       e.preventDefault();
       if (!dragged) return;
@@ -97,10 +96,7 @@
   });
 
 
-  // -----------------------------
   // BASIC DRAG AND DROP ENGINE
-  // -----------------------------
-
   let dragged = null;
   let group = null;
   // make all toolbox items draggable
@@ -160,14 +156,12 @@
     console.log("userEq:::", userEq);
     const isCorrect = normalize(userEq) === normalize(correctEq);
     if (isCorrect) {
-      console.log("✔ Correct:", userEq);
       slot.style.border = "3px solid #2ecc71"; // green
       correctCounter++;
       if(correctCounter === 3) {
         showPopup("greatWork", { step: 1, description: "" });
       }
     } else {
-      console.log("❌ Wrong:", userEq, "Expected:", correctEq);
       slot.style.border = "3px solid #e74c3c"; // red
     }
   }
@@ -220,9 +214,4 @@
     expr = expr.replace(/\+\-/g, "-").replace(/\-\-/g, "+");
     return expr;
   }
-
-
-
-
-
 })();

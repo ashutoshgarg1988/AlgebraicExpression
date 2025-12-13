@@ -9,6 +9,8 @@
 (function initChallengeScreen() {
   const challengeResetBtn = document.getElementById("challengeResetBtn");
   const challengeNextBtn = document.getElementById("challengeNextBtn");
+  const equalCheck = document.getElementById("equalCheck");
+  const checkBtn = document.getElementById("checkBtn");
   let equationTxt = document.getElementById("equationTxt");
   // Select sliders
   const sliderX = document.querySelector(".slider-x");
@@ -18,6 +20,8 @@
   const labelX = sliderX.nextElementSibling;
   const labelY = sliderY.nextElementSibling;
   const labelZ = sliderZ.nextElementSibling;
+  let leftWeight = 1;
+  let rightWeight = 1;
 
   setCommonUI({
     btnHome: true,
@@ -32,6 +36,14 @@
 
   challengeResetBtn.addEventListener("click", () => {
 
+  });
+
+  checkBtn.addEventListener("click", () => {
+    if(leftWeight === rightWeight) {
+      showPopup("greatWork", { step: 1, description: "" });
+    }else {
+      alert("Please try again");
+    }
   });
 
   challengeNextBtn.addEventListener("click", () => {
@@ -72,8 +84,13 @@
     const X = Number(sliderX.value);
     const Y = Number(sliderY.value);
     const Z = Number(sliderZ.value);
-    const leftWeight = (X * x) + Y;  // LHS = Ax + B
-    const rightWeight = Z;           // RHS constant
+    leftWeight = (X * x) + Y;  // LHS = Ax + B
+    rightWeight = Z;           // RHS constant
+    if(leftWeight === rightWeight) {
+      equalCheck.innerText = "="
+    }else {
+      equalCheck.innerText = "≠"
+    }
     return { leftWeight, rightWeight };
   }
 
@@ -87,14 +104,14 @@
     const maxAngle = 18;
     let angle = Math.max(-maxAngle, Math.min(maxAngle, diff * 2));
     // Rotate ONLY the arm
-    arm.style.transform = `rotate(${angle}deg)`;
+    arm.style.transform = `rotate(${-angle}deg)`;
     // Tray movement (they stay horizontal)
     const baseTop = 39;  // original top %
     const radius = 35;   // adjust depending on your graphics
     const rad = angle * Math.PI / 180;
     const verticalShift = Math.sin(rad) * radius;
-    leftW.style.top = `${baseTop - verticalShift}%`;  // left moves same direction as sin
-    rightW.style.top = `${baseTop + verticalShift}%`;  // right moves opposite
+    leftW.style.top = `${baseTop + verticalShift}%`;  // left moves same direction as sin
+    rightW.style.top = `${baseTop - verticalShift}%`;  // right moves opposite
   }
 
 })();

@@ -18,6 +18,19 @@
   margin: 0 auto;
 }
 
+#checkBtn {
+  position: absolute;
+  bottom: 25px;
+  left: 43%;
+  width: 14%;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+#checkBtn:hover {
+  transform: scale(1.1);
+}
+
 .workspace {
   flex: 1;
   height: 456px;
@@ -80,13 +93,20 @@
   font-size: 40px;
 }
 
+#equalCheck{
+  text-align: center;
+  font-weight: 700;
+  margin-top: 55px;
+  font-size: 70px;
+}
+
 /* X value box below balance scale */
 .x-value-box {
   position: relative;
   display: flex;
   justify-content: center;
   gap: 10px;
-  /* top: 68%; */
+  top: -21%;
 }
 
 .x-value-input {
