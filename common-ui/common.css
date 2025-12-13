@@ -16,6 +16,15 @@ img {
   display: none !important;
 }
 
+.btn {
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
 /* COMMON BUTTON BAR */
 #common-ui {
   width: 1920px;
@@ -30,11 +39,6 @@ img {
   height: 70px;
   cursor: pointer;
   object-fit: contain;
-  transition: transform 0.25s ease;
-}
-
-.common-btn:hover {
-  transform: scale(1.1);
 }
 
 .music-btn {
@@ -42,11 +46,6 @@ img {
   position: absolute;
   left: -1px;
   bottom: 2%;
-  transition: transform 0.25s ease;
-}
-
-.music-btn:hover {
-  transform: scale(1.1);
 }
 
 #logo {
@@ -70,11 +69,6 @@ img {
   color: #000;
   cursor: pointer;
   box-shadow: 0 10px 0 rgba(0,0,0,0.25);
-  transition: transform 0.25s ease;
-}
-
-.logo-btn:hover {
-  transform: scale(1.1);
 }
 
 /* Bottom copyright text */
@@ -155,11 +149,6 @@ img {
 .sound-btn {
   width: 80px;
   cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.sound-btn:hover {
-  transform: scale(1.1);
 }
 
 .mute-tag {
@@ -299,11 +288,6 @@ img {
 .gw-btn {
   position: absolute;
   cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.gw-btn:hover {
-  transform: scale(1.1);
 }
 
 .reset {

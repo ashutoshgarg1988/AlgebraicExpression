@@ -13,12 +13,12 @@ document.querySelectorAll("img").forEach(img => {
 });
 
 document.getElementById("common-ui").innerHTML = `
-  <div class="logo-btn" id="btnLogo">Logo</div>
-  <img src="assets/images/common/icon-home.svg" class="common-btn" id="btnHome" />
-  <img src="assets/images/common/icon-play.svg" class="common-btn" id="btnPlay" />
-  <img src="assets/images/common/icon-book.svg" class="common-btn" id="btnBook" />
+  <div class="btn logo-btn" id="btnLogo">Logo</div>
+  <img src="assets/images/common/icon-home.svg" class="btn common-btn" id="btnHome" />
+  <img src="assets/images/common/icon-play.svg" class="btn common-btn" id="btnPlay" />
+  <img src="assets/images/common/icon-book.svg" class="btn common-btn" id="btnBook" />
   <img src="assets/images/common/copyright.svg" class="copyright-txt" id="copyright" />
-  <img src="assets/images/common/music-btn.svg" class="music-btn" id="musicBtn" />
+  <img src="assets/images/common/music-btn.svg" class="btn music-btn" id="musicBtn" />
 `;
 
 document.getElementById("btnLogo").onclick = () => {

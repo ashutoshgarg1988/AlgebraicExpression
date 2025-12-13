@@ -23,12 +23,7 @@
   bottom: 25px;
   left: 43%;
   width: 14%;
-  cursor: pointer;
   transition: 0.18s ease;
-}
-
-#checkBtn:hover {
-  transform: scale(1.1);
 }
 
 .workspace {

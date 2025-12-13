@@ -30,11 +30,6 @@
     left: 43%;
     width: 227px;
     cursor: pointer;
-    transition: transform 0.25s ease;
-}
-
-.intro-play-btn:hover {
-  transform: scale(1.1);
 }
 
 /* Characters Bottom */
