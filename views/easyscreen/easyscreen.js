@@ -42,6 +42,15 @@
     soundBtn.src = muted ? "assets/icons/sound-off.png" : "assets/icons/sound-on.png";
   });
 
+  document.getElementById("easyResetBtn").addEventListener("click", ()=> {
+    sliderX.value = 1;
+    labelX.textContent = `x = ${sliderX.value}`;
+    sliderY.value = 1;
+    labelY.textContent = `y = ${sliderY.value}`;
+    totalTxt.innerText = "0";
+    resetCenterPanel();
+  });
+
   // Update X slider value
   sliderX.addEventListener("input", () => {
     labelX.textContent = `x = ${sliderX.value}`;
@@ -56,11 +65,15 @@
 
   // Clear button click functionality
   document.querySelector(".clear-btn")?.addEventListener("click", () => {
+    resetCenterPanel();
+  });
+
+  function resetCenterPanel() {
     workPanel.innerHTML = "";
     totalTxt.innerText = 0;
     expressionTxt.innerText = "-";
     group = null;
-  });
+  }
 
   // Make toolbox items draggable
   document.querySelectorAll(".drag-src").forEach(src => {
