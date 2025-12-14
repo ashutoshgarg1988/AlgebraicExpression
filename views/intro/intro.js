@@ -9,8 +9,13 @@
 (function initIntro() {
   // When play button is clicked → go to quiz / next screen
   let playBtn = document.querySelector(".intro-play-btn");
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   playBtn.addEventListener("click", () => {
     loadView("menu");
+    if (isMobile) {
+        requestFullScreen();
+        enableFullscreenOnFirstTouch();
+    }
   });
 
   setCommonUI({

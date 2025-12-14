@@ -9,7 +9,6 @@
 const BASE_WIDTH = 1920;
 const BASE_HEIGHT = 1080;
 let CURRENT_SCALE = 1;
-const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 function getViewportSize() {
     if (window.visualViewport) {
         return {
@@ -88,11 +87,6 @@ function enableFullscreenOnFirstTouch() {
   };
   document.addEventListener("touchstart", handler, { once: true });
   document.addEventListener("click", handler, { once: true });
-}
-
-if (isMobile) {
-    requestFullScreen();
-    enableFullscreenOnFirstTouch();
 }
 
 scaleStage();
