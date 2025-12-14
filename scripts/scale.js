@@ -9,7 +9,7 @@
 const BASE_WIDTH = 1920;
 const BASE_HEIGHT = 1080;
 let CURRENT_SCALE = 1;
-
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 function getViewportSize() {
     if (window.visualViewport) {
         return {
@@ -67,6 +67,33 @@ function getStageCoords(e, element) {
 //         scale
 //     };
 // }
+
+function requestFullScreen() {
+  const el = document.documentElement;
+  if (el.requestFullscreen) {
+    el.requestFullscreen();
+  } else if (el.webkitRequestFullscreen) { // iOS Safari
+    el.webkitRequestFullscreen();
+  } else if (el.msRequestFullscreen) { // IE/old Edge
+    el.msRequestFullscreen();
+  }
+}
+
+// Force fullscreen on first user interaction (mobile-safe)
+function enableFullscreenOnFirstTouch() {
+  const handler = () => {
+    requestFullScreen();
+    document.removeEventListener("touchstart", handler);
+    document.removeEventListener("click", handler);
+  };
+  document.addEventListener("touchstart", handler, { once: true });
+  document.addEventListener("click", handler, { once: true });
+}
+
+if (isMobile) {
+    requestFullScreen();
+    enableFullscreenOnFirstTouch();
+}
 
 scaleStage();
 window.addEventListener("resize", scaleStage);
