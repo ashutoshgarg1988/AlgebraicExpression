@@ -28,9 +28,9 @@ const popupTemplates = {
     <div class="popup-overlay">
       <div class="greatwork-popup">
         <div class="gw-btn-row">
-          <img src="../assets/images/common/icon-play.svg" class="btn gw-btn play" onclick="goToGame()">
-          <img src="../assets/images/common/reset.svg" class="btn gw-btn reset" onclick="restartStep()">
-          <img src="../assets/images/common/next.svg" class="btn gw-btn next" onclick="goNextStep()">
+          <img src="assets/images/common/icon-play.svg" class="btn gw-btn play" onclick="goToGame()">
+          <img src="assets/images/common/reset.svg" class="btn gw-btn reset" onclick="restartStep()">
+          <img src="assets/images/common/next.svg" class="btn gw-btn next" onclick="goNextStep()">
         </div>
 
       </div>
