@@ -171,8 +171,6 @@
     const slotIndex = parseInt(slot.id.replace("slot", "")) - 1;
     const correctEq = eqs[slotIndex];
     const userEq = groupToExpression(group);
-    console.log("correctEq:::", correctEq);
-    console.log("userEq:::", userEq);
     const isCorrect = normalize(userEq) === normalize(correctEq);
     if (isCorrect) {
       slot.style.border = "3px solid #2ecc71"; // green

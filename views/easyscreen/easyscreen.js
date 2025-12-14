@@ -84,7 +84,7 @@
     let equationTxt = '';
     for (let i = 0; i < allElemsOnCenterStage.length; i++) {
       if (equationTxt !== "") {
-          equationTxt += " + ";
+        equationTxt += " + ";
       }
       if (allElemsOnCenterStage[i].symbol === 'x') {
         totalVal = totalVal + allElemsOnCenterStage[i].value * sliderX.value;
@@ -92,10 +92,9 @@
       } else if (allElemsOnCenterStage[i].symbol === 'y') {
         totalVal = totalVal + allElemsOnCenterStage[i].value * sliderY.value;
         equationTxt += allElemsOnCenterStage[i].value+'y';
-      } else if (allElemsOnCenterStage[i].symbol === '1' || allElemsOnCenterStage[i].symbol === '-1') {
-        console.log("allElemsOnCenterStage[i].value::",allElemsOnCenterStage[i].value);
+      } else if (allElemsOnCenterStage[i].symbol === '1' || allElemsOnCenterStage[i].symbol === '-1' || allElemsOnCenterStage[i].symbol === 'B' || allElemsOnCenterStage[i].symbol === 'S' || allElemsOnCenterStage[i].symbol === 'G') {
         totalVal = totalVal + allElemsOnCenterStage[i].value;
-        equationTxt += allElemsOnCenterStage[i].value+'y';
+        equationTxt += allElemsOnCenterStage[i].value;
       }
     }
     totalTxt.innerText = totalVal;
@@ -170,7 +169,7 @@
     let newVal = Number(existing.dataset.value) + Number(incoming.dataset.value);
     existing.dataset.value = newVal;
     // Update display
-    if (existing.dataset.symbol) {
+    if (existing.dataset.symbol === 'x' || existing.dataset.symbol === 'y') {
       existing.innerHTML = `${newVal}${existing.dataset.symbol}`;
     } else {
       existing.innerHTML = newVal;
