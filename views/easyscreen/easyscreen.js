@@ -19,6 +19,7 @@
   const workPanel = document.getElementById("workPanel");
   // Drag and drop functionality
   let draggedData = null;
+  let currentMergeTarget = null;
 
   setCommonUI({
     btnHome: true,
@@ -31,6 +32,7 @@
   // Show info popup when screen loads
   // showPopup("info", { text: "Drag the angle arm to build an angle" });
 
+  // Next button click functionality
   easyNextBtn.addEventListener("click", () => {
     loadView("warmupscreen");
   });
@@ -52,6 +54,7 @@
     getTotalValue();
   });
 
+  // Clear button click functionality
   document.querySelector(".clear-btn")?.addEventListener("click", () => {
     workPanel.innerHTML = "";
     totalTxt.innerText = 0;
@@ -73,9 +76,30 @@
     });
   });
 
-  // Allow dropping
   workPanel.addEventListener("dragover", e => {
     e.preventDefault();
+    // Clear previous highlight
+    if (currentMergeTarget) {
+      currentMergeTarget.classList.remove("merge-highlight");
+      currentMergeTarget = null;
+    }
+    if (!draggedData) {
+      workPanel.style.cursor = "default";
+      return;
+    }
+    const target = document.elementFromPoint(e.clientX, e.clientY);
+    if (
+      target &&
+      target.classList.contains("work-item") &&
+      target.dataset.type === draggedData.type &&
+      target.dataset.symbol === (draggedData.symbol || "")
+    ) {
+      currentMergeTarget = target;
+      target.classList.add("merge-highlight");
+      workPanel.style.cursor = "copy";
+    } else {
+      workPanel.style.cursor = "default";
+    }
   });
 
   // Function to get total text value on right side panel
@@ -88,10 +112,10 @@
       }
       if (allElemsOnCenterStage[i].symbol === 'x') {
         totalVal = totalVal + allElemsOnCenterStage[i].value * sliderX.value;
-        equationTxt += allElemsOnCenterStage[i].value+'x';
+        equationTxt += allElemsOnCenterStage[i].value + 'x';
       } else if (allElemsOnCenterStage[i].symbol === 'y') {
         totalVal = totalVal + allElemsOnCenterStage[i].value * sliderY.value;
-        equationTxt += allElemsOnCenterStage[i].value+'y';
+        equationTxt += allElemsOnCenterStage[i].value + 'y';
       } else if (allElemsOnCenterStage[i].symbol === '1' || allElemsOnCenterStage[i].symbol === '-1' || allElemsOnCenterStage[i].symbol === 'B' || allElemsOnCenterStage[i].symbol === 'S' || allElemsOnCenterStage[i].symbol === 'G') {
         totalVal = totalVal + allElemsOnCenterStage[i].value;
         equationTxt += allElemsOnCenterStage[i].value;
@@ -120,10 +144,19 @@
   workPanel.addEventListener("drop", e => {
     e.preventDefault();
     if (!draggedData) return;
+    // If merge target exists → MERGE
+    if (currentMergeTarget) {
+      mergeWorkItems(currentMergeTarget, draggedData);
+      currentMergeTarget.classList.remove("merge-highlight");
+      currentMergeTarget = null;
+      workPanel.style.cursor = "default";
+      logAllWorkItems();
+      return;
+    }
+    // Otherwise → create new item
     const x = e.offsetX;
     const y = e.offsetY;
     createWorkItem(draggedData, x, y, e);
-    //Log everything currently on stage
     logAllWorkItems();
   });
 
@@ -145,36 +178,24 @@
     el.style.top = y + "px";
     el.style.cursor = "grab";
     el.style.width = "100px";
-    // Check if dropped on an existing work item
-    const target = document.elementFromPoint(event.clientX, event.clientY);
-    if (target && target.classList.contains("work-item")) {
-      mergeWorkItems(target, el);
-      return; // do NOT add a new box
-    }
     // Otherwise add as new box
     enableMoveInsideWork(el);
     enableDeleteByDraggingBack(el);
     workPanel.appendChild(el);
   }
 
-  function mergeWorkItems(existing, incoming) {
-    // Only merge if same type and same symbol
-    if (
-      existing.dataset.type !== incoming.dataset.type ||
-      existing.dataset.symbol !== incoming.dataset.symbol
-    ) {
-      return;
-    }
-    // Calculate new value
-    let newVal = Number(existing.dataset.value) + Number(incoming.dataset.value);
+  function mergeWorkItems(existing, draggedData) {
+    const existingVal = Number(existing.dataset.value);
+    const incomingVal = Number(draggedData.value);
+    const newVal = existingVal + incomingVal;
     existing.dataset.value = newVal;
-    // Update display
     if (existing.dataset.symbol === 'x' || existing.dataset.symbol === 'y') {
       existing.innerHTML = `${newVal}${existing.dataset.symbol}`;
     } else {
       existing.innerHTML = newVal;
     }
   }
+
 
   // Allow moving inside work panel
   function enableMoveInsideWork(el) {
