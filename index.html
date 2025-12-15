@@ -11,32 +11,489 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <title>Algebraic Expression</title>
-    <link rel="stylesheet" href="background/background.css" />
-    <link rel="stylesheet" href="common-ui/common.css" />
-    <link rel="icon" href="assets/icons/favicon.png" type="image/x-icon">
-  </head>
+<head>
+  <title>Algebraic Expression</title>
+  <link rel="stylesheet" href="background/background.css" />
+  <link rel="stylesheet" href="common-ui/common.css" />
+  <link rel="icon" href="assets/icons/favicon.png" type="image/x-icon">
+</head>
 
-  <body>
-    <div id="stage">
-      <!-- COMMON BACKGROUND -->
-      <div id="global-background"></div>
+<body>
+  <div id="stage">
+    <!-- COMMON BACKGROUND -->
+    <div id="global-background"></div>
 
-      <!-- COMMON UI BUTTONS -->
-      <div id="common-ui"></div>
-      
-      <!-- MAIN APP VIEW -->
-      <div id="app"></div>
+    <!-- COMMON UI BUTTONS -->
+    <div id="common-ui"></div>
 
-      <!-- GLOBAL POPUP LAYER -->
-      <div id="popup-layer"></div>
-    </div>
-    <script src="scripts/scale.js"></script>
-    <script src="scripts/router.js"></script>
-    <script src="common-ui/common.js"></script>
-     <script src="common-ui/popup.js"></script>
-    <script src="scripts/app.js"></script>
-  </body>
+    <!-- MAIN APP VIEW -->
+    <div id="app"></div>
+
+    <!-- GLOBAL POPUP LAYER -->
+    <div id="popup-layer"></div>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!-- VIEW TEMPLATES (Offline replacement for fetch)  -->
+    <!-- ─────────────────────────────────────────────── -->
+
+    <!-- INTRO -->
+    <template id="view-intro">
+      <div id="intro-screen">
+        <img src="assets/images/intro/text-maths.png" class="intro-title-maths">
+        <img src="assets/images/intro/text-simulations.png" class="intro-title-sim">
+        <img src="assets/images/intro/heading.png" class="intro-title-types">
+        <img src="assets/images/intro/boy-girl.svg" class="intro-boy">
+        <img src="assets/images/intro/btn-play.png" class="btn intro-play-btn">
+      </div>
+    </template>
+
+    <!-- MENU -->
+    <template id="view-menu">
+      <div>
+        <div class="title-banner">
+          <!-- <span>Types of Angles</span> -->
+          <img src="assets/images/menu/heading.png" />
+        </div>
+
+        <div class="cards-row">
+          <div class="card blue" id="intro-card">
+            <img src="assets/images/menu/text-intro.svg" class="icon" />
+          </div>
+
+          <div class="card orange" id="discover-card">
+            <img src="assets/images/menu/text-discover.svg" class="icon" />
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- DISCOVER MENU -->
+    <template id="view-discovermenu">
+      <div>
+        <div class="title-banner custom-title ">
+          <span>Discover</span>
+        </div>
+
+        <div class="cards-row">
+          <div class="card" id="easyCard">
+            <div class="card-inner">
+              <img class="card-bg" src="assets/images/discovermenu/easy-box.svg" />
+              <img class="card-icon" src="assets/images/discovermenu/easy-icon.svg" />
+              <img class="card-name" src="assets/images/discovermenu/easy.svg" />
+            </div>
+            <div class="tooltip-wrapper">
+              <img class="tooltip-icon" src="assets/images/discovermenu/tooltip-icon.svg" />
+              <div class="tooltip-img">
+                <img src="assets/images/discovermenu/easy-txt.svg" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="warmUpCard">
+            <div class="card-inner">
+              <img class="card-bg" src="assets/images/discovermenu/warmup-box.svg" />
+              <img class="card-icon" src="assets/images/discovermenu/warmup-icon.svg" />
+              <img class="card-name" src="assets/images/discovermenu/warmup.svg" />
+            </div>
+            <div class="tooltip-wrapper">
+              <img class="tooltip-icon" src="assets/images/discovermenu/tooltip-icon.svg" />
+              <div class="tooltip-img">
+                <img src="assets/images/discovermenu/warmup-txt.svg" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="challengeCard">
+            <div class="card-inner">
+              <img class="card-bg" src="assets/images/discovermenu/challenge-box.svg" />
+              <img class="card-icon" src="assets/images/discovermenu/challenge-icon.svg" />
+              <img class="card-name" src="assets/images/discovermenu/challenge.svg" />
+            </div>
+            <div class="tooltip-wrapper">
+              <img class="tooltip-icon" src="assets/images/discovermenu/tooltip-icon.svg" />
+              <div class="tooltip-img">
+                <img src="assets/images/discovermenu/challenge-txt.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </template>
+
+    <!-- INTRO SCREEN -->
+    <template id="view-introscreen">
+      <!-- 
+  ------------------------------------------------------------
+  Author: Ashutosh Garg
+  Email: ashutoshgarg1987@gmail.com
+  File: intorscreen.html
+  Description: Intro screen view
+  Created On: 10/Dec/2025
+  ------------------------------------------------------------
+-->
+
+      <div id="intro-screen">
+        <img class="intro-title fade-in" src="assets/images/introscreen/title-introduction.svg">
+        <div class="intro-box">
+          <h1 class="fade-in maintxt" style="--d:0s">Algebraic Expressions</h1>
+          <div class="fade-in subtext" style="--d:0.2s">An Algebraic Expression is the combination of constant and
+            variables.
+            We use the operations like addition, subtraction <br> etc. to form an algebraic expression.</div>
+
+          <div class="two-col">
+            <div style="width: 40%;">
+              <h2 class="fade-in maintxt" style="--d:0.4s">Variable</h2>
+              <div class="fade-in subtext" style="--d:0.6s">A variable does not have a fixed value. It can be varied.
+                It <br> is represented by letters
+                like <em>a, y, p, m</em> etc.</div>
+            </div>
+
+            <div>
+              <h2 class="fade-in maintxt" style="--d:0.8s">Constant</h2>
+              <div class="fade-in subtext" style="--d:1.0s">A constant has a fixed value. Any number without<br> a
+                variable is a constant.</div>
+            </div>
+          </div>
+
+          <h2 class="fade-in maintxt" style="--d:1.0s">Example: <span class="bold-eq">2x + 7</span></h2>
+          <div class="fade-in subtext" style="--d:1.2s">Here we got this expression by multiplying 2 and x and then
+            adding
+            7 to it.<br>
+            In the above expression, the variable is x and the constant is 7.</div>
+
+          <div class="example-row">
+            <div style="display: flex; flex-direction:column">
+              <div>
+                <h2 class="fade-in maintxt" style="--d:1.4s">Expressions with One Variable</h2>
+                <div class="fade-in subtext" style="--d:1.6s">If we know the value of the variable in the expression
+                  then we can<br>easily find the numerical value of the given expression.
+                </div>
+              </div>
+              <div style="margin-top: 29px;">
+                <div>
+                  <strong class="maintxt fade-in" style="--d:1.8s">Example:</strong>
+                  <span class="fade-in subtext" style="--d:2.0s">Find the value of the expression </span>
+                  <strong class="fade-in subtext" style="--d:2.0s">2x + 7</strong>
+                  <span class="fade-in subtext" style="--d:2.0s">if</span>
+                  <strong class="fade-in subtext" style="--d:2.0s">x = 3</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="workings">
+              <div class="fade-in subtext" style="--d:2.2s; margin-top: 29px;">
+                We have to put the<br> value of <strong>x = 3.</strong><br>
+                <strong>
+                  = 2x + 7<br>
+                  = 2(3) + 7<br>
+                  = 6 + 7<br>
+                  = 13
+                </strong>
+                <div>
+                </div>
+              </div>
+
+              <div class="equation-section fade-in" class="" style="--d:2.4s">
+                <img class="equation" src="assets/images/introscreen/equation.svg">
+                <img class="coefcient" src="assets/images/introscreen/coefcient.svg">
+                <img class="constant" src="assets/images/introscreen/constant.svg">
+                <img class="variable" src="assets/images/introscreen/variable.svg">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skip Button -->
+        <img id="skipBtn" class="btn skip-btn fade-in" style="--d:2.6s" src="assets/images/introscreen/skip-btn.png" />
+      </div>
+    </template>
+
+    <!-- EASY SCREEN -->
+    <template id="view-easyscreen">
+      <!-- 
+  ------------------------------------------------------------
+  Author: Ashutosh Garg
+  Email: ashutoshgarg1987@gmail.com
+  File: easyscreen.html
+  Description: easy screen view
+  Created On: 11/Dec/2025
+  ------------------------------------------------------------
+-->
+
+      <div id="easy-screen">
+        <!-- TOP BANNER -->
+        <div class="top-banner">
+          <span>Let’s learn how to build algebraic expressions using coins, weights, and variables.</span>
+
+          <div class="sound-wrapper">
+            <img src="assets/images/common/sound-btn.svg" class="btn sound-btn" id="soundBtn">
+            <!-- <div class="mute-tag">Mute</div> -->
+          </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content-area">
+          <!-- LEFT: TOOLBOX PANEL -->
+          <!-- TOOLBOX -->
+          <div class="bg-panel" style="width: 19%; padding: 18px;">
+            <div class="tool-title">Toolbox</div>
+
+            <!-- Coins Row -->
+            <div class="tool-section coins">
+              <div class="row">
+                <div class="btn coin drag-src" data-type="coin" data-symbol="B" data-value="5">
+                  <img src="assets/images/easyscreen/bronz.svg" style="width: 100px;">
+                </div>
+                <div class="btn coin drag-src" data-type="coin" data-symbol="S" data-value="10">
+                  <img src="assets/images/easyscreen/silver.svg" style="width: 100px;">
+                </div>
+                <div class="btn coin drag-src" data-type="coin" data-symbol="G" data-value="15">
+                  <img src="assets/images/easyscreen/gold.svg" style="width: 100px;">
+                </div>
+              </div>
+              <div class="tool-section-title">Coins</div>
+            </div>
+
+            <!-- Algebra Buttons -->
+            <div class="tool-section algebra">
+              <div class="grid-2">
+                <div class="btn alg-btn x drag-src" data-type="var" data-symbol="x" data-value="1">x</div>
+                <div class="btn alg-btn y drag-src" data-type="var" data-symbol="y" data-value="1">y</div>
+                <div class="btn alg-btn one drag-src" data-type="num" data-symbol="1" data-value="1">1</div>
+                <div class="btn alg-btn neg-one drag-src" data-type="num" data-symbol="-1" data-value="-1">-1</div>
+              </div>
+              <div class="tool-section-title">Algebra</div>
+            </div>
+
+            <!-- Weights Row -->
+            <div class="tool-section weights">
+              <div class="row">
+                <div class="weight">
+                  <img class="btn" src="assets/images/easyscreen/weight-2.svg" style="width: 100px;">
+                </div>
+                <div class="weight">
+                  <img class="btn" src="assets/images/easyscreen/weight-5.svg" style="width: 100px;">
+                </div>
+                <div class="weight">
+                  <img class="btn" src="assets/images/easyscreen/weight-10.svg" style="width: 100px;">
+                </div>
+              </div>
+              <div class="tool-section-title">Weight</div>
+            </div>
+
+            <button class="btn clear-btn">Clear</button>
+          </div>
+
+          <!-- Center: Work PANEL -->
+          <div class="bg-panel" style="width: 58%; padding: 18px;" id="rightPanel">
+            <div id="workPanel" class="work-dropzone"></div>
+            <div class="expression-box" id="expressionTxt"> - </div>
+          </div>
+
+
+          <!-- RIGHT: VARIABLES PANEL -->
+          <div class="bg-panel" style="width: 19%; padding: 18px;" id="rightPanel">
+            <div class="tool-title">Variables</div>
+            <div class="slider-box">
+              <input type="range" min="0" max="10" class="slider-x" value="1">
+              <div class="tool-section-title">x = 1</div>
+            </div>
+
+            <div class="slider-box">
+              <input type="range" min="0" max="10" class="slider-y" value="1">
+              <div class="tool-section-title">y = 1</div>
+            </div>
+
+            <div class="tool-title">Total</div>
+            <div class="total-box" id="totalTxt">0</div>
+
+            <div class="checkboxes">
+              <div><input type="checkbox" /> Show Coefficients</div>
+              <div><input type="checkbox" /> Coin Values</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM RIGHT BUTTONS -->
+        <div class="bottom-right-buttons">
+          <div id="easyResetBtn"><img src="assets/images/common/reset.svg" style="width: 90px;"></div>
+          <div id="easyNextBtn"><img src="assets/images/common/next.svg" style="width: 110px;"></div>
+        </div>
+
+      </div>
+    </template>
+
+    <!-- WARMUP SCREEN -->
+    <template id="view-warmupscreen">
+      <!-- 
+  ------------------------------------------------------------
+  Author: Ashutosh Garg
+  Email: ashutoshgarg1987@gmail.com
+  File: easyscreen.html
+  Description: easy screen view
+  Created On: 11/Dec/2025
+  ------------------------------------------------------------
+-->
+
+      <div id="warmup-screen">
+        <!-- TOP BANNER -->
+        <div class="top-banner">
+          <span>Drag the blocks to build the correct expression, then drop the completed expression into the matching
+            box.</span>
+          <div class="sound-wrapper">
+            <img src="assets/images/common/sound-btn.svg" class="btn sound-btn" id="soundBtn">
+            <!-- <div class="mute-tag">Mute</div> -->
+          </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-area">
+          <!-- LEFT TOOLBOX -->
+          <div class="toolbox">
+            <h2 style="font-size: 50px;">Toolbox</h2>
+            <div class="grid-2">
+              <div class="alg-btn x draggable-block" data-type="var" data-value="x">x</div>
+              <div class="alg-btn y draggable-block" data-type="var" data-value="y">y</div>
+            </div>
+            <div class="numbers-grid">
+              <div class="draggable-block" data-type="num" data-value="-10">-10</div>
+              <div class="draggable-block" data-type="num" data-value="-9">-9</div>
+              <div class="draggable-block" data-type="num" data-value="-8">-8</div>
+              <div class="draggable-block" data-type="num" data-value="-7">-7</div>
+              <div class="draggable-block" data-type="num" data-value="-6">-6</div>
+              <div class="draggable-block" data-type="num" data-value="-5">-5</div>
+              <div class="draggable-block" data-type="num" data-value="-4">-4</div>
+              <div class="draggable-block" data-type="num" data-value="-3">-3</div>
+              <div class="draggable-block" data-type="num" data-value="-2">-2</div>
+              <div class="draggable-block" data-type="num" data-value="-1">-1</div>
+              <div class="draggable-block" data-type="num" data-value="1">1</div>
+              <div class="draggable-block" data-type="num" data-value="2">2</div>
+              <div class="draggable-block" data-type="num" data-value="3">3</div>
+              <div class="draggable-block" data-type="num" data-value="4">4</div>
+              <div class="draggable-block" data-type="num" data-value="5">5</div>
+              <div class="draggable-block" data-type="num" data-value="6">6</div>
+              <div class="draggable-block" data-type="num" data-value="7">7</div>
+              <div class="draggable-block" data-type="num" data-value="8">8</div>
+              <div class="draggable-block" data-type="num" data-value="9">9</div>
+              <div class="draggable-block" data-type="num" data-value="10">10</div>
+            </div>
+            <button class="clear-btn">
+              <img src="assets/images/common/clear.svg" alt="Clear" class="clear-img">
+            </button>
+          </div>
+
+          <!-- CENTER WHITE WORKSPACE -->
+          <div class="workspace"></div>
+
+          <!-- RIGHT EQUATIONS -->
+          <div class="equations">
+            <div class="eq-box">
+              <div class="eq-font" id="equation1">Equation 1</div>
+              <div class="eq-slot" id="slot1"></div>
+            </div>
+
+            <div class="eq-box">
+              <div class="eq-font" id="equation2">Equation 2</div>
+              <div class="eq-slot" id="slot2"></div>
+            </div>
+
+            <div class="eq-box">
+              <div class="eq-font" id="equation3">Equation 3</div>
+              <div class="eq-slot" id="slot3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM RIGHT BUTTONS -->
+        <div class="bottom-right-buttons">
+          <div id="warmupResetBtn"><img src="assets/images/common/reset.svg" style="width: 90px;"></div>
+          <div id="warmupNextBtn"><img src="assets/images/common/next.svg" style="width: 110px;"></div>
+        </div>
+      </div>
+    </template>
+
+    <!-- CHALLENGE SCREEN -->
+    <template id="view-challengescreen">
+      <!-- 
+  ------------------------------------------------------------
+  Author: Ashutosh Garg
+  Email: ashutoshgarg1987@gmail.com
+  File: challengescreen.html
+  Description: challenge screen view
+  Created On: 12/Dec/2025
+  ------------------------------------------------------------
+-->
+
+      <div id="challenge-screen">
+        <!-- TOP BANNER -->
+        <div class="top-banner">
+          <span>Build the equation on the balance exactly as shown, then use balanced operations to find the value of
+            the
+            variable.</span>
+          <div class="sound-wrapper">
+            <img src="assets/images/common/sound-btn.svg" class="btn sound-btn" id="soundBtn">
+            <!-- <div class="mute-tag">Mute</div> -->
+          </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-area">
+          <!-- LEFT TOOLBOX -->
+          <div class="toolbox">
+            <div class="slider-box-vertical">
+              <input type="range" min="0" max="10" class="slider-x vertical-slider" value="1">
+              <div class="tool-section-title">1x</div>
+            </div>
+
+            <div class="slider-box-vertical">
+              <input type="range" min="0" max="10" class="slider-y vertical-slider" value="1">
+              <div class="tool-section-title">1</div>
+            </div>
+          </div>
+
+          <!-- CENTER WHITE WORKSPACE -->
+          <div class="workspace">
+            <div id="equationTxt" class="equation-txt"> 1x + 1 = 1</div>
+            <div id="equalCheck">=</div>
+            <div class="balance-scale-box">
+              <img src="assets/images/challengescreen/scalebase.svg" class="scale-base" style="top: 46%;">
+              <img src="assets/images/challengescreen/scalebase-line.svg" class="scale-base" style="top: 70%;">
+              <img src="assets/images/challengescreen/scale-arm.svg" class="scale-arm">
+              <img src="assets/images/challengescreen/left-part.svg" id="leftWeight" class="scale-weight">
+              <img src="assets/images/challengescreen/right-part.svg" id="rightWeight" class="scale-weight">
+            </div>
+            <div class="x-value-box">
+              <div style="font-size: 39px;">x =</div>
+              <input id="xValue" class="x-value-input">
+            </div>
+          </div>
+
+          <!-- RIGHT EQUATIONS -->
+          <div class="toolbox">
+            <div class="slider-box-vertical" style="position: relative; left: 77px;">
+              <input type="range" min="0" max="110" class="slider-z vertical-slider" value="1">
+              <div class="tool-section-title">1</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="checkBtn" class="btn"><img src="assets/images/challengescreen/check-btn.svg"></div>
+
+        <!-- BOTTOM RIGHT BUTTONS -->
+        <div class="bottom-right-buttons">
+          <div id="challengeResetBtn"><img src="assets/images/common/reset.svg" style="width: 90px;"></div>
+          <div id="challengeNextBtn"><img src="assets/images/common/next.svg" style="width: 110px;"></div>
+        </div>
+      </div>
+    </template>
+  </div>
+  <script src="scripts/scale.js"></script>
+  <script src="scripts/router.js"></script>
+  <script src="common-ui/common.js"></script>
+  <script src="common-ui/popup.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
 
 </html>

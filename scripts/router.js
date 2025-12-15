@@ -6,6 +6,34 @@
  *  Date        : 4-Dec-2025
  ***************************************************************/
 
+// Code to load views Locaally
+function loadView(viewName) {
+  // Load HTML from <template>
+  const tpl = document.getElementById(`view-${viewName}`);
+  if (!tpl) {
+    console.error("View not found:", viewName);
+    return;
+  }
+  document.querySelector("#app").innerHTML = tpl.innerHTML;
+  // Remove OLD CSS
+  document.querySelectorAll("link[data-view-css]").forEach(el => el.remove());
+  // Add NEW CSS
+  const css = document.createElement("link");
+  css.rel = "stylesheet";
+  css.href = `views/${viewName}/${viewName}.css`;
+  css.setAttribute("data-view-css", viewName);
+  document.head.appendChild(css);
+  // Remove OLD JS
+  document.querySelectorAll("script[data-view-js]").forEach(el => el.remove());
+  // Add NEW JS
+  const js = document.createElement("script");
+  js.src = `views/${viewName}/${viewName}.js`;
+  js.setAttribute("data-view-js", viewName);
+  document.body.appendChild(js);
+}
+
+/*
+// Code for run on server using dynamic load using fetch
 async function loadView(viewName) {
   // Load HTML
   const html = await fetch(`views/${viewName}/${viewName}.html`).then(r => r.text());
@@ -30,6 +58,7 @@ async function loadView(viewName) {
   js.setAttribute("data-view-js", viewName);
   document.body.appendChild(js);
 }
+*/
 
 // Show/Hide common elements as per need
 function setCommonUI(options = {}) {

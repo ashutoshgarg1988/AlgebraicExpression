@@ -1,0 +1,42 @@
+<!-- 
+  ------------------------------------------------------------
+  Author: Ashutosh Garg
+  Email: ashutoshgarg1987@gmail.com
+  File: index.html
+  Description: 
+  Created On: 10/Dec/2025
+  ------------------------------------------------------------
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Algebraic Expression</title>
+    <link rel="stylesheet" href="background/background.css" />
+    <link rel="stylesheet" href="common-ui/common.css" />
+    <link rel="icon" href="assets/icons/favicon.png" type="image/x-icon">
+  </head>
+
+  <body>
+    <div id="stage">
+      <!-- COMMON BACKGROUND -->
+      <div id="global-background"></div>
+
+      <!-- COMMON UI BUTTONS -->
+      <div id="common-ui"></div>
+      
+      <!-- MAIN APP VIEW -->
+      <div id="app"></div>
+
+      <!-- GLOBAL POPUP LAYER -->
+      <div id="popup-layer"></div>
+    </div>
+    <script src="scripts/scale.js"></script>
+    <script src="scripts/router.js"></script>
+    <script src="common-ui/common.js"></script>
+     <script src="common-ui/popup.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+
+</html>
