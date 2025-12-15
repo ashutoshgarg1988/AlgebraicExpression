@@ -55,18 +55,18 @@
 }
 
 .maintxt {
-    font-size: 2.3rem;
+    font-size: 36px;
     margin-bottom: 10px;
     font-weight: 700;
 }
 
 .subtext {
-    font-size: 1.7rem;
+    font-size: 27px;
 }
 
 .bold-eq {
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 28px;
 }
 
 /* Two Column Section */
