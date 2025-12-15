@@ -1,7 +1,9 @@
 /* #intro-screen:not(.start) .fade-in {
     opacity: 0 !important;
 } */
-
+* {
+  font-family: Arial;
+}
 .fade-in {
     opacity: 0;
     /* transform: translateY(10px); */
@@ -54,18 +56,18 @@
 }
 
 .maintxt {
-    font-size: 37px;
+    font-size: 2.3rem;
     margin-bottom: 10px;
     font-weight: 700;
 }
 
 .subtext {
-    font-size: 27px;
+    font-size: 1.7rem;
 }
 
 .bold-eq {
     font-weight: 700;
-    font-size: 28px;
+    font-size: 1.8rem;
 }
 
 /* Two Column Section */
