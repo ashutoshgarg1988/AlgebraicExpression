@@ -18,14 +18,17 @@
 
   // Add event listeners
   document.getElementById("intro-card")?.addEventListener("click", () => {
+    SoundManager.play("click");
     loadView("introscreen");
   });
 
   document.getElementById("discover-card")?.addEventListener("click", () => {
+    SoundManager.play("click");
     loadView("discovermenu");
   });
 
   document.getElementById("diy-card")?.addEventListener("click", () => {
+    SoundManager.play("click");
     loadView("doitscreen");
   });
 })();

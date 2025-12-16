@@ -16,6 +16,19 @@
   });
   let correctCounter = 0;
   let eqs = []; 
+  let muted = false;
+
+  SoundManager.playBg("warmUp");
+  soundBtn.addEventListener("click", () => {
+    SoundManager.play("click");
+    muted = !muted;
+    if(muted) {
+      SoundManager.pause('warmUp');
+    } else {
+      SoundManager.resume();
+    }
+    // soundBtn.src = muted ? "assets/icons/sound-off.png" : "assets/icons/sound-on.png";
+  });
 
   function genrateRandomEq() {
     eqs = generateRandomEquations();
@@ -29,6 +42,7 @@
   // showPopup("info", { text: "Use the tiles at bottom to build an angle that matches the target angle" });
 
   warmupNextBtn.addEventListener("click", () => {
+    SoundManager.play("click");
     loadView("challengescreen");
   });
 
@@ -39,6 +53,7 @@
   });
 
   document.getElementById("warmupResetBtn").addEventListener("click", () => {
+    SoundManager.play("click");
     workspace.innerHTML = "";
     group = null;
     // 2️⃣ Clear all equation slots

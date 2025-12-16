@@ -23,7 +23,9 @@
   const labelZ = sliderZ.nextElementSibling;
   let leftWeight = 1;
   let rightWeight = 1;
+  let muted = false;
 
+  SoundManager.playBg("challange");
   setCommonUI({
     btnHome: true,
     btnPlay: true,
@@ -32,10 +34,22 @@
     copyright: true
   });
 
+  soundBtn.addEventListener("click", () => {
+    SoundManager.play("click");
+    muted = !muted;
+    if(muted) {
+      SoundManager.pause('challange');
+    } else {
+      SoundManager.resume();
+    }
+    // soundBtn.src = muted ? "assets/icons/sound-off.png" : "assets/icons/sound-on.png";
+  });
+
   // Show info popup when screen loads
   // showPopup("info", { text: "Stop the moving arm as close as you can to the target angle." });
 
   challengeResetBtn.addEventListener("click", () => {
+    SoundManager.play("click");
     sliderX.value = 1;
     labelX.textContent = `${sliderX.value}x`;
     sliderY.value = 1;
@@ -49,6 +63,7 @@
   });
 
   checkBtn.addEventListener("click", () => {
+    SoundManager.play("click");
     if(leftWeight === rightWeight) {
       showPopup("greatWork", { step: 1, description: "" });
     }else {
@@ -57,6 +72,7 @@
   });
 
   challengeNextBtn.addEventListener("click", () => {
+    SoundManager.play("click");
     loadView("menu");
   });
 

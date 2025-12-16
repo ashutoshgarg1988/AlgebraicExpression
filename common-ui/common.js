@@ -23,18 +23,24 @@ document.getElementById("common-ui").innerHTML = `
 
 document.getElementById("btnLogo").onclick = () => {
   loadView('intro');
+  SoundManager.stopAll();
+  SoundManager.play("click");
 };
 
 document.getElementById("btnHome").onclick = () => {
   loadView('menu');
+  SoundManager.stopAll();
+  SoundManager.play("click");
 };
 
 document.getElementById("btnPlay").onclick = () => {
   alert("Play clicked!");
+  SoundManager.play("click");
 };
 
 document.getElementById("btnBook").onclick = () => {
   alert("Book clicked!");
+  SoundManager.play("click");
 };
 
 // document.getElementById("btnReload").onclick = () => {

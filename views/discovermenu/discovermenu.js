@@ -7,6 +7,7 @@
  ***************************************************************/
 
 (function initDiscoverMenu() {
+  SoundManager.playBg("simulation");
   setCommonUI({
     btnHome: true,
     btnPlay: false,
@@ -17,14 +18,17 @@
 
   // Card Click Events
   document.getElementById("easyCard").addEventListener("click", () => {
+    SoundManager.play("click");
     loadView("easyscreen");
   });
 
   document.getElementById("warmUpCard").addEventListener("click", () => {
+    SoundManager.play("click");
     loadView('warmupscreen');
   });
 
   document.getElementById("challengeCard").addEventListener("click", () => {
+    SoundManager.play("click");
     loadView('challengescreen');
   });
 })();
