@@ -7,6 +7,7 @@
  ***************************************************************/
 
 (function initIntroScreen() {
+  SoundManager.playBg("introduction");
   setCommonUI({
     btnHome: true,
     btnPlay: true,
@@ -17,6 +18,7 @@
   const skipBtn = document.getElementById("skipBtn");
   if (skipBtn) {
     skipBtn.addEventListener("click", () => {
+      SoundManager.play("click");
       loadView("menu");
     });
   }

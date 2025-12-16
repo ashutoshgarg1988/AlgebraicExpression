@@ -7,6 +7,7 @@
  ***************************************************************/
 
 (function initEasyScreen() {
+  SoundManager.playBg("easy");
   let totalTxt = document.getElementById('totalTxt');
   let expressionTxt = document.getElementById('expressionTxt');
   let allElemsOnCenterStage;
@@ -20,6 +21,7 @@
   // Drag and drop functionality
   let draggedData = null;
   let currentMergeTarget = null;
+  let muted = false;
 
   setCommonUI({
     btnHome: true,
@@ -34,15 +36,23 @@
 
   // Next button click functionality
   easyNextBtn.addEventListener("click", () => {
+    SoundManager.play("click");
     loadView("warmupscreen");
   });
 
   soundBtn.addEventListener("click", () => {
+    SoundManager.play("click");
     muted = !muted;
-    soundBtn.src = muted ? "assets/icons/sound-off.png" : "assets/icons/sound-on.png";
+    if(muted) {
+      SoundManager.pause('easy');
+    } else {
+      SoundManager.resume();
+    }
+    // soundBtn.src = muted ? "assets/icons/sound-off.png" : "assets/icons/sound-on.png";
   });
 
   document.getElementById("easyResetBtn").addEventListener("click", ()=> {
+    SoundManager.play("click");
     sliderX.value = 1;
     labelX.textContent = `x = ${sliderX.value}`;
     sliderY.value = 1;
@@ -65,6 +75,7 @@
 
   // Clear button click functionality
   document.querySelector(".clear-btn")?.addEventListener("click", () => {
+    SoundManager.play("click");
     resetCenterPanel();
   });
 
