@@ -123,16 +123,6 @@
 
     <!-- INTRO SCREEN -->
     <template id="view-introscreen">
-      <!-- 
-  ------------------------------------------------------------
-  Author: MentorNest Animation
-  Email: info@mentornest.com
-  File: intorscreen.html
-  Description: Intro screen view
-  Created On: 10/Dec/2025
-  ------------------------------------------------------------
--->
-
       <div id="intro-screen">
         <!-- <img class="intro-title fade-in" src="assets/images/introscreen/title-introduction.svg"> -->
         <div class="title-audio-wrapper fade-in" style="--d:0s; display: inline-block; position: relative;">
@@ -216,16 +206,6 @@
 
     <!-- EASY SCREEN -->
     <template id="view-easyscreen">
-      <!-- 
-  ------------------------------------------------------------
-  Author: MentorNest Animation
-  Email: info@mentornest.com
-  File: easyscreen.html
-  Description: easy screen view
-  Created On: 11/Dec/2025
-  ------------------------------------------------------------
--->
-
       <div id="easy-screen">
         <!-- TOP BANNER -->
         <div class="top-banner">
@@ -338,16 +318,6 @@
 
     <!-- WARMUP SCREEN -->
     <template id="view-warmupscreen">
-      <!-- 
-  ------------------------------------------------------------
-  Author: MentorNest Animation
-  Email: info@mentornest.com
-  File: easyscreen.html
-  Description: easy screen view
-  Created On: 11/Dec/2025
-  ------------------------------------------------------------
--->
-
       <div id="warmup-screen">
         <!-- TOP BANNER -->
         <div class="top-banner">
@@ -364,10 +334,29 @@
           <!-- LEFT TOOLBOX -->
           <div class="toolbox">
             <h2 style="font-size: 50px;">Toolbox</h2>
-            <div class="grid-2">
+            <div class="grid-2" id="xyBtns">
               <div class="alg-btn x draggable-block" data-type="var" data-value="x">x</div>
               <div class="alg-btn y draggable-block" data-type="var" data-value="y">y</div>
             </div>
+            <div class="tool-section coins" id="coinBtns" style="display: none;">
+              <div class="row">
+                <div class="btn coin draggable-block" data-type="coin" data-symbol="B" data-value="5">
+                  <img src="assets/images/easyscreen/bronz.png" style="width: 100px;">
+                  <span class="coin-text">₹</span>
+                </div>
+                <div class="btn coin draggable-block" data-type="coin" data-symbol="S" data-value="10">
+                  <img src="assets/images/easyscreen/silver.png" style="width: 100px;">
+                  <span class="coin-text">₹</span>
+                </div>
+                <div class="btn coin draggable-block" data-type="coin" data-symbol="G" data-value="15">
+                  <img src="assets/images/easyscreen/gold.png" style="width: 100px;">
+                  <span class="coin-text">₹</span>
+                </div>
+              </div>
+              <div class="tool-section-title">Coins</div>
+            </div>
+
+
             <div class="numbers-grid">
               <!-- <div class="draggable-block" data-type="num" data-value="-10">-10</div>
               <div class="draggable-block" data-type="num" data-value="-9">-9</div>
@@ -429,16 +418,6 @@
 
     <!-- CHALLENGE SCREEN -->
     <template id="view-challengescreen">
-      <!-- 
-  ------------------------------------------------------------
-  Author: MentorNest Animation
-  Email: info@mentornest.com
-  File: challengescreen.html
-  Description: challenge screen view
-  Created On: 12/Dec/2025
-  ------------------------------------------------------------
--->
-
       <div id="challenge-screen">
         <!-- TOP BANNER -->
         <div class="top-banner">
@@ -504,23 +483,23 @@
     </template>
   </div>
 
-<div class="floating-particles">
-  <div class="particle">
+  <div class="floating-particles">
+    <div class="particle">
       <img src="assets/images/intro/animate-img.png" alt="A. 1,2">
-  </div>
-  <div class="particle">
+    </div>
+    <div class="particle">
       <img src="assets/images/intro/animate-img1.png" alt="B. 1,4">
-  </div>
-  <div class="particle">
+    </div>
+    <div class="particle">
       <img src="assets/images/intro/animate-img2.png" alt="C. 1,6">
-  </div>
-  <div class="particle">
+    </div>
+    <div class="particle">
       <img src="assets/images/intro/animate-img3.png" alt="D. 1,8">
+    </div>
+    <div class="particle">
+      <img src="assets/images/intro/animate-img4.png" alt="D. 1,8">
+    </div>
   </div>
-  <div class="particle">
-    <img src="assets/images/intro/animate-img4.png" alt="D. 1,8">
-</div>
-</div>
 
 
   <script src="scripts/scale.js"></script>

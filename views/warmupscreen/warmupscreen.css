@@ -66,6 +66,43 @@
   margin-bottom: 17px;
 }
 
+.tool-section-title {
+  text-align: center;
+  font-weight: 700;
+  color: #444;
+  margin: 10px;
+  font-size: 25px;
+}
+
+/* Layout helpers */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid grey;
+  border-radius: 16px;
+}
+
+/* COINS */
+.coin {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  /* border: 3px solid rgba(0, 0, 0, 0.2); */
+}
+
+.coin-text {
+  position: absolute;
+  color: grey;
+  font-size: 30px;
+}
+
 /* ALGEBRA BUTTONS */
 .alg-btn {
   height: 55px;
@@ -89,8 +126,8 @@
 .numbers-grid {
     display: grid;
     grid-template-columns: repeat(4, 0.5fr);
-    gap: 7px;
-    margin-bottom: 20px;
+    gap: 20px 7px;
+    margin: 57px 0;
 }
 
 .numbers-grid div {
