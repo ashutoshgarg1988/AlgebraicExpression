@@ -142,22 +142,25 @@
   // Merge logic (count-based, correct)
   function mergeExistingItem(existing, draggedData) {
     const count = Number(existing.dataset.count) + 1;
-    const baseValue = Number(existing.dataset.baseValue);
     existing.dataset.count = count;
-    existing.dataset.value = count * baseValue;
-    /* ✅ Update text only for non-image items */
+    existing.dataset.value = count * existing.dataset.baseValue;
+    // Update text ONLY for text-based items
     if (
       existing.dataset.type === "var" ||
       existing.dataset.type === "num"
     ) {
       if (existing.dataset.symbol === "x" || existing.dataset.symbol === "y") {
         existing.textContent = `${count}${existing.dataset.symbol}`;
+      } else if(existing.dataset.symbol === "-1") {
+        existing.textContent = `-${count}`;
       } else {
         existing.textContent = `${count}`;
       }
     }
+    // Coins & weights untouched visually
     updateCoefficientBadges();
   }
+
 
 
   // Function to get total text value on right side panel
@@ -172,12 +175,10 @@
       if (el.symbol === 'x') {
         totalVal += el.value * sliderX.value;
         xCount += el.value;
-      }
-      else if (el.symbol === 'y') {
+      } else if (el.symbol === 'y') {
         totalVal += el.value * sliderY.value;
         yCount += el.value;
-      }
-      else if (
+      } else if (
         el.symbol === '1' ||
         el.symbol === '-1' ||
         el.symbol === 'B' ||
@@ -189,7 +190,10 @@
       ) {
         totalVal += el.value;
         constantCount += el.value;
+      } else {
+
       }
+
     }
 
     // Build equation text cleanly
@@ -222,7 +226,7 @@
     e.preventDefault();
     if (!draggedData) return;
     const existing = findExistingWorkItem(draggedData);
-    // ✅ MERGE if already exists
+    // MERGE if already exists
     if (existing) {
       mergeExistingItem(existing, draggedData);
     }
@@ -236,38 +240,45 @@
 
 
   // Create the dropped object
-  function createWorkItem(item, x, y) {
+  function createWorkItem(item) {
     const original = document.querySelector(
       `.drag-src[data-type="${item.type}"][data-symbol="${item.symbol || ""}"][data-value="${item.value}"]`
     );
+    // Clone the original element EXACTLY
     const el = original.cloneNode(true);
     el.classList.add("work-item");
+    // Remove drag-only behavior
+    el.removeAttribute("draggable");
+    el.style.cursor = "default";
+    // Data for logic
     el.dataset.type = item.type;
     el.dataset.symbol = item.symbol || "";
     el.dataset.baseValue = item.value;
     el.dataset.count = 1;
     el.dataset.value = item.value;
-    el.style.position = "absolute";
-    el.style.left = x + "px";
-    el.style.top = y + "px";
-    el.style.width = "100px";
-    el.style.cursor = "default";
-    el.setAttribute("draggable", "false");
-    /* ONLY update text for algebra buttons */
-    if (item.type === "var" || item.type === "num") {
-      if (item.symbol === "x" || item.symbol === "y") {
-        el.textContent = `1${item.symbol}`;
-      } else {
-        el.textContent = `1`;
-      }
-    }
-    // DO NOTHING for coins & weights (image stays)
-    workPanel.appendChild(el);
+    getExpressionGroup().appendChild(el);
+    updateCoefficientBadges();
   }
+
 
   const showCoeffChk = document.getElementById("showCoeffChk");
   showCoeffChk.addEventListener("change", () => {
     updateCoefficientBadges();
+  });
+
+  const showCoinValChk = document.getElementById("showCoinValChk");
+  showCoinValChk.addEventListener("change", () => {
+    document.querySelectorAll(".btn.coin").forEach(coin => {
+      const value = coin.dataset.value;      // 5, 10, 15
+      const textEl = coin.querySelector(".coin-text");
+      if (showCoinValChk.checked) {
+        if (textEl) {
+          textEl.textContent = value;
+        }
+      }else {
+        textEl.textContent = '₹';
+      }
+    });
   });
 
   function updateCoefficientBadges() {
@@ -287,6 +298,18 @@
       el.appendChild(badge);
     });
   }
+
+  function getExpressionGroup() {
+    let group = workPanel.querySelector(".expr-group");
+    if (!group) {
+      group = document.createElement("div");
+      group.className = "expr-group";
+      workPanel.appendChild(group);
+    }
+    return group;
+  }
+
+
 
 })();
 

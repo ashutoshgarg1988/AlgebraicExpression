@@ -248,13 +248,16 @@
             <div class="tool-section coins">
               <div class="row">
                 <div class="btn coin drag-src" data-type="coin" data-symbol="B" data-value="5">
-                  <img src="assets/images/easyscreen/bronz.svg" style="width: 100px;">
+                  <img src="assets/images/easyscreen/bronz.png" style="width: 100px;">
+                  <span class="coin-text">₹</span>
                 </div>
                 <div class="btn coin drag-src" data-type="coin" data-symbol="S" data-value="10">
-                  <img src="assets/images/easyscreen/silver.svg" style="width: 100px;">
+                  <img src="assets/images/easyscreen/silver.png" style="width: 100px;">
+                  <span class="coin-text">₹</span>
                 </div>
                 <div class="btn coin drag-src" data-type="coin" data-symbol="G" data-value="15">
-                  <img src="assets/images/easyscreen/gold.svg" style="width: 100px;">
+                  <img src="assets/images/easyscreen/gold.png" style="width: 100px;">
+                  <span class="coin-text">₹</span>
                 </div>
               </div>
               <div class="tool-section-title">Coins</div>
@@ -265,8 +268,10 @@
               <div class="grid-2">
                 <div class="btn alg-btn x drag-src" data-type="var" data-symbol="x" data-value="1">x</div>
                 <div class="btn alg-btn y drag-src" data-type="var" data-symbol="y" data-value="1">y</div>
+                <!-- <div class="btn alg-btn plus drag-src" data-type="var" data-symbol="+" data-value="0">+</div> -->
                 <div class="btn alg-btn one drag-src" data-type="num" data-symbol="1" data-value="1">1</div>
                 <div class="btn alg-btn neg-one drag-src" data-type="num" data-symbol="-1" data-value="-1">-1</div>
+                <!-- <div class="btn alg-btn minus drag-src" data-type="var" data-symbol="-" data-value="0">-</div> -->
               </div>
               <div class="tool-section-title">Algebra</div>
             </div>
@@ -292,7 +297,9 @@
 
           <!-- Center: Work PANEL -->
           <div class="bg-panel" style="width: 58%; padding: 18px;" id="rightPanel">
-            <div id="workPanel" class="work-dropzone"></div>
+            <div id="workPanel" class="work-dropzone">
+              <div class="expr-group"></div>
+            </div>
             <div class="expression-box" id="expressionTxt"> - </div>
           </div>
 
@@ -315,7 +322,7 @@
 
             <div class="checkboxes">
               <div><input type="checkbox" id="showCoeffChk"/> Show Coefficients</div>
-              <div><input type="checkbox" /> Coin Values</div>
+              <div><input type="checkbox" id="showCoinValChk"/> Coin Values</div>
             </div>
           </div>
         </div>

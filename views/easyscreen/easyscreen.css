@@ -61,7 +61,8 @@
 
 .grid-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: repeat(2, auto);
   gap: 10px;
   border: 1px solid grey;
   border-radius: 16px;
@@ -79,6 +80,12 @@
   font-size: 22px;
   font-weight: 700;
   /* border: 3px solid rgba(0, 0, 0, 0.2); */
+}
+
+.coin-text {
+  position: absolute;
+  color: grey;
+  font-size: 30px;
 }
 
 .gold {
@@ -103,6 +110,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 70px;
 }
 
 .x {
@@ -120,6 +128,15 @@
 
 .neg-one {
   background: #22c55e;
+}
+
+.plus {
+  background: #15f6fa;
+  color: #222;
+}
+
+.minus {
+  background: #b522c5;
 }
 
 /* WEIGHTS */
@@ -332,14 +349,18 @@ input[type="checkbox"]:checked::after {
   user-select: none;
 }
 
+.work-item {
+  position: relative;   /* 👈 THIS IS THE KEY */
+}
+
 .coeff-badge {
-  position: absolute;
+ position: absolute;
   right: 100%;
-  margin-right: 8px;
+  margin-right: -2px;
   top: 50%;
   transform: translateY(-50%);
   padding: 4px 8px;
-  font-size: 14px;
+  font-size: 19px;
   font-weight: bold;
   border-radius: 6px;
   white-space: nowrap;
@@ -356,4 +377,14 @@ input[type="checkbox"]:checked::after {
 .coeff-const {
   background: #ffcc00;
   color: #000;
+}
+
+.expr-group {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 50px 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
