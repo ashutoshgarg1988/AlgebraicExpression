@@ -34,7 +34,7 @@ document.getElementById("btnHome").onclick = () => {
 };
 
 document.getElementById("btnPlay").onclick = () => {
-  alert("Play clicked!");
+  loadView('discovermenu');
   SoundManager.play("click");
 };
 
