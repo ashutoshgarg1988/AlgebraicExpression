@@ -87,6 +87,7 @@
     totalTxt.innerText = 0;
     expressionTxt.innerText = "-";
     group = null;
+    updateCoefficientBadges();
   }
 
   // Make toolbox items draggable
@@ -128,6 +129,36 @@
       workPanel.style.cursor = "default";
     }
   });
+
+  // helper to find existing item on center panel
+  function findExistingWorkItem(item) {
+    return [...workPanel.querySelectorAll(".work-item")].find(el =>
+      el.dataset.type === item.type &&
+      el.dataset.symbol === (item.symbol || "") &&
+      Number(el.dataset.baseValue) === Number(item.value)
+    );
+  }
+
+  // Merge logic (count-based, correct)
+  function mergeExistingItem(existing, draggedData) {
+    const count = Number(existing.dataset.count) + 1;
+    const baseValue = Number(existing.dataset.baseValue);
+    existing.dataset.count = count;
+    existing.dataset.value = count * baseValue;
+    /* ✅ Update text only for non-image items */
+    if (
+      existing.dataset.type === "var" ||
+      existing.dataset.type === "num"
+    ) {
+      if (existing.dataset.symbol === "x" || existing.dataset.symbol === "y") {
+        existing.textContent = `${count}${existing.dataset.symbol}`;
+      } else {
+        existing.textContent = `${count}`;
+      }
+    }
+    updateCoefficientBadges();
+  }
+
 
   // Function to get total text value on right side panel
   function getTotalValue() {
@@ -171,7 +202,6 @@
     expressionTxt.innerText = `${equationTxt} = ${totalVal}`;
   }
 
-
   //Log everything currently on stage
   function logAllWorkItems() {
     const items = [...document.querySelectorAll("#workPanel .work-item")];
@@ -191,91 +221,148 @@
   workPanel.addEventListener("drop", e => {
     e.preventDefault();
     if (!draggedData) return;
-    // If merge target exists → MERGE
-    if (currentMergeTarget) {
-      mergeWorkItems(currentMergeTarget, draggedData);
-      currentMergeTarget.classList.remove("merge-highlight");
-      currentMergeTarget = null;
-      workPanel.style.cursor = "default";
-      logAllWorkItems();
-      return;
+    const existing = findExistingWorkItem(draggedData);
+    // ✅ MERGE if already exists
+    if (existing) {
+      mergeExistingItem(existing, draggedData);
     }
-    // Otherwise → create new item
-    const x = e.offsetX;
-    const y = e.offsetY;
-    createWorkItem(draggedData, x, y, e);
+    // ➕ Otherwise create new
+    else {
+      createWorkItem(draggedData, e.offsetX, e.offsetY, e);
+    }
+    updateCoefficientBadges();
     logAllWorkItems();
   });
 
+
   // Create the dropped object
-  function createWorkItem(item, x, y, event) {
-    // Clone the toolbox template
+  function createWorkItem(item, x, y) {
     const original = document.querySelector(
       `.drag-src[data-type="${item.type}"][data-symbol="${item.symbol || ""}"][data-value="${item.value}"]`
     );
     const el = original.cloneNode(true);
     el.classList.add("work-item");
-    // Start with its original value
-    el.dataset.value = item.value;
-    el.dataset.symbol = item.symbol || "";
     el.dataset.type = item.type;
-    // Position in work area
+    el.dataset.symbol = item.symbol || "";
+    el.dataset.baseValue = item.value;
+    el.dataset.count = 1;
+    el.dataset.value = item.value;
     el.style.position = "absolute";
     el.style.left = x + "px";
     el.style.top = y + "px";
-    el.style.cursor = "grab";
     el.style.width = "100px";
-    // Otherwise add as new box
-    enableMoveInsideWork(el);
-    enableDeleteByDraggingBack(el);
+    el.style.cursor = "default";
+    el.setAttribute("draggable", "false");
+    /* ONLY update text for algebra buttons */
+    if (item.type === "var" || item.type === "num") {
+      if (item.symbol === "x" || item.symbol === "y") {
+        el.textContent = `1${item.symbol}`;
+      } else {
+        el.textContent = `1`;
+      }
+    }
+    // DO NOTHING for coins & weights (image stays)
     workPanel.appendChild(el);
   }
 
-  function mergeWorkItems(existing, draggedData) {
-    const existingVal = Number(existing.dataset.value);
-    const incomingVal = Number(draggedData.value);
-    const newVal = existingVal + incomingVal;
-    existing.dataset.value = newVal;
-    if (existing.dataset.symbol === 'x' || existing.dataset.symbol === 'y') {
-      existing.innerHTML = `${newVal}${existing.dataset.symbol}`;
-    } else {
-      existing.innerHTML = newVal;
-    }
-  }
+  const showCoeffChk = document.getElementById("showCoeffChk");
+  showCoeffChk.addEventListener("change", () => {
+    updateCoefficientBadges();
+  });
 
-
-  // Allow moving inside work panel
-  function enableMoveInsideWork(el) {
-    let offsetX = 0, offsetY = 0;
-    el.addEventListener("mousedown", e => {
-      offsetX = e.offsetX;
-      offsetY = e.offsetY;
-      function move(ev) {
-        el.style.left = (ev.pageX - workPanel.offsetLeft - offsetX) + "px";
-        el.style.top = (ev.pageY - workPanel.offsetTop - offsetY) + "px";
+  function updateCoefficientBadges() {
+    document.querySelectorAll(".work-item").forEach(el => {
+      el.querySelector(".coeff-badge")?.remove();
+      if (!showCoeffChk.checked) return;
+      const count = Number(el.dataset.count || 1);
+      const badge = document.createElement("div");
+      badge.classList.add("coeff-badge");
+      if (el.dataset.symbol === "x" || el.dataset.symbol === "y") {
+        badge.textContent = `${count}`; //${el.dataset.symbol}
+        badge.classList.add("coeff-x");
+      } else {
+        badge.textContent = `${count}`;
+        badge.classList.add("coeff-const");
       }
-      function stop() {
-        document.removeEventListener("mousemove", move);
-      }
-      document.addEventListener("mousemove", move);
-      document.addEventListener("mouseup", stop, { once: true });
+      el.appendChild(badge);
     });
   }
+
+})();
+
+
+
+// Older Code
+// workPanel.addEventListener("drop", e => {
+  //   e.preventDefault();
+  //   if (!draggedData) return;
+  //   // If merge target exists → MERGE
+  //   if (currentMergeTarget) {
+  //     mergeWorkItems(currentMergeTarget, draggedData);
+  //     updateCoefficientBadges();
+  //     currentMergeTarget.classList.remove("merge-highlight");
+  //     currentMergeTarget = null;
+  //     workPanel.style.cursor = "default";
+  //     logAllWorkItems();
+  //     return;
+  //   }
+  //   // Otherwise → create new item
+  //   const x = e.offsetX;
+  //   const y = e.offsetY;
+  //   createWorkItem(draggedData, x, y, e);
+  //   logAllWorkItems();
+  // });
+
+
+    // Allow moving inside work panel
+  // function enableMoveInsideWork(el) {
+  //   let offsetX = 0, offsetY = 0;
+  //   el.addEventListener("mousedown", e => {
+  //     offsetX = e.offsetX;
+  //     offsetY = e.offsetY;
+  //     function move(ev) {
+  //       el.style.left = (ev.pageX - workPanel.offsetLeft - offsetX) + "px";
+  //       el.style.top = (ev.pageY - workPanel.offsetTop - offsetY) + "px";
+  //     }
+  //     function stop() {
+  //       document.removeEventListener("mousemove", move);
+  //     }
+  //     document.addEventListener("mousemove", move);
+  //     document.addEventListener("mouseup", stop, { once: true });
+  //   });
+  // }
+
+  //   function mergeWorkItems(existing, draggedData) {
+  //   const existingCount = Number(existing.dataset.count || 1);
+  //   const incomingCount = 1;
+  //   const newCount = existingCount + incomingCount;
+  //   existing.dataset.count = newCount;
+  //   // Update value for calculations
+  //   const baseValue = Number(draggedData.value);
+  //   existing.dataset.value = newCount * baseValue;
+  //   // Update visual text
+  //   if (existing.dataset.symbol === 'x' || existing.dataset.symbol === 'y') {
+  //     existing.innerHTML = `${newCount}${existing.dataset.symbol}`;
+  //   } else {
+  //     existing.innerHTML = newCount;
+  //   }
+  //   updateCoefficientBadges();
+  // }
 
   // Delete by dragging back onto toolbox buttons
-  function enableDeleteByDraggingBack(el) {
-    el.setAttribute("draggable", "true");
-    el.addEventListener("dragstart", e => {
-      e.dataTransfer.setData("text/plain", "dragging");
-      draggedData = el;
-    });
-    document.querySelectorAll(".drag-src").forEach(src => {
-      src.addEventListener("dragover", e => e.preventDefault());
-      src.addEventListener("drop", () => {
-        if (draggedData.classList.contains("work-item")) {
-          draggedData.remove();
-        }
-      });
-    });
-  }
-})();
+  // function enableDeleteByDraggingBack(el) {
+  //   el.setAttribute("draggable", "true");
+  //   el.addEventListener("dragstart", e => {
+  //     e.dataTransfer.setData("text/plain", "dragging");
+  //     draggedData = el;
+  //   });
+  //   document.querySelectorAll(".drag-src").forEach(src => {
+  //     src.addEventListener("dragover", e => e.preventDefault());
+  //     src.addEventListener("drop", () => {
+  //       if (draggedData.classList.contains("work-item")) {
+  //         draggedData.remove();
+  //         updateCoefficientBadges();
+  //       }
+  //     });
+  //   });
+  // }
