@@ -1,6 +1,6 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : easyscreen.js
  *  Description : Handeler and functionality for Challenge screen
  *  Date        : 12-Dec-2025
@@ -25,7 +25,7 @@
   let rightWeight = 1;
   let muted = false;
 
-  SoundManager.playBg("challange");
+  SoundManager.playSceneBg("challange");
   setCommonUI({
     btnHome: true,
     btnPlay: true,
@@ -33,16 +33,18 @@
     musicBtn: true,
     copyright: true
   });
-
   soundBtn.addEventListener("click", () => {
     SoundManager.play("click");
-    muted = !muted;
-    if(muted) {
-      SoundManager.pause('challange');
+  
+    const muted = SoundManager.toggleVoiceMute();
+  
+    if (muted) {
+      soundBtn.src = "assets/images/common/audio-off.svg";
+      soundBtn.setAttribute("title", "Unmute");
     } else {
-      SoundManager.resume();
+      soundBtn.src = "assets/images/common/sound-btn.svg";
+      soundBtn.setAttribute("title", "Mute");
     }
-    // soundBtn.src = muted ? "assets/icons/sound-off.png" : "assets/icons/sound-on.png";
   });
 
   // Show info popup when screen loads
@@ -73,7 +75,14 @@
 
   challengeNextBtn.addEventListener("click", () => {
     SoundManager.play("click");
-    loadView("menu");
+    loadView("menu")
+    SoundManager.stopAll();
+    setTimeout(() => {
+      if (!SoundManager.isBgmMuted()) {
+        SoundManager.playBgm("bgm");
+      }
+    }, 500);
+ 
   });
 
   // Update X slider value

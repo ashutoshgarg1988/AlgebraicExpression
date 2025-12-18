@@ -1,6 +1,6 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : SoundManager.js
  *  Description : Handeler and functionality for Sounds related (Load, pause ,resume, stop)
  *  Date        : 12-Dec-2025
@@ -26,122 +26,309 @@ const SOUNDS = {
   },
   click: {
     src: "assets/sounds/click.mp3"
+  },
+  bgm: {
+    src: "assets/sounds/bgm.mp3",
+    loop: true,
+    volume: 0.5
   }
 };
 
 
-/* SOUND MANAGER (OBJECT-BASED CONFIG) */
+
+// const SoundManager = (function () {
+//   const sounds = {};
+
+//   let currentBgm = null;    
+//   let currentSceneBg = null; 
+//   let muted = false;
+//   let bgmMuted = false;   
+//   let voiceMuted = false; 
+  
+//   function loadFromMap(soundMap = {}) {
+//     Object.keys(soundMap).forEach((key) => {
+//       if (sounds[key]) return;
+
+//       const config = soundMap[key];
+//       const audio = new Audio(config.src);
+//       audio.loop = !!config.loop;
+//       audio.volume = config.volume ?? 1;
+
+//       sounds[key] = audio;
+//     });
+//   }
+
+//   function safePlay(audio) {
+//     if (!audio || muted) return;
+//     audio.play().catch(() => {});
+//   }
+
+//   function play(key) {
+//     const audio = sounds[key];
+//     if (!audio || muted) return;
+//     audio.currentTime = 0;
+//     safePlay(audio);
+//   }
+
+//   // BGM that should keep looping and NOT be replaced by scene audio
+//   function playBgm(key = "bgm") {
+//     const audio = sounds[key];
+//     if (!audio) return;
+  
+//     audio.loop = true;
+//     currentBgm = audio;
+  
+//     if (bgmMuted) return;      
+//     audio.play().catch(()=>{});
+//   }
+  
+//   //  Screen-specific background (easy/warmUp/introduction/etc.)
+//   // This will NOT touch bgm.
+//   function playSceneBg(key) {
+//     const audio = sounds[key];
+//     if (!audio) return;
+
+//     if (currentSceneBg && currentSceneBg !== audio) {
+//       currentSceneBg.pause();
+//       currentSceneBg.currentTime = 0;
+//     }
+
+//     currentSceneBg = audio;
+//     if (!muted) safePlay(currentSceneBg);
+//   }
+
+//   function pause(key) {
+//     const audio = sounds[key];
+//     if (audio) audio.pause();
+//   }
+
+//   function resume() {
+//     if (muted) return;
+//     if (currentBgm) safePlay(currentBgm);
+//     if (currentSceneBg) safePlay(currentSceneBg);
+//   }
+
+//   function stop(key) {
+//     const audio = sounds[key];
+//     if (!audio) return;
+//     audio.pause();
+//     audio.currentTime = 0;
+
+//     if (currentBgm === audio) currentBgm = null;
+//     if (currentSceneBg === audio) currentSceneBg = null;
+//   }
+
+//   function stopSceneBg() {
+//     if (!currentSceneBg) return;
+//     currentSceneBg.pause();
+//     currentSceneBg.currentTime = 0;
+//     currentSceneBg = null;
+//   }
+
+//   function stopAll() {
+//     Object.values(sounds).forEach((audio) => {
+//       audio.pause();
+//       audio.currentTime = 0;
+//     });
+//     currentBgm = null;
+//     currentSceneBg = null;
+//   }
+
+//   function mute() {
+//     muted = true;
+//     Object.values(sounds).forEach((audio) => audio.pause());
+//   }
+
+//   function unmute() {
+//     muted = false;
+//     resume();
+//   }
+
+//   function toggleMute() {
+//     muted ? unmute() : mute();
+//     return muted;
+//   }
+
+//   function isMuted() {
+//     return muted;
+//   }
+//   function isbgmMuted() {
+//     return bgmMuted;
+//   }
+//   function has(key) {
+//     return !!sounds[key];
+//   }
+
+//   return {
+//     loadFromMap,
+//     play,
+//     playBgm,        // use for bgm
+//     playSceneBg,    // use for easy/warmUp/introduction/etc
+//     pause,
+//     resume,
+//     stop,
+//     stopSceneBg,
+//     stopAll,
+//     mute,
+//     unmute,
+//     toggleMute,
+//     isMuted,
+//     has,
+//     isbgmMuted
+//   };
+// })();
+
+
+
+
 const SoundManager = (function () {
-    const sounds = {};          // key -> Audio
-    let currentBg = null;       // currently playing background
-    let muted = false;
-    /* LOAD ALL SOUNDS FROM OBJECT */
-    function loadFromMap(soundMap = {}) {
-        Object.keys(soundMap).forEach(key => {
-        if (sounds[key]) return;
+  const sounds = {};
 
-        const config = soundMap[key];
-        const audio = new Audio(config.src);
+  let currentBgm = null;
+  let currentSceneBg = null;
 
-        audio.loop = !!config.loop;
-        audio.volume = config.volume ?? 1;
+  let bgmMuted = false;     //  only bgm
+  let voiceMuted = false;   
 
-        sounds[key] = audio;
-        });
+  function loadFromMap(soundMap = {}) {
+    Object.keys(soundMap).forEach((key) => {
+      if (sounds[key]) return;
+      const config = soundMap[key];
+      const audio = new Audio(config.src);
+      audio.loop = !!config.loop;
+      audio.volume = config.volume ?? 1;
+      sounds[key] = audio;
+    });
+  }
+
+  function safePlay(audio) {
+    if (!audio) return;
+    audio.play().catch(() => {});
+  }
+
+
+  function play(key) {
+    const audio = sounds[key];
+    if (!audio || voiceMuted) return;
+    audio.currentTime = 0;
+    safePlay(audio);
+  }
+
+
+  function playBgm(key = "bgm") {
+    const audio = sounds[key];
+    if (!audio) return;
+
+    audio.loop = true;
+
+    // stop previous bgm if different
+    if (currentBgm && currentBgm !== audio) {
+      currentBgm.pause();
+      currentBgm.currentTime = 0;
     }
 
+    currentBgm = audio;
 
-    /* PLAY SOUND (SFX) */
-    function play(key) {
-        const audio = sounds[key];
-        if (!audio || muted) return;
-        audio.currentTime = 0;
-        audio.play().catch(() => { });
+    if (bgmMuted) return;
+    safePlay(currentBgm);
+  }
+
+
+  function playSceneBg(key) {
+    const audio = sounds[key];
+    if (!audio || voiceMuted) return;
+
+    if (currentSceneBg && currentSceneBg !== audio) {
+      currentSceneBg.pause();
+      currentSceneBg.currentTime = 0;
     }
 
-    /* PLAY BACKGROUND MUSIC */
-    function playBg(key) {
-        const audio = sounds[key];
-        if (!audio) return;
-        if (currentBg && currentBg !== audio) {
-            currentBg.pause();
-            currentBg.currentTime = 0;
-        }
-        currentBg = audio;
-        if (!muted) {
-            audio.play().catch(() => { });
-        }
-    }
+    currentSceneBg = audio;
+    safePlay(currentSceneBg);
+  }
 
-    /* PAUSE SOUND */
-    function pause(key) {
-        const audio = sounds[key];
-        if (audio) audio.pause();
-    }
+  function stop(key) {
+    const audio = sounds[key];
+    if (!audio) return;
+    audio.pause();
+    audio.currentTime = 0;
+    if (currentBgm === audio) currentBgm = null;
+    if (currentSceneBg === audio) currentSceneBg = null;
+  }
 
-    /* RESUME BACKGROUND SOUND */
-    function resume() {
-        if (!muted && currentBg) {
-        currentBg.play().catch(() => {});
-        }
-    }
+  function stopSceneBg() {
+    if (!currentSceneBg) return;
+    currentSceneBg.pause();
+    currentSceneBg.currentTime = 0;
+    currentSceneBg = null;
+  }
 
-    /* STOP SOUND */
-    function stop(key) {
-        const audio = sounds[key];
-        if (!audio) return;
-        audio.pause();
-        audio.currentTime = 0;
-    }
+  function stopAll() {
+    Object.values(sounds).forEach((audio) => {
+      audio.pause();
+      audio.currentTime = 0;
+    });
+    currentBgm = null;
+    currentSceneBg = null;
+  }
 
-    /* STOP ALL SOUNDS */
-    function stopAll() {
-        Object.values(sounds).forEach(audio => {
-            audio.pause();
-            audio.currentTime = 0;
-        });
-        currentBg = null;
-    }
 
-    /* MUTE / UNMUTE */
-    function mute() {
-        muted = true;
-        Object.values(sounds).forEach(audio => audio.pause());
-    }
+  function muteBgm() {
+    bgmMuted = true;
+    if (currentBgm) currentBgm.pause();
+  }
+  function unmuteBgm() {
+    bgmMuted = false;
+    if (currentBgm) safePlay(currentBgm);
+  }
+  function toggleBgmMute() {
+    bgmMuted ? unmuteBgm() : muteBgm();
+    return bgmMuted;
+  }
+  function isBgmMuted() {
+    return bgmMuted;
+  }
 
-    function unmute() {
-        muted = false;
-        if (currentBg) {
-            currentBg.play().catch(() => { });
-        }
-    }
+  
+  function muteVoice() {
+    voiceMuted = true;
+    if (currentSceneBg) currentSceneBg.pause();
+  }
+  function unmuteVoice() {
+    voiceMuted = false;
+    if (currentSceneBg) safePlay(currentSceneBg);
+  }
+  function toggleVoiceMute() {
+    voiceMuted ? unmuteVoice() : muteVoice();
+    return voiceMuted;
+  }
+  function isVoiceMuted() {
+    return voiceMuted;
+  }
 
-    function toggleMute() {
-        muted ? unmute() : mute();
-        return muted;
-    }
+  function has(key) {
+    return !!sounds[key];
+  }
 
-    function isMuted() {
-        return muted;
-    }
+  return {
+    loadFromMap,
+    play,
+    playBgm,
+    playSceneBg,
+    stop,
+    stopSceneBg,
+    stopAll,
+    has,
 
-    /* CHECK IF SOUND EXISTS */
-    function has(key) {
-        return !!sounds[key];
-    }
 
-    return {
-        loadFromMap,
-        play,
-        playBg,
-        pause,
-        resume,
-        stop,
-        stopAll,
-        mute,
-        unmute,
-        toggleMute,
-        isMuted,
-        has
-    };
+    muteBgm,
+    unmuteBgm,
+    toggleBgmMute,
+    isBgmMuted,
+
+    muteVoice,
+    unmuteVoice,
+    toggleVoiceMute,
+    isVoiceMuted,
+  };
 })();

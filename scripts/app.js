@@ -1,6 +1,6 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : app.js
  *  Description : Start point 
  *  Date        : 10-Dec-2025

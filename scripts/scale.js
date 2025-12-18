@@ -1,6 +1,6 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : scale.js
  *  Description : Handeler for scaling of app for multiple device
  *  Date        : 4-Dec-2025
@@ -28,7 +28,7 @@ function scaleStage() {
     // --- Landscape only ---
     if (ww < wh) {
         stage.style.display = "none";
-        document.body.style.background = "#000";
+        // document.body.style.background = "#000";
         return;
     }
     stage.style.display = "block";
@@ -54,18 +54,7 @@ function getStageCoords(e, element) {
     };
 }
 
-// function getStageCoords1(clientX, clientY) {
-//     const stage = document.getElementById("stage");
-//     const rect = stage.getBoundingClientRect();
-//     const scaleX = rect.width / BASE_WIDTH;
-//     const scaleY = rect.height / BASE_HEIGHT;
-//     const scale = Math.min(scaleX, scaleY);
-//     return {
-//         x: (clientX - rect.left) / scale,
-//         y: (clientY - rect.top) / scale,
-//         scale
-//     };
-// }
+
 
 function requestFullScreen() {
   const el = document.documentElement;

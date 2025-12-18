@@ -1,25 +1,53 @@
-/***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
- *  File        : introscreen.js
- *  Description : Handeler function for Intro screen
- *  Date        : 10-Dec-2025
- ***************************************************************/
-
 (function initIntroScreen() {
-  SoundManager.playBg("introduction");
+  SoundManager.playSceneBg("introduction");
+
   setCommonUI({
     btnHome: true,
-    btnPlay: true,
-    btnBook: true,
+    btnPlay: false,
+    btnBook: false,
     musicBtn: true,
     copyright: true
   });
+
+  const soundBtn = document.getElementById("soundBtn"); 
+  let introMuted = false;
+console.log(soundBtn);
+
+  if (soundBtn) {
+    soundBtn.addEventListener("click", () => {
+      SoundManager.play("click");
+      introMuted = !introMuted;
+console.log(soundBtn);
+
+      if (introMuted) {
+        console.log("yes");
+        
+        SoundManager.stop("introduction"); 
+        soundBtn.src = "assets/images/common/audio-off.svg";
+        soundBtn.setAttribute("title", "Unmute");
+      } else {
+        console.log("no");
+        
+        SoundManager.playSceneBg("introduction"); 
+        soundBtn.src = "assets/images/common/sound-btn.svg";
+        soundBtn.setAttribute("title", "Mute");
+      }
+    });
+  }
+
   const skipBtn = document.getElementById("skipBtn");
   if (skipBtn) {
     skipBtn.addEventListener("click", () => {
       SoundManager.play("click");
+SoundManager.stopAll()
       loadView("menu");
+      setTimeout(() => {
+        if (!SoundManager.isBgmMuted()) {
+          SoundManager.playBgm("bgm");
+        }
+      }, 500);         
+     // SoundManager.stopAll({ keepBgm: true });
+
     });
   }
 })();

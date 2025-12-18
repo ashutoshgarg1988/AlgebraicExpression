@@ -1,6 +1,6 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : router.js
  *  Description : Handeler routes
  *  Date        : 4-Dec-2025

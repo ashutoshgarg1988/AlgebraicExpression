@@ -1,17 +1,17 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : discovermenu.js.js
  *  Description : Handeler for Discover Menu screen
  *  Date        : 10-Dec-2025
  ***************************************************************/
 
 (function initDiscoverMenu() {
-  SoundManager.playBg("simulation");
+  SoundManager.playSceneBg("simulation");
   setCommonUI({
     btnHome: true,
     btnPlay: false,
-    btnBook: true,
+    btnBook: false,
     musicBtn: true,
     copyright: true
   });

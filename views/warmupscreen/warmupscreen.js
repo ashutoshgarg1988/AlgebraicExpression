@@ -1,6 +1,6 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : warmupscreen.js
  *  Description : Handeler and functionality for warm up screen
  *  Date        : 12-Dec-2025
@@ -17,19 +17,37 @@
   let correctCounter = 0;
   let eqs = []; 
   let muted = false;
+  const soundBtn = document.getElementById("soundBtn");
 
-  SoundManager.playBg("warmUp");
-  soundBtn.addEventListener("click", () => {
-    SoundManager.play("click");
-    muted = !muted;
-    if(muted) {
-      SoundManager.pause('warmUp');
-    } else {
-      SoundManager.resume();
-    }
-    // soundBtn.src = muted ? "assets/icons/sound-off.png" : "assets/icons/sound-on.png";
-  });
+  // SoundManager.playBg("warmUp");
+  // soundBtn.addEventListener("click", () => {
+  //   SoundManager.play("click");
+  //   muted = !muted;
+  //   if(muted) {
+  //     SoundManager.pause('warmUp');
+  //   } else {
+  //     SoundManager.resume();
+  //   }
+   
+  // });
+// start warmUp narration
+SoundManager.playSceneBg("warmUp");
 
+soundBtn.addEventListener("click", () => {
+  SoundManager.play("click");
+
+  const muted = SoundManager.toggleVoiceMute();
+
+  if (muted) {
+    soundBtn.src = "assets/images/common/audio-off.svg";
+    soundBtn.setAttribute("title", "Unmute");
+  } else {
+    soundBtn.src = "assets/images/common/sound-btn.svg";
+    soundBtn.setAttribute("title", "Mute");
+  }
+});
+
+  
   function genrateRandomEq() {
     eqs = generateRandomEquations();
     document.getElementById("equation1").textContent = eqs[0];

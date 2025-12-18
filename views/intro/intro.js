@@ -1,6 +1,6 @@
 /***************************************************************
- *  Author      : Ashutosh Garg
- *  Email       : ashutoshgarg1987@gmail.com
+ *  Author      : MentorNest Animation
+ *  Email       : info@mentornest.com
  *  File        : intro.js
  *  Description : Handeler for Intro screen
  *  Date        : 10-Dec-2025
@@ -25,6 +25,6 @@
     btnPlay: false,
     btnBook: false,
     musicBtn: true,
-    copyright: false
+    copyright: true
   });
 })();

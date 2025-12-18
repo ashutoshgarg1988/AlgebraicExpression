@@ -21,9 +21,6 @@ img {
   transition: 0.18s ease;
 }
 
-.btn:hover {
-  transform: scale(1.1);
-}
 
 /* COMMON BUTTON BAR */
 #common-ui {
@@ -60,15 +57,14 @@ img {
 .logo-btn {
   position: absolute;
   top: 22px;
-  right: 27px;
-  background: #ffffff;
-  padding: 20px 50px;
+  right: 0px;
+  /* padding: 20px 50px; */
   border-radius: 18px;
   font-size: 38px;
   font-weight: 800;
   color: #000;
   cursor: pointer;
-  box-shadow: 0 10px 0 rgba(0,0,0,0.25);
+
 }
 
 /* Bottom copyright text */
@@ -105,13 +101,13 @@ img {
 .title-banner {
   position: absolute;
   top: 40px;
-  left: 40px;
-  padding: 16px 40px;
+  left: 0px;
+  padding: 16px 9px;
   border-radius: 18px;
   font-size: 50px;
   font-weight: 900;
   color: #fff;
-  
+  z-index: 2;
 }
 
 .custom-title {

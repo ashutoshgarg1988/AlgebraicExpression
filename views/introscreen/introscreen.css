@@ -2,8 +2,10 @@
     opacity: 0 !important;
 } */
 * {
-  font-family: Arial;
+  font-family: 'Raleway';
 }
+html, body, #intro-screen, .intro-box { overflow: hidden; }
+
 .fade-in {
     opacity: 0;
     /* transform: translateY(10px); */
@@ -23,11 +25,11 @@
 }
 
 .intro-title {
-    position: absolute;
+    /* position: absolute; */
     top: 20px;
     left: 215px;
     width: 400px;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
 }
 
 /* Skip Button */
@@ -127,3 +129,8 @@
     width: 20%;
     position: absolute;
 }
+.title-audio-wrapper {
+    display: inline-block;
+    position: relative;
+  }
+  
