@@ -15,7 +15,7 @@
     copyright: true
   });
   let correctCounter = 0;
-  let eqs = []; 
+  let eqs = [];
   let muted = false;
   const soundBtn = document.getElementById("soundBtn");
 
@@ -28,26 +28,26 @@
   //   } else {
   //     SoundManager.resume();
   //   }
-   
+
   // });
-// start warmUp narration
-SoundManager.playSceneBg("warmUp");
+  // start warmUp narration
+  SoundManager.playSceneBg("warmUp");
 
-soundBtn.addEventListener("click", () => {
-  SoundManager.play("click");
+  soundBtn.addEventListener("click", () => {
+    SoundManager.play("click");
 
-  const muted = SoundManager.toggleVoiceMute();
+    const muted = SoundManager.toggleVoiceMute();
 
-  if (muted) {
-    soundBtn.src = "assets/images/common/audio-off.svg";
-    soundBtn.setAttribute("title", "Unmute");
-  } else {
-    soundBtn.src = "assets/images/common/sound-btn.svg";
-    soundBtn.setAttribute("title", "Mute");
-  }
-});
+    if (muted) {
+      soundBtn.src = "assets/images/common/audio-off.svg";
+      soundBtn.setAttribute("title", "Unmute");
+    } else {
+      soundBtn.src = "assets/images/common/sound-btn.svg";
+      soundBtn.setAttribute("title", "Mute");
+    }
+  });
 
-  
+
   function genrateRandomEq() {
     eqs = generateRandomEquations();
     document.getElementById("equation1").textContent = eqs[0];
@@ -76,8 +76,8 @@ soundBtn.addEventListener("click", () => {
     group = null;
     // 2️⃣ Clear all equation slots
     document.querySelectorAll(".eq-slot").forEach(slot => {
-        slot.innerHTML = "";
-        slot.style.border = "1px solid grey";
+      slot.innerHTML = "";
+      slot.style.border = "1px solid grey";
     });
 
     // 3️⃣ Reset internal drag state
@@ -90,7 +90,7 @@ soundBtn.addEventListener("click", () => {
   function generateRandomEquations() {
     const variables = ["x", "y"];
     function randomCoeff() {
-      return Math.floor(Math.random() * 10) + 1; // 1–10
+      return Math.floor(Math.random() * 5) + 1; // 1–10
     }
 
     function randomSign() {
@@ -208,7 +208,7 @@ soundBtn.addEventListener("click", () => {
     if (isCorrect) {
       slot.style.border = "3px solid #2ecc71"; // green
       correctCounter++;
-      if(correctCounter === 3) {
+      if (correctCounter === 3) {
         showPopup("greatWork", { step: 1, description: "" });
       }
     } else {
@@ -216,52 +216,48 @@ soundBtn.addEventListener("click", () => {
     }
   }
 
-  // Convert blocks to algebraic string
   function groupToExpression(groupElem) {
-    // collect raw token texts in order
     const raw = [...groupElem.querySelectorAll(".workspace-block")].map(b => b.textContent.trim());
-    const parts = [];
+    const tokens = [];
     let i = 0;
     while (i < raw.length) {
       const t = raw[i];
-      // If token is a variable (x or y)
+      // Merge number + variable → 3 + x = 3x
+      if (/^\d+$/.test(t) && (raw[i + 1] === "x" || raw[i + 1] === "y")) {
+        tokens.push(t + raw[i + 1]); // "3x"
+        i += 2;
+        continue;
+      }
+      // Variable alone → 1x / 1y
       if (t === "x" || t === "y") {
-        // If previous part is a plain integer (possibly signed), merge them
-        if (parts.length > 0 && /^[+-]?\d+$/.test(parts[parts.length - 1])) {
-          const coeff = parts.pop();            // e.g. "7" or "-3"
-          parts.push(coeff + t);                // "7x" or "-3y"
-        } else {
-          // no explicit coefficient → assume 1
-          parts.push("1" + t);                  // change to "x" if you prefer
-        }
+        tokens.push("1" + t);
         i++;
         continue;
       }
-      // If token looks like a signed/unsigned integer (coefficient or constant)
-      if (/^[+-]?\d+$/.test(t)) {
-        // push as-is (may later be merged with variable)
-        parts.push(t);
+      // Operators + -
+      if (t === "+" || t === "-") {
+        tokens.push(t);
         i++;
         continue;
       }
-      // Fallback: push whatever it is (handles unexpected tokens)
-      parts.push(t);
+      // Plain number (constant)
+      if (/^\d+$/.test(t)) {
+        tokens.push(t);
+        i++;
+        continue;
+      }
+      // fallback
+      tokens.push(t);
       i++;
     }
-
-    // Build final expression string with explicit + between positive terms
-    if (parts.length === 0) return "";
-    let expr = parts[0];
-    for (let j = 1; j < parts.length; j++) {
-      const p = parts[j];
-      if (p.startsWith("-")) {
-        expr += p;             // negative term: append directly e.g. "-6y"
-      } else {
-        expr += "+" + p;       // positive term: add plus
-      }
-    }
-    // clean small things (optional)
-    expr = expr.replace(/\+\-/g, "-").replace(/\-\-/g, "+");
+    // Join without injecting extra operators
+    let expr = "";
+    tokens.forEach((t, idx) => {
+      // avoid starting with "+"
+      if (idx === 0 && t === "+") return;
+      expr += t;
+    });
     return expr;
   }
+
 })();

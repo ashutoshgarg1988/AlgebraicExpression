@@ -207,9 +207,9 @@
 
 .expression-group {
     display: flex;
-    gap: 12px;
+    gap: 9px;
     background: #ffffff;
-    padding: 18px 12px;
+    padding: 18px 4px;
     border-radius: 16px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     cursor: grab;
@@ -229,6 +229,6 @@
     padding: 6% 6%;
 } */
 .eq-slot .expression-group .workspace-block {
-    padding: 21px 15px;
+    padding: 21px 13px;
     font-size: 22px;
 }
