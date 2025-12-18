@@ -218,3 +218,58 @@ input[type="range"]::-moz-range-thumb {
 input.slider-y::-moz-range-thumb {
   background: #3b82f6 !important;
 }
+
+
+/* Ball visuals */
+.scale-weight {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Balls sit ON the tray */
+.scale-weight {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* tray image MUST be positioned */
+.scale-weight .tray-img {
+  display: block;
+  width: 100%;
+}
+
+/* shared container style */
+.ball-container {
+  position: absolute;
+  left: 73%;
+  transform: translateX(-50%) rotate(180deg);
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  width: 80px;
+}
+
+/* stack placement */
+.x-balls { bottom: 110px; }
+.y-balls { bottom: 90px; }
+.z-balls { bottom: 91px; }
+
+/* ball */
+.ball {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: rotate(180deg) scale(0.5);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.ball.show {
+  opacity: 1;
+  transform: rotate(180deg) scale(1);
+}
+
+/* colors */
+.ball.x { background: #3b82f6; }
+.ball.y { background: #ef4444; }
+.ball.z { background: #22c55e; }

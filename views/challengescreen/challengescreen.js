@@ -159,21 +159,53 @@
   // Function to update the scale machine tilt animation
   function updateScaleTilt() {
     const arm = document.querySelector(".scale-arm");
-    const leftW = document.getElementById("leftWeight");
-    const rightW = document.getElementById("rightWeight");
-    const { leftWeight, rightWeight } = getWeights();
+    const leftTray = document.getElementById("leftWeight");
+    const rightTray = document.getElementById("rightWeight");
+    const xBalls = leftTray.querySelector(".x-balls");
+    const yBalls = leftTray.querySelector(".y-balls");
+    const zBalls = rightTray.querySelector(".z-balls");
+    const xVal = Number(xValueInput.value || 0);
+    const A = Number(sliderX.value);
+    const B = Number(sliderY.value);
+    const Z = Number(sliderZ.value);
+    const xCount = A * xVal;
+    const yCount = B;
+    const leftWeight = xCount + yCount;
+    const rightWeight = Z;
+    renderBalls(xBalls, xCount, "x");
+    renderBalls(yBalls, yCount, "y");
+    renderBalls(zBalls, rightWeight, "z");
+    equalCheck.innerText = leftWeight === rightWeight ? "=" : "≠";
     const diff = leftWeight - rightWeight;
     const maxAngle = 18;
-    let angle = Math.max(-maxAngle, Math.min(maxAngle, diff * 2));
-    // Rotate ONLY the arm
+    const angle = Math.max(-maxAngle, Math.min(maxAngle, diff * 2));
     arm.style.transform = `rotate(${-angle}deg)`;
-    // Tray movement (they stay horizontal)
-    const baseTop = 39;  // original top %
-    const radius = 35;   // adjust depending on your graphics
+    const baseTop = 39;
+    const radius = 35;
     const rad = angle * Math.PI / 180;
-    const verticalShift = Math.sin(rad) * radius;
-    leftW.style.top = `${baseTop + verticalShift}%`;  // left moves same direction as sin
-    rightW.style.top = `${baseTop - verticalShift}%`;  // right moves opposite
+    const shift = Math.sin(rad) * radius;
+    leftTray.style.top = `${baseTop + shift}%`;
+    rightTray.style.top = `${baseTop - shift}%`;
   }
 
+
+  function renderBalls(container, count, type) {
+    if (!container) return;
+    const current = container.children.length;
+    // ADD
+    for (let i = current; i < count; i++) {
+      const ball = document.createElement("div");
+      ball.className = `ball ${type}`;
+      container.appendChild(ball);
+      requestAnimationFrame(() => {
+        ball.classList.add("show");
+      });
+    }
+    // REMOVE
+    for (let i = current - 1; i >= count; i--) {
+      const ball = container.children[i];
+      ball.classList.remove("show");
+      setTimeout(() => ball.remove(), 250);
+    }
+  }
 })();
