@@ -26,7 +26,7 @@
   setCommonUI({
     btnHome: true,
     btnPlay: true,
-    btnBook: true,
+    btnBook: false,
     musicBtn: true,
     copyright: true
   });
@@ -132,25 +132,45 @@
   // Function to get total text value on right side panel
   function getTotalValue() {
     let totalVal = 0;
-    let equationTxt = '';
+    let xCount = 0;
+    let yCount = 0;
+    let constantCount = 0;
+
     for (let i = 0; i < allElemsOnCenterStage.length; i++) {
-      if (equationTxt !== "") {
-        equationTxt += " + ";
+      const el = allElemsOnCenterStage[i];
+      if (el.symbol === 'x') {
+        totalVal += el.value * sliderX.value;
+        xCount += el.value;
       }
-      if (allElemsOnCenterStage[i].symbol === 'x') {
-        totalVal = totalVal + allElemsOnCenterStage[i].value * sliderX.value;
-        equationTxt += allElemsOnCenterStage[i].value + 'x';
-      } else if (allElemsOnCenterStage[i].symbol === 'y') {
-        totalVal = totalVal + allElemsOnCenterStage[i].value * sliderY.value;
-        equationTxt += allElemsOnCenterStage[i].value + 'y';
-      } else if (allElemsOnCenterStage[i].symbol === '1' || allElemsOnCenterStage[i].symbol === '-1' || allElemsOnCenterStage[i].symbol === 'B' || allElemsOnCenterStage[i].symbol === 'S' || allElemsOnCenterStage[i].symbol === 'G') {
-        totalVal = totalVal + allElemsOnCenterStage[i].value;
-        equationTxt += allElemsOnCenterStage[i].value;
+      else if (el.symbol === 'y') {
+        totalVal += el.value * sliderY.value;
+        yCount += el.value;
+      }
+      else if (
+        el.symbol === '1' ||
+        el.symbol === '-1' ||
+        el.symbol === 'B' ||
+        el.symbol === 'S' ||
+        el.symbol === 'G' ||
+        el.symbol === '2W' ||
+        el.symbol === '5W' ||
+        el.symbol === '10W'
+      ) {
+        totalVal += el.value;
+        constantCount += el.value;
       }
     }
+
+    // Build equation text cleanly
+    const parts = [];
+    if (xCount !== 0) parts.push(`${xCount}x`);
+    if (yCount !== 0) parts.push(`${yCount}y`);
+    if (constantCount !== 0) parts.push(`${constantCount}`);
+    const equationTxt = parts.join(' + ');
     totalTxt.innerText = totalVal;
-    expressionTxt.innerText = equationTxt + ' = ' + totalVal;
+    expressionTxt.innerText = `${equationTxt} = ${totalVal}`;
   }
+
 
   //Log everything currently on stage
   function logAllWorkItems() {

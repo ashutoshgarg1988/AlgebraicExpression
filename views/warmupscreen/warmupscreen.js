@@ -10,7 +10,7 @@
   setCommonUI({
     btnHome: true,
     btnPlay: true,
-    btnBook: true,
+    btnBook: false,
     musicBtn: true,
     copyright: true
   });

@@ -24,20 +24,20 @@
   let leftWeight = 1;
   let rightWeight = 1;
   let muted = false;
+  updateEquation();
 
   SoundManager.playSceneBg("challange");
   setCommonUI({
     btnHome: true,
     btnPlay: true,
-    btnBook: true,
+    btnBook: false,
     musicBtn: true,
     copyright: true
   });
+
   soundBtn.addEventListener("click", () => {
     SoundManager.play("click");
-  
     const muted = SoundManager.toggleVoiceMute();
-  
     if (muted) {
       soundBtn.src = "assets/images/common/audio-off.svg";
       soundBtn.setAttribute("title", "Unmute");
@@ -52,14 +52,6 @@
 
   challengeResetBtn.addEventListener("click", () => {
     SoundManager.play("click");
-    sliderX.value = 1;
-    labelX.textContent = `${sliderX.value}x`;
-    sliderY.value = 1;
-    labelY.textContent = `${sliderY.value}`;
-    sliderZ.value = 1;
-    labelZ.textContent = `${sliderZ.value}`;
-    xValueInput.value = "";
-    equalCheck.innerText = "=";
     updateEquation();
     updateScaleTilt();
   });
@@ -88,21 +80,21 @@
   // Update X slider value
   sliderX.addEventListener("input", () => {
     labelX.textContent = `${sliderX.value}x`;
-    updateEquation();
+    // updateEquation();
     updateScaleTilt();
   });
 
   // Update Y slider value
   sliderY.addEventListener("input", () => {
     labelY.textContent = `${sliderY.value}`;
-    updateEquation();
+    // updateEquation();
     updateScaleTilt();
   });
 
   // Update Y slider value
   sliderZ.addEventListener("input", () => {
     labelZ.textContent = `${sliderZ.value}`;
-    updateEquation();
+    // updateEquation();
     updateScaleTilt();
   });
 
@@ -111,8 +103,43 @@
   });
 
   function updateEquation() {
-    equationTxt.innerText = `${sliderX.value}x + ${sliderY.value} = ${sliderZ.value}`;
+    // equationTxt.innerText = `${sliderX.value}x + ${sliderY.value} = ${sliderZ.value}`;
+    let equationData = generateBalancedEquation();
+    equationTxt.innerText = equationData.equation;
+    sliderX.value = 0; //equationData.a;
+    labelX.textContent = `${sliderX.value}x`;
+    sliderY.value = 0; //equationData.b;
+    labelY.textContent = `${sliderY.value}`;
+    sliderZ.value = 0; //equationData.rhs;
+    labelZ.textContent = `${sliderZ.value}`;
+    xValueInput.value = "";
+    equalCheck.innerText = "≠";
+
   }
+
+  function generateBalancedEquation() {
+    const x = getRandomInt(0, 10);      // solution for x
+    const a = getRandomInt(1, 10);      // coefficient of x (avoid 0)
+    const b = getRandomInt(0, 10);      // constant
+    const rhs = a * x + b;
+    // Ensure RHS is within allowed range
+    if (rhs < 1 || rhs > 110) {
+      return generateBalancedEquation(); // retry
+    }
+    return {
+      equation: `${a}x + ${b} = ${rhs}`,
+      a,
+      b,
+      rhs,
+      x
+    };
+  }
+
+  // Helper
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
 
   function getWeights() {
     const x = Number(xValueInput.value || 0);
