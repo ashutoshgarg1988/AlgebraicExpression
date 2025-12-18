@@ -1,7 +1,7 @@
 <!-- 
   ------------------------------------------------------------
-  Author: Ashutosh Garg
-  Email: ashutoshgarg1987@gmail.com
+  Author: MentorNest Animation
+  Email: info@mentornest.com
   File: index.html
   Description: 
   Created On: 10/Dec/2025
@@ -15,13 +15,14 @@
   <title>Algebraic Expression</title>
   <link rel="stylesheet" href="background/background.css" />
   <link rel="stylesheet" href="common-ui/common.css" />
-  <link rel="icon" href="assets/icons/favicon.png" type="image/x-icon">
+  <!-- <link rel="icon" href="assets/icons/favicon.png" type="image/x-icon"> -->
 </head>
 
 <body>
   <div id="stage">
     <!-- COMMON BACKGROUND -->
     <div id="global-background"></div>
+    <!-- <div id="pattern-bg"></div> -->
 
     <!-- COMMON UI BUTTONS -->
     <div id="common-ui"></div>
@@ -79,7 +80,7 @@
             <div class="card-inner">
               <img class="card-bg" src="assets/images/discovermenu/easy-box.svg" />
               <img class="card-icon" src="assets/images/discovermenu/easy-icon.svg" />
-              <img class="card-name" src="assets/images/discovermenu/easy.svg" />
+              <img class="card-name" style="width: 30%;"  src="assets/images/discovermenu/easy.png" />
             </div>
             <div class="tooltip-wrapper">
               <img class="tooltip-icon" src="assets/images/discovermenu/tooltip-icon.svg" />
@@ -88,12 +89,11 @@
               </div>
             </div>
           </div>
-
           <div class="card" id="warmUpCard">
             <div class="card-inner">
               <img class="card-bg" src="assets/images/discovermenu/warmup-box.svg" />
               <img class="card-icon" src="assets/images/discovermenu/warmup-icon.svg" />
-              <img class="card-name" src="assets/images/discovermenu/warmup.svg" />
+              <img class="card-name" src="assets/images/discovermenu/warmup.png" />
             </div>
             <div class="tooltip-wrapper">
               <img class="tooltip-icon" src="assets/images/discovermenu/tooltip-icon.svg" />
@@ -107,7 +107,7 @@
             <div class="card-inner">
               <img class="card-bg" src="assets/images/discovermenu/challenge-box.svg" />
               <img class="card-icon" src="assets/images/discovermenu/challenge-icon.svg" />
-              <img class="card-name" src="assets/images/discovermenu/challenge.svg" />
+              <img class="card-name" src="assets/images/discovermenu/challenge.png" />
             </div>
             <div class="tooltip-wrapper">
               <img class="tooltip-icon" src="assets/images/discovermenu/tooltip-icon.svg" />
@@ -125,8 +125,8 @@
     <template id="view-introscreen">
       <!-- 
   ------------------------------------------------------------
-  Author: Ashutosh Garg
-  Email: ashutoshgarg1987@gmail.com
+  Author: MentorNest Animation
+  Email: info@mentornest.com
   File: intorscreen.html
   Description: Intro screen view
   Created On: 10/Dec/2025
@@ -134,7 +134,12 @@
 -->
 
       <div id="intro-screen">
-        <img class="intro-title fade-in" src="assets/images/introscreen/title-introduction.svg">
+        <!-- <img class="intro-title fade-in" src="assets/images/introscreen/title-introduction.svg"> -->
+        <div class="title-audio-wrapper fade-in" style="--d:0s; display: inline-block; position: relative;">
+          <img class="intro-title" src="assets/images/introscreen/title-introduction.svg">
+          <img id="soundBtn" src="assets/images/common/sound-btn.svg"
+               style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 60px; height: 66px; left: 380px;cursor: pointer;">
+        </div>
         <div class="intro-box">
           <div class="fade-in maintxt" style="--d:0s">Algebraic Expressions</div>
           <div class="fade-in subtext" style="--d:0.2s">An Algebraic Expression is the combination of constant and
@@ -213,8 +218,8 @@
     <template id="view-easyscreen">
       <!-- 
   ------------------------------------------------------------
-  Author: Ashutosh Garg
-  Email: ashutoshgarg1987@gmail.com
+  Author: MentorNest Animation
+  Email: info@mentornest.com
   File: easyscreen.html
   Description: easy screen view
   Created On: 11/Dec/2025
@@ -328,8 +333,8 @@
     <template id="view-warmupscreen">
       <!-- 
   ------------------------------------------------------------
-  Author: Ashutosh Garg
-  Email: ashutoshgarg1987@gmail.com
+  Author: MentorNest Animation
+  Email: info@mentornest.com
   File: easyscreen.html
   Description: easy screen view
   Created On: 11/Dec/2025
@@ -417,8 +422,8 @@
     <template id="view-challengescreen">
       <!-- 
   ------------------------------------------------------------
-  Author: Ashutosh Garg
-  Email: ashutoshgarg1987@gmail.com
+  Author: MentorNest Animation
+  Email: info@mentornest.com
   File: challengescreen.html
   Description: challenge screen view
   Created On: 12/Dec/2025
@@ -489,6 +494,26 @@
       </div>
     </template>
   </div>
+
+<div class="floating-particles">
+  <div class="particle">
+      <img src="assets/images/intro/animate-img.png" alt="A. 1,2">
+  </div>
+  <div class="particle">
+      <img src="assets/images/intro/animate-img1.png" alt="B. 1,4">
+  </div>
+  <div class="particle">
+      <img src="assets/images/intro/animate-img2.png" alt="C. 1,6">
+  </div>
+  <div class="particle">
+      <img src="assets/images/intro/animate-img3.png" alt="D. 1,8">
+  </div>
+  <div class="particle">
+    <img src="assets/images/intro/animate-img4.png" alt="D. 1,8">
+</div>
+</div>
+
+
   <script src="scripts/scale.js"></script>
   <script src="scripts/router.js"></script>
   <script src="scripts/soundManager.js"></script>
