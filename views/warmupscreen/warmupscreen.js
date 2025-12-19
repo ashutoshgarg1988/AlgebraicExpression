@@ -77,10 +77,12 @@
   // showPopup("info", { text: "Use the tiles at bottom to build an angle that matches the target angle" });
 
   warmupNextBtn.addEventListener("click", () => {
+    if (correctCounter < 3) return;
     SoundManager.play("click");
     if(level === 0) {
       level++;
       handleLevelChanges();
+      resetLevel();
     }else {
       loadView("challengescreen");
     }
@@ -94,6 +96,10 @@
 
   document.getElementById("warmupResetBtn").addEventListener("click", () => {
     SoundManager.play("click");
+    resetLevel();
+  });
+
+  function resetLevel() {
     workspace.innerHTML = "";
     group = null;
     // 2️⃣ Clear all equation slots
@@ -106,8 +112,7 @@
     dragged = null;
     group = null;
     (level === 0) ? genrateRandomEq() : genrateRandomCoinEq();
-    
-  });
+  }
 
   // Function to genrate 3 random equations to show in right panel
   function generateRandomEquations() {
