@@ -44,7 +44,7 @@
 
 /* TOOLBOX LEFT */
 .toolbox {
-    width: 19%;
+    width: 21%;
     height: 665px;
     background: white;
     padding: 18px;
@@ -97,12 +97,6 @@
   /* border: 3px solid rgba(0, 0, 0, 0.2); */
 }
 
-.coin-text {
-  position: absolute;
-  color: grey;
-  font-size: 30px;
-}
-
 /* ALGEBRA BUTTONS */
 .alg-btn {
   height: 55px;
@@ -127,7 +121,7 @@
     display: grid;
     grid-template-columns: repeat(4, 0.5fr);
     gap: 20px 7px;
-    margin: 57px 0;
+    margin: 36px 0;
 }
 
 .numbers-grid div {
@@ -163,7 +157,7 @@
 
 /* RIGHT EQUATIONS */
 .equations {
-    width: 19%;
+    width: 21%;
     height: 665px;
 }
 
@@ -269,3 +263,50 @@
     padding: 21px 13px;
     font-size: 22px;
 }
+
+
+/* small coin for right side coin based equation */
+.eq-coin-term {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.eq-coin-img {
+  width: 28px;
+  height: auto;
+}
+
+.eq-count {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.eq-number {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.eq-plus {
+  margin: 0 6px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.coin-block {
+  width: 64px;
+  height: 64px;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coin-img {
+  width: 52px;
+  height: auto;
+  pointer-events: none;
+}
+
+

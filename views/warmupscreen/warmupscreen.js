@@ -16,8 +16,28 @@
   });
   let correctCounter = 0;
   let eqs = [];
+  let coinEqs = [];
   let muted = false;
+  let level = 0;
   const soundBtn = document.getElementById("soundBtn");
+  // Coin based equation work
+  const COINS = {
+    B: { value: 5, img: "assets/images/warmupscreen/bronz.svg" },
+    S: { value: 10, img: "assets/images/warmupscreen/silver.svg" },
+    G: { value: 15, img: "assets/images/warmupscreen/gold.svg" }
+  };
+  genrateRandomEq();
+  function handleLevelChanges() {
+    if(level === 0){
+      document.getElementById('xyBtns').style.display = 'block';
+      document.getElementById('coinBtns').style.display = 'none';
+      genrateRandomEq();
+    }else {
+      document.getElementById('xyBtns').style.display = 'none';
+      document.getElementById('coinBtns').style.display = 'block';
+      genrateRandomCoinEq();
+    }
+  }
 
   // SoundManager.playBg("warmUp");
   // soundBtn.addEventListener("click", () => {
@@ -30,14 +50,12 @@
   //   }
 
   // });
+
   // start warmUp narration
   SoundManager.playSceneBg("warmUp");
-
   soundBtn.addEventListener("click", () => {
     SoundManager.play("click");
-
     const muted = SoundManager.toggleVoiceMute();
-
     if (muted) {
       soundBtn.src = "assets/images/common/audio-off.svg";
       soundBtn.setAttribute("title", "Unmute");
@@ -54,14 +72,18 @@
     document.getElementById("equation2").textContent = eqs[1];
     document.getElementById("equation3").textContent = eqs[2];
   }
-  genrateRandomEq();
 
   // Show info popup when screen loads
   // showPopup("info", { text: "Use the tiles at bottom to build an angle that matches the target angle" });
 
   warmupNextBtn.addEventListener("click", () => {
     SoundManager.play("click");
-    loadView("challengescreen");
+    if(level === 0) {
+      level++;
+      handleLevelChanges();
+    }else {
+      loadView("challengescreen");
+    }
   });
 
   // CLEAR BUTTON
@@ -83,14 +105,15 @@
     // 3️⃣ Reset internal drag state
     dragged = null;
     group = null;
-    genrateRandomEq();
+    (level === 0) ? genrateRandomEq() : genrateRandomCoinEq();
+    
   });
 
   // Function to genrate 3 random equations to show in right panel
   function generateRandomEquations() {
     const variables = ["x", "y"];
     function randomCoeff() {
-      return Math.floor(Math.random() * 5) + 1; // 1–10
+      return Math.floor(Math.random() * 9) + 1; // 1–10
     }
 
     function randomSign() {
@@ -185,9 +208,23 @@
       makeGroupDraggable(group);
     }
     // Create token
-    const token = document.createElement("div");
-    token.classList.add("workspace-block");
-    token.textContent = dragged.dataset.value;
+    const type = dragged.dataset.type;
+    let token;
+    if (type === "coin") {
+      token = document.createElement("div");
+      token.classList.add("workspace-block", "coin-block");
+      const img = document.createElement("img");
+      img.src = dragged.querySelector("img").src;
+      img.classList.add("coin-img");
+      token.dataset.value = dragged.dataset.value;   // 5 / 10 / 15
+      token.dataset.symbol = dragged.dataset.symbol; // B / S / G
+      token.appendChild(img);
+    } else {
+      // number / + / -
+      token = document.createElement("div");
+      token.classList.add("workspace-block");
+      token.textContent = dragged.dataset.value;
+    }
     group.appendChild(token);
   });
 
@@ -217,7 +254,13 @@
   }
 
   function groupToExpression(groupElem) {
-    const raw = [...groupElem.querySelectorAll(".workspace-block")].map(b => b.textContent.trim());
+    // const raw = [...groupElem.querySelectorAll(".workspace-block")].map(b => b.textContent.trim());
+    const raw = [...groupElem.querySelectorAll(".workspace-block")].map(b => {
+      if (b.classList.contains("coin-block")) {
+        return b.dataset.symbol; // B / S / G
+      }
+      return b.textContent.trim();
+    });
     const tokens = [];
     let i = 0;
     while (i < raw.length) {
@@ -259,5 +302,97 @@
     });
     return expr;
   }
+
+
+  // Random coin-based equation generator (DATA only)
+  function generateRandomCoinEquation() {
+    const terms = [];
+    // 1–2 coin terms
+    const coinKeys = Object.keys(COINS);
+    const coinTermCount = Math.floor(Math.random() * 2) + 1;
+    for (let i = 0; i < coinTermCount; i++) {
+      const coinKey = coinKeys[Math.floor(Math.random() * coinKeys.length)];
+      const count = Math.floor(Math.random() * 4) + 1; // 1–4 coins
+      terms.push({
+        type: "coin",
+        coin: coinKey,
+        count
+      });
+    }
+    // Optional constant
+    if (Math.random() < 0.7) {
+      terms.push({
+        type: "number",
+        value: Math.floor(Math.random() * 9) + 1
+      });
+    }
+    console.log("terms:::",terms);
+    return terms;
+  }
+
+  function renderCoinEquation(container, equation) {
+    container.innerHTML = "";
+    equation.forEach((term, index) => {
+      if (index > 0) {
+        const plus = document.createElement("span");
+        plus.textContent = " + ";
+        plus.className = "eq-plus";
+        container.appendChild(plus);
+      }
+      if (term.type === "coin") {
+        const termWrap = document.createElement("span");
+        termWrap.className = "eq-coin-term";
+
+        const count = document.createElement("span");
+        count.textContent = term.count;
+        count.className = "eq-count";
+
+        const img = document.createElement("img");
+        img.src = COINS[term.coin].img;
+        img.className = "eq-coin-img";
+
+        termWrap.appendChild(count);
+        termWrap.appendChild(img);
+        container.appendChild(termWrap);
+      }
+
+      if (term.type === "number") {
+        const num = document.createElement("span");
+        num.textContent = term.value;
+        num.className = "eq-number";
+        container.appendChild(num);
+      }
+    });
+  }
+
+  // Show coin based equations
+  function genrateRandomCoinEq() {
+    // existing text equations
+    eqs = generateRandomEquations();
+    // NEW: coin equations
+    coinEqs = [
+      generateRandomCoinEquation(),
+      generateRandomCoinEquation(),
+      generateRandomCoinEquation()
+    ];
+    console.log("coinEqs:::",coinEqs);
+
+    renderCoinEquation(
+      document.querySelector("#equation1"),
+      coinEqs[0]
+    );
+    renderCoinEquation(
+      document.querySelector("#equation2"),
+      coinEqs[1]
+    );
+    renderCoinEquation(
+      document.querySelector("#equation3"),
+      coinEqs[2]
+    );
+  }
+
+
+
+
 
 })();

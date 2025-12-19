@@ -132,12 +132,16 @@
 
   // helper to find existing item on center panel
   function findExistingWorkItem(item) {
+    //Never merge operators
+    if (item.symbol === "+" || item.symbol === "-") return null;
+
     return [...workPanel.querySelectorAll(".work-item")].find(el =>
       el.dataset.type === item.type &&
       el.dataset.symbol === (item.symbol || "") &&
       Number(el.dataset.baseValue) === Number(item.value)
     );
   }
+
 
   // Merge logic (count-based, correct)
   function mergeExistingItem(existing, draggedData) {
@@ -149,19 +153,18 @@
       existing.dataset.type === "var" ||
       existing.dataset.type === "num"
     ) {
-      if (existing.dataset.symbol === "x" || existing.dataset.symbol === "y") {
-        existing.textContent = `${count}${existing.dataset.symbol}`;
-      } else if(existing.dataset.symbol === "-1") {
-        existing.textContent = `-${count}`;
-      } else {
-        existing.textContent = `${count}`;
-      }
+      existing.textContent = `${existing.dataset.symbol}`;
+      // if (existing.dataset.symbol === "x" || existing.dataset.symbol === "y") {
+      //   existing.textContent = `${count}${existing.dataset.symbol}`;
+      // } else if(existing.dataset.symbol === "-1") {
+      //   existing.textContent = `-${count}`;
+      // } else {
+      //   existing.textContent = `${count}`;
+      // }
     }
     // Coins & weights untouched visually
     updateCoefficientBadges();
   }
-
-
 
   // Function to get total text value on right side panel
   function getTotalValue() {
@@ -169,42 +172,48 @@
     let xCount = 0;
     let yCount = 0;
     let constantCount = 0;
-
+    let currentSign = 1;
     for (let i = 0; i < allElemsOnCenterStage.length; i++) {
       const el = allElemsOnCenterStage[i];
-      if (el.symbol === 'x') {
-        totalVal += el.value * sliderX.value;
-        xCount += el.value;
-      } else if (el.symbol === 'y') {
-        totalVal += el.value * sliderY.value;
-        yCount += el.value;
-      } else if (
-        el.symbol === '1' ||
-        el.symbol === '-1' ||
-        el.symbol === 'B' ||
-        el.symbol === 'S' ||
-        el.symbol === 'G' ||
-        el.symbol === '2W' ||
-        el.symbol === '5W' ||
-        el.symbol === '10W'
-      ) {
-        totalVal += el.value;
-        constantCount += el.value;
-      } else {
-
+      if (el.symbol === "+") {
+        currentSign = 1;
+        continue;
       }
-
+      if (el.symbol === "-") {
+        currentSign = -1;
+        continue;
+      }
+      if (el.symbol === "x") {
+        totalVal += currentSign * el.value * sliderX.value;
+        xCount += currentSign * el.value;
+      } 
+      else if (el.symbol === "y") {
+        totalVal += currentSign * el.value * sliderY.value;
+        yCount += currentSign * el.value;
+      }
+      else {
+        totalVal += currentSign * el.value;
+        constantCount += currentSign * el.value;
+      }
+      // reset sign after applying
+      currentSign = 1;
     }
-
-    // Build equation text cleanly
+    //  Build equation text properly
     const parts = [];
     if (xCount !== 0) parts.push(`${xCount}x`);
     if (yCount !== 0) parts.push(`${yCount}y`);
-    if (constantCount !== 0) parts.push(`${constantCount}`);
-    const equationTxt = parts.join(' + ');
+    if (constantCount !== 0) {
+      parts.push(
+        constantCount > 0
+          ? `+ ${constantCount}`
+          : `- ${Math.abs(constantCount)}`
+      );
+    }
+    const equationTxt = parts.join(" ");
     totalTxt.innerText = totalVal;
     expressionTxt.innerText = `${equationTxt} = ${totalVal}`;
   }
+
 
   //Log everything currently on stage
   function logAllWorkItems() {
@@ -225,13 +234,11 @@
   workPanel.addEventListener("drop", e => {
     e.preventDefault();
     if (!draggedData) return;
-    const existing = findExistingWorkItem(draggedData);
-    // MERGE if already exists
+    const isOperator = draggedData.symbol === "+" || draggedData.symbol === "-";
+    const existing = isOperator ? null : findExistingWorkItem(draggedData);
     if (existing) {
       mergeExistingItem(existing, draggedData);
-    }
-    // ➕ Otherwise create new
-    else {
+    } else {
       createWorkItem(draggedData, e.offsetX, e.offsetY, e);
     }
     updateCoefficientBadges();
@@ -269,7 +276,7 @@
   const showCoinValChk = document.getElementById("showCoinValChk");
   showCoinValChk.addEventListener("change", () => {
     document.querySelectorAll(".btn.coin").forEach(coin => {
-      const value = coin.dataset.value;      // 5, 10, 15
+      const value = (coin.dataset.baseValue) ? coin.dataset.baseValue : coin.dataset.value;      // 5, 10, 15
       const textEl = coin.querySelector(".coin-text");
       if (showCoinValChk.checked) {
         if (textEl) {
@@ -291,6 +298,8 @@
       if (el.dataset.symbol === "x" || el.dataset.symbol === "y") {
         badge.textContent = `${count}`; //${el.dataset.symbol}
         badge.classList.add("coeff-x");
+      } else if(el.dataset.symbol === "+" || el.dataset.symbol === "-") {
+        // DO nothing
       } else {
         badge.textContent = `${count}`;
         badge.classList.add("coeff-const");
