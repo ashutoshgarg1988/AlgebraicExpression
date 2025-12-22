@@ -111,6 +111,17 @@
   font-size: 30px;
 }
 
+.x-value-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.x-value-input.enabled {
+  opacity: 1;
+  cursor: text;
+  box-shadow: 0 0 0 2px #4CAF50;
+}
+
 /* Balance scale */
 .balance-scale-box {
   text-align: center;

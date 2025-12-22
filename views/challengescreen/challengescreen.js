@@ -13,6 +13,8 @@
   const equalCheck = document.getElementById("equalCheck");
   const checkBtn = document.getElementById("checkBtn");
   const xValueInput = document.getElementById("xValue");
+  xValueInput.disabled = true;
+  xValueInput.classList.toggle("enabled", false);
   let equationTxt = document.getElementById("equationTxt");
   // Select sliders
   const sliderX = document.querySelector(".slider-x");
@@ -176,6 +178,8 @@
     renderBalls(zBalls, Z, "z");
     // Equality symbol
     equalCheck.innerText = leftWeight === rightWeight ? "=" : "≠";
+    xValueInput.disabled = leftWeight !== rightWeight;
+    xValueInput.classList.toggle("enabled", leftWeight === rightWeight);
     // ⚖️ Scale tilt
     const diff = leftWeight - rightWeight;
     const maxAngle = 18;
