@@ -7,6 +7,7 @@
  ***************************************************************/
 
 (function initChallengeScreen() {
+  let solutionX = 0;
   const challengeResetBtn = document.getElementById("challengeResetBtn");
   const challengeNextBtn = document.getElementById("challengeNextBtn");
   const equalCheck = document.getElementById("equalCheck");
@@ -58,10 +59,10 @@
 
   checkBtn.addEventListener("click", () => {
     SoundManager.play("click");
-    if(leftWeight === rightWeight) {
+    if(solutionX === Number(xValueInput.value)) {
       showPopup("greatWork", { step: 1, description: "" });
     }else {
-      alert("Please try again");
+      showPopup("info", { text: "Wrong answer! Please try again." });
     }
   });
 
@@ -103,18 +104,17 @@
   });
 
   function updateEquation() {
-    // equationTxt.innerText = `${sliderX.value}x + ${sliderY.value} = ${sliderZ.value}`;
-    let equationData = generateBalancedEquation();
+    const equationData = generateBalancedEquation();
     equationTxt.innerText = equationData.equation;
-    sliderX.value = 0; //equationData.a;
-    labelX.textContent = `${sliderX.value}x`;
-    sliderY.value = 0; //equationData.b;
-    labelY.textContent = `${sliderY.value}`;
-    sliderZ.value = 0; //equationData.rhs;
-    labelZ.textContent = `${sliderZ.value}`;
+    solutionX = equationData.x;
+    sliderX.value = 0;
+    sliderY.value = 0;
+    sliderZ.value = 0;
+    labelX.textContent = `0x`;
+    labelY.textContent = `0`;
+    labelZ.textContent = `0`;
     xValueInput.value = "";
     equalCheck.innerText = "≠";
-
   }
 
   function generateBalancedEquation() {
@@ -164,22 +164,24 @@
     const xBalls = leftTray.querySelector(".x-balls");
     const yBalls = leftTray.querySelector(".y-balls");
     const zBalls = rightTray.querySelector(".z-balls");
-    const xVal = Number(xValueInput.value || 0);
-    const A = Number(sliderX.value);
-    const B = Number(sliderY.value);
-    const Z = Number(sliderZ.value);
-    const xCount = A * xVal;
-    const yCount = B;
-    const leftWeight = xCount + yCount;
+    const A = Number(sliderX.value); // coefficient of x
+    const B = Number(sliderY.value); // LHS constant
+    const Z = Number(sliderZ.value); // RHS
+    // HYBRID LOGIC
+    const leftWeight = (A * solutionX) + B;
     const rightWeight = Z;
-    renderBalls(xBalls, xCount, "x");
-    renderBalls(yBalls, yCount, "y");
-    renderBalls(zBalls, rightWeight, "z");
+    // VISUAL COUNTS
+    renderBalls(xBalls, A, "x"); // ONLY 7 balls
+    renderBalls(yBalls, B, "y");
+    renderBalls(zBalls, Z, "z");
+    // Equality symbol
     equalCheck.innerText = leftWeight === rightWeight ? "=" : "≠";
+    // ⚖️ Scale tilt
     const diff = leftWeight - rightWeight;
     const maxAngle = 18;
-    const angle = Math.max(-maxAngle, Math.min(maxAngle, diff * 2));
+    const angle = Math.max(-maxAngle, Math.min(maxAngle, diff * 0.6));
     arm.style.transform = `rotate(${-angle}deg)`;
+    // Tray movement
     const baseTop = 39;
     const radius = 35;
     const rad = angle * Math.PI / 180;
@@ -187,7 +189,6 @@
     leftTray.style.top = `${baseTop + shift}%`;
     rightTray.style.top = `${baseTop - shift}%`;
   }
-
 
   function renderBalls(container, count, type) {
     if (!container) return;

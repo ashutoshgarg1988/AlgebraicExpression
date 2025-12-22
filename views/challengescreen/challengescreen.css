@@ -270,6 +270,6 @@ input.slider-y::-moz-range-thumb {
 }
 
 /* colors */
-.ball.x { background: #3b82f6; }
-.ball.y { background: #ef4444; }
+.ball.x { background: #ef4444; }
+.ball.y { background: #3b82f6; }
 .ball.z { background: #22c55e; }
