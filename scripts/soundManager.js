@@ -188,7 +188,7 @@ const SoundManager = (function () {
   let currentSceneBg = null;
 
   let bgmMuted = false;     //  only bgm
-  let voiceMuted = false;   
+  let voiceMuted = true;   
 
   function loadFromMap(soundMap = {}) {
     Object.keys(soundMap).forEach((key) => {
@@ -305,7 +305,6 @@ const SoundManager = (function () {
   function isVoiceMuted() {
     return voiceMuted;
   }
-
   function has(key) {
     return !!sounds[key];
   }
@@ -319,13 +318,10 @@ const SoundManager = (function () {
     stopSceneBg,
     stopAll,
     has,
-
-
     muteBgm,
     unmuteBgm,
     toggleBgmMute,
     isBgmMuted,
-
     muteVoice,
     unmuteVoice,
     toggleVoiceMute,

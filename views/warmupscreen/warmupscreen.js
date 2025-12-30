@@ -51,7 +51,6 @@
   // });
 
   // start warmUp narration
-  SoundManager.playSceneBg("warmUp");
   soundBtn.addEventListener("click", () => {
     SoundManager.play("click");
     const muted = SoundManager.toggleVoiceMute();
@@ -59,6 +58,7 @@
       soundBtn.src = "assets/images/common/audio-off.svg";
       soundBtn.setAttribute("title", "Unmute");
     } else {
+      SoundManager.playSceneBg("warmUp");
       soundBtn.src = "assets/images/common/sound-btn.svg";
       soundBtn.setAttribute("title", "Mute");
     }

@@ -7,7 +7,6 @@
  ***************************************************************/
 
 (function initEasyScreen() {
-  SoundManager.playSceneBg("easy");
   let totalTxt = document.getElementById('totalTxt');
   let expressionTxt = document.getElementById('expressionTxt');
   let allElemsOnCenterStage;
@@ -21,7 +20,6 @@
   // Drag and drop functionality
   let draggedData = null;
   let currentMergeTarget = null;
-  let muted = false;
 
   setCommonUI({
     btnHome: true,
@@ -42,13 +40,12 @@
 
   soundBtn.addEventListener("click", () => {
     SoundManager.play("click");
-  
     const muted = SoundManager.toggleVoiceMute();
-  
     if (muted) {
       soundBtn.src = "assets/images/common/audio-off.svg";
       soundBtn.setAttribute("title", "Unmute");
     } else {
+      SoundManager.playSceneBg("easy");
       soundBtn.src = "assets/images/common/sound-btn.svg";
       soundBtn.setAttribute("title", "Mute");
     }
