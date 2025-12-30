@@ -1,59 +1,71 @@
 /* ---------------- MAIN CONTENT AREA ---------------- */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Raleway'; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Raleway';
+}
+
 .content-area {
-    position: absolute;
-    top: 180px;
-    width: 97%;
-    left: 28px;
-    height: 820px;
-    display: flex;
-    justify-content: space-between;
+  position: absolute;
+  top: 180px;
+  width: 97%;
+  left: 28px;
+  height: 820px;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* LEFT PANEL */
 .bg-panel {
-    top: 66px;
-    height: 690px;
-    background: white;
-    border-radius: 35px;
-    position: relative;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
+  top: 66px;
+  height: 690px;
+  background: white;
+  border-radius: 35px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 
 /* MAIN LAYOUT */
 .main-area {
-    position: absolute;
-    top: 250px;
-    width: 97%;
-    left: 28px;
-    display: flex;
-    justify-content: center; /* center horizontally */
-    align-items: flex-start; /* top-align panels */
-    gap: 29px;               /* space between toolbox, workspace, equations */
-    margin: 0 auto;          /* ensure it stays centered */
+  position: absolute;
+  top: 250px;
+  width: 97%;
+  left: 28px;
+  display: flex;
+  justify-content: center;
+  /* center horizontally */
+  align-items: flex-start;
+  /* top-align panels */
+  gap: 29px;
+  /* space between toolbox, workspace, equations */
+  margin: 0 auto;
+  /* ensure it stays centered */
 }
+
 .workspace {
-    flex: 1;
-    height: 456px;          /* ensure px unit */
-    background: white;
-    border-radius: 22px;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  flex: 1;
+  height: 456px;
+  /* ensure px unit */
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* TOOLBOX LEFT */
 .toolbox {
-    width: 21%;
-    height: 665px;
-    background: white;
-    padding: 18px;
-    border-radius: 20px;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  width: 21%;
+  height: 665px;
+  background: white;
+  padding: 18px;
+  border-radius: 20px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 .toolbox h2 {
-    margin-bottom: 14px;
+  margin-bottom: 14px;
 }
 
 .grid-2 {
@@ -118,70 +130,73 @@
 }
 
 .numbers-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 0.5fr);
-    gap: 20px 7px;
-    margin: 36px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 0.5fr);
+  gap: 20px 7px;
+  margin: 36px 0;
 }
 
 .numbers-grid div {
-    width: 70px;
-    height: 70px;
-    background: #333;
-    color: white;
-    display: flex;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
+  width: 70px;
+  height: 70px;
+  background: #333;
+  color: white;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
 }
 
 /* CLEAR BUTTON */
 .clear-btn {
-    width: 100%;
-    cursor: pointer;
+  width: 100%;
+  cursor: pointer;
 }
 
 /* WHITE WORKSPACE */
 .workspace {
-    position: relative;
-    width: 100%;
-    height: 665px;
-    display: flex;
-    justify-content: center;   /* center horizontally */
-    align-items: center;       /* center vertically */
-    background: white;
-    border-radius: 22px;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  position: relative;
+  width: 100%;
+  height: 665px;
+  display: flex;
+  justify-content: center;
+  /* center horizontally */
+  align-items: center;
+  /* center vertically */
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* RIGHT EQUATIONS */
 .equations {
-    width: 21%;
-    height: 665px;
+  width: 21%;
+  height: 665px;
 }
 
 .eq-font {
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: 17px;
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 17px;
+  font-family: sans-serif;
 }
 
 .eq-box {
-    background: white;
-    padding: 14px;
-    height: 207px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  background: white;
+  padding: 14px;
+  height: 207px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 .eq-slot {
-    margin-top: 8px;
-    /* background: #f5f5f5; */
-    min-height: 105px;
-    border-radius: 12px;
-    border: 1px solid gainsboro;
+  margin-top: 8px;
+  /* background: #f5f5f5; */
+  min-height: 105px;
+  border-radius: 12px;
+  border: 1px solid gainsboro;
 }
 
 /* Drag n drop */
@@ -195,7 +210,7 @@
   cursor: grab;
   -webkit-tap-highlight-color: transparent;
   transition: transform .08s ease, box-shadow .08s ease;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.18);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
   font-weight: 700;
 }
 
@@ -224,44 +239,46 @@
 }
 
 .workspace-block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #333;
-    color: white;
-    padding: 12px 20px;
-    font-size: 28px;
-    font-weight: 700;
-    border-radius: 14px;
-    user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  color: white;
+  padding: 12px 20px;
+  font-size: 28px;
+  font-weight: 700;
+  border-radius: 14px;
+  user-select: none;
 }
 
 .expression-group {
-    display: flex;
-    gap: 9px;
-    background: #ffffff;
-    padding: 18px 4px;
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    cursor: grab;
+  display: flex;
+  gap: 9px;
+  background: #ffffff;
+  padding: 18px 4px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: grab;
 }
+
 .expression-group:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 
 .expression-group {
-    cursor: grab;
+  cursor: grab;
 }
+
 .expression-group:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 
 /* .eq-slot .expression-group .workspace-block {
     padding: 6% 6%;
 } */
 .eq-slot .expression-group .workspace-block {
-    padding: 21px 13px;
-    font-size: 22px;
+  padding: 21px 13px;
+  font-size: 22px;
 }
 
 
@@ -308,5 +325,3 @@
   height: auto;
   pointer-events: none;
 }
-
-
