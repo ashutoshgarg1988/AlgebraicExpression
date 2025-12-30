@@ -43,7 +43,7 @@ html, body, #intro-screen, .intro-box { overflow: hidden; }
 
 /* White Box */
 .intro-box {
-    background: #ffffff;
+    /* background: #ffffff; */
     padding: 6px 27px;
     border-radius: 18px;
     width: 90%;
@@ -132,5 +132,66 @@ html, body, #intro-screen, .intro-box { overflow: hidden; }
 .title-audio-wrapper {
     display: inline-block;
     position: relative;
-  }
+}
+
+/* GRID LAYOUT */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  height: 100%;
+}
+
+/* CARD STYLE */
+.intro-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  position: relative;
+}
+
+/* CENTER CARD ALIGNMENT */
+.center-card {
+  text-align: left;
+}
+
+/* Equation positioning INSIDE center card */
+.center-card .equation-section {
+  position: relative;
+  width: 120%;
+  height: 320px;
+  margin-top: -233px;
+  left: -43px;
+}
+
+/* Keep your existing equation image positions */
+.equation {
+  width: 42%;
+  position: absolute;
+  left: 29%;
+  top: 35%;
+}
+
+.coefcient {
+  left: 18%;
+  top: 8%;
+  width: 20%;
+  position: absolute;
+}
+
+.constant {
+  left: 58%;
+  top: 8%;
+  width: 20%;
+  position: absolute;
+}
+
+.variable {
+  left: 32%;
+  top: 65%;
+  width: 20%;
+  position: absolute;
+}
+
   
