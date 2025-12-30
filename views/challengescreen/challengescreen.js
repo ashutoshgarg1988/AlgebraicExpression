@@ -8,6 +8,7 @@
 
 (function initChallengeScreen() {
   let solutionX = 0;
+  let correctAnswerCount = 0;
   const challengeResetBtn = document.getElementById("challengeResetBtn");
   const challengeNextBtn = document.getElementById("challengeNextBtn");
   const equalCheck = document.getElementById("equalCheck");
@@ -62,7 +63,16 @@
   checkBtn.addEventListener("click", () => {
     SoundManager.play("click");
     if(solutionX === Number(xValueInput.value)) {
-      showPopup("greatWork", { step: 1, description: "" });
+      correctAnswerCount++;
+      if(correctAnswerCount === 3) {
+        showPopup("greatWork", { step: 1, description: "" });
+      } else {
+        showPopup("info", { text: "Correct answer! Well done." });
+        updateEquation();
+        updateScaleTilt();
+        equalCheck.innerText = "≠";
+        xValueInput.classList.toggle("enabled", false);
+      }
     }else {
       showPopup("info", { text: "Wrong answer! Please try again." });
     }
@@ -117,6 +127,7 @@
     labelZ.textContent = `0`;
     xValueInput.value = "";
     equalCheck.innerText = "≠";
+    xValueInput.disabled = true;
   }
 
   function generateBalancedEquation() {
@@ -143,20 +154,20 @@
   }
 
 
-  function getWeights() {
-    const x = Number(xValueInput.value || 0);
-    const X = Number(sliderX.value);
-    const Y = Number(sliderY.value);
-    const Z = Number(sliderZ.value);
-    leftWeight = (X * x) + Y;  // LHS = Ax + B
-    rightWeight = Z;           // RHS constant
-    if(leftWeight === rightWeight) {
-      equalCheck.innerText = "="
-    }else {
-      equalCheck.innerText = "≠"
-    }
-    return { leftWeight, rightWeight };
-  }
+  // function getWeights() {
+  //   const x = Number(xValueInput.value || 0);
+  //   const X = Number(sliderX.value);
+  //   const Y = Number(sliderY.value);
+  //   const Z = Number(sliderZ.value);
+  //   leftWeight = (X * x) + Y;  // LHS = Ax + B
+  //   rightWeight = Z;           // RHS constant
+  //   if(leftWeight === rightWeight) {
+  //     equalCheck.innerText = "="
+  //   }else {
+  //     equalCheck.innerText = "≠"
+  //   }
+  //   return { leftWeight, rightWeight };
+  // }
 
   // Function to update the scale machine tilt animation
   function updateScaleTilt() {
@@ -178,8 +189,10 @@
     renderBalls(zBalls, Z, "z");
     // Equality symbol
     equalCheck.innerText = leftWeight === rightWeight ? "=" : "≠";
-    xValueInput.disabled = leftWeight !== rightWeight;
-    xValueInput.classList.toggle("enabled", leftWeight === rightWeight);
+    istxtDisabled = leftWeight !== rightWeight || (leftWeight === 0 && rightWeight ===0);
+    xValueInput.disabled = istxtDisabled;
+    console.log("istxtDisabled:::",istxtDisabled);
+    xValueInput.classList.toggle("enabled", !istxtDisabled);
     // ⚖️ Scale tilt
     const diff = leftWeight - rightWeight;
     const maxAngle = 18;

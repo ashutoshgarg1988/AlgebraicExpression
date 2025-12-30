@@ -17,7 +17,6 @@
   let correctCounter = 0;
   let eqs = [];
   let coinEqs = [];
-  let muted = false;
   let level = 0;
   const soundBtn = document.getElementById("soundBtn");
   // Coin based equation work

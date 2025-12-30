@@ -79,6 +79,7 @@
   font-size: 36px;
   position: relative;
   top: 472px;
+  font-family: sans-serif;
 }
 
 .equation-txt {
@@ -86,6 +87,7 @@
   font-weight: 700;
   margin-top: 30px;
   font-size: 40px;
+  font-family: sans-serif;
 }
 
 #equalCheck{
@@ -261,15 +263,15 @@ input.slider-y::-moz-range-thumb {
 }
 
 /* stack placement */
-.x-balls { bottom: 110px; }
-.y-balls { bottom: 90px; }
+.x-balls { bottom: 90px; }
+.y-balls { bottom: 110px; }
 .z-balls { bottom: 91px; }
 
 /* ball */
 .ball {
   width: 14px;
   height: 14px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   opacity: 0;
   transform: rotate(180deg) scale(0.5);
   transition: opacity 0.25s ease, transform 0.25s ease;
