@@ -27,11 +27,20 @@ const SOUNDS = {
   click: {
     src: "assets/sounds/click.mp3"
   },
+  easyDiscover: {
+    src: "assets/sounds/easyDiscover.mp3"
+  },
+  warmUpDiscover: {
+    src: "assets/sounds/warmUpDiscover.mp3"
+  },
+  challengeDiscover: {
+    src: "assets/sounds/challengeDiscover.mp3"
+  },
   bgm: {
     src: "assets/sounds/bgm.mp3",
     loop: true,
     volume: 0.5
-  }
+  },
 };
 
 

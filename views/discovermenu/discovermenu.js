@@ -55,16 +55,25 @@
   tooltips.forEach(wrapper => {
     const openIcon = wrapper.querySelector(".tooltip-icon");
     const closeIcon = wrapper.querySelector(".tooltip-close");
+    const openSound = wrapper.dataset.openSound;
+    const closeSound = wrapper.dataset.closeSound;
     openIcon.addEventListener("click", (e) => {
       e.stopPropagation();
       tooltips.forEach(t => {
         if (t !== wrapper) t.classList.remove("active");
       });
+      const willOpen = !wrapper.classList.contains("active");
       wrapper.classList.toggle("active");
+      if (willOpen && openSound) {
+        SoundManager.playSceneBg(openSound);
+      }
     });
     closeIcon.addEventListener("click", (e) => {
       e.stopPropagation();
       wrapper.classList.remove("active");
+      if (closeSound) {
+        SoundManager.play(closeSound);
+      }
     });
   });
 
