@@ -14,7 +14,7 @@
     <span>Let’s learn how to build algebraic expressions using coins, weights, and variables.</span>
 
     <div class="sound-wrapper">
-      <img src="assets/images/common/sound-btn.svg" class="btn sound-btn" id="soundBtn">
+      <img src="assets/images/common/audio-off.svg" class="btn sound-btn" id="soundBtn">
       <!-- <div class="mute-tag">Mute</div> -->
     </div>
   </div>
@@ -50,8 +50,10 @@
         <div class="grid-2">
           <div class="btn alg-btn x drag-src" data-type="var" data-symbol="x" data-value="1">x</div>
           <div class="btn alg-btn y drag-src" data-type="var" data-symbol="y" data-value="1">y</div>
+          <div class="btn alg-btn plus drag-src" data-type="var" data-symbol="+" data-value="0">+</div>
           <div class="btn alg-btn one drag-src" data-type="num" data-symbol="1" data-value="1">1</div>
           <div class="btn alg-btn neg-one drag-src" data-type="num" data-symbol="-1" data-value="-1">-1</div>
+          <div class="btn alg-btn minus drag-src" data-type="var" data-symbol="-" data-value="0">-</div>
         </div>
         <div class="tool-section-title">Algebra</div>
       </div>
@@ -71,36 +73,36 @@
         </div>
         <div class="tool-section-title">Weight</div>
       </div>
-
       <button class="btn clear-btn">Clear</button>
     </div>
 
     <!-- Center: Work PANEL -->
     <div class="bg-panel" style="width: 58%; padding: 18px;" id="rightPanel">
-      <div id="workPanel" class="work-dropzone"></div>
-      <div class="expression-box" id="expressionTxt"> - </div>
+      <div id="workPanel" class="work-dropzone">
+        <div class="expr-group"></div>
+      </div>
+      <div class="expression-box" id="expressionTxt" style="visibility: hidden;"> - </div>
     </div>
-
 
     <!-- RIGHT: VARIABLES PANEL -->
     <div class="bg-panel" style="width: 19%; padding: 18px;" id="rightPanel">
       <div class="tool-title">Variables</div>
-        <div class="slider-box">
-          <input type="range" min="0" max="10" class="slider-x" value="1">
-          <div class="tool-section-title">x = 1</div>
-        </div>
+      <div class="slider-box">
+        <input type="range" min="0" max="10" class="slider-x" value="1">
+        <div class="tool-section-title">x = 1</div>
+      </div>
 
-        <div class="slider-box">
-          <input type="range" min="0" max="10" class="slider-y" value="1">
-          <div class="tool-section-title">y = 1</div>
-        </div>
+      <div class="slider-box">
+        <input type="range" min="0" max="10" class="slider-y" value="1">
+        <div class="tool-section-title">y = 1</div>
+      </div>
 
-        <div class="tool-title">Total</div>
-        <div class="total-box" id="totalTxt">0</div>
+      <div class="tool-title">Total</div>
+      <div class="total-box" id="totalTxt">0</div>
 
-       <div class="checkboxes">
-        <div><input type="checkbox" /> Show Coefficients</div>
-        <div><input type="checkbox" /> Coin Values</div>
+      <div class="checkboxes">
+        <div><input type="checkbox" id="showCoeffChk" /> Show Coefficients</div>
+        <div><input type="checkbox" id="showCoinValChk" /> Coin Values</div>
       </div>
     </div>
   </div>

@@ -61,7 +61,7 @@
 
 .grid-2 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(2, 1fr); 
   grid-template-rows: repeat(2, auto);
   gap: 10px;
   border: 1px solid grey;
@@ -102,8 +102,8 @@
 
 /* ALGEBRA BUTTONS */
 .alg-btn {
-  height: 55px;
-  border-radius: 14px;
+  height: 72px;
+  border-radius: 6px;
   font-size: 26px;
   font-weight: 700;
   color: #fff;
@@ -393,3 +393,139 @@ input[type="checkbox"]:checked::after {
   border-radius: 18px;
   /* box-shadow: 0 8px 24px rgba(0,0,0,0.12); */
 }
+
+
+
+
+
+
+
+/* MODE TOGGLE */
+.mode-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0 24px;
+}
+
+.mode-label {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* SWITCH */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 88px;
+  height: 36px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch .slider {
+  position: absolute;
+  inset: 0;
+  background-color: #fff;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 4px solid #ddd;
+}
+
+.switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  left: 2px;
+  top: 0px;
+  background-color: #4f46e5;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.switch input:checked + .slider {
+  background-color: #fff
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(49px);
+}
+
+/* Disabled drag visuals */
+.drag-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+/* Plain algebra items on center */
+.text-item {
+  font-size: 46px;
+  font-weight: 700;
+  color: #222;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+}
+
+.expr-sign {
+  font-size: 42px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 6px;
+  user-select: none;
+  pointer-events: none;
+}
+
+
+.text-item[data-symbol="x"] { color: #ff4d4f; }
+.text-item[data-symbol="y"] { color: #3b82f6; }
+.text-item[data-symbol="1"] { color: #facc15; }
+.text-item[data-symbol="-1"] { color: #22c55e; }
+
+/* Hide logic layer items */
+.expr-group.logic-layer {
+  display: none;
+}
+
+/* Bigger & cleaner math look */
+.expr-group.visual-layer .text-item {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+/* Plus / minus */
+.expr-sign {
+  font-size: 40px;
+  font-weight: 700;
+  color: #000;
+  user-select: none;
+}
+
+.logic-layer {
+  display: none;
+}
+
+.coins-layer,
+.visual-layer {
+  display: none; /* hidden by default */
+}
+
+.coins-layer.active,
+.visual-layer.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+

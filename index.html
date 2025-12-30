@@ -256,17 +256,17 @@
               <div class="grid-2">
                 <div class="btn alg-btn x drag-src" data-type="var" data-symbol="x" data-value="1">x</div>
                 <div class="btn alg-btn y drag-src" data-type="var" data-symbol="y" data-value="1">y</div>
-                <div class="btn alg-btn plus drag-src" data-type="var" data-symbol="+" data-value="0">+</div>
+                <!-- <div class="btn alg-btn plus drag-src" data-type="var" data-symbol="+" data-value="0">+</div> -->
                 <div class="btn alg-btn one drag-src" data-type="num" data-symbol="1" data-value="1">1</div>
                 <div class="btn alg-btn neg-one drag-src" data-type="num" data-symbol="-1" data-value="-1">-1</div>
-                <div class="btn alg-btn minus drag-src" data-type="var" data-symbol="-" data-value="0">-</div>
+                <!-- <div class="btn alg-btn minus drag-src" data-type="var" data-symbol="-" data-value="0">-</div> -->
               </div>
               <div class="tool-section-title">Algebra</div>
             </div>
 
             <!-- Weights Row -->
             <div class="tool-section weights">
-              <div class="row">
+              <!-- <div class="row">
                 <div class="weight btn drag-src" data-type="weight" data-symbol="2W" data-value="2">
                   <img class="btn" src="assets/images/easyscreen/weight-2.svg" style="width: 100px;">
                 </div>
@@ -276,8 +276,16 @@
                 <div class="weight btn drag-src" data-type="weight" data-symbol="10W" data-value="10">
                   <img class="btn" src="assets/images/easyscreen/weight-10.svg" style="width: 100px;">
                 </div>
+              </div> -->
+              <div class="mode-toggle">
+                <span class="mode-label">Coins</span>
+                <label class="switch">
+                  <input type="checkbox" id="modeToggle">
+                  <span class="slider"></span>
+                </label>
+                <span class="mode-label">Algebra</span>
               </div>
-              <div class="tool-section-title">Weight</div>
+              <div class="tool-section-title"></div>
             </div>
             <button class="btn clear-btn">Clear</button>
           </div>
@@ -285,7 +293,8 @@
           <!-- Center: Work PANEL -->
           <div class="bg-panel" style="width: 58%; padding: 18px;" id="rightPanel">
             <div id="workPanel" class="work-dropzone">
-              <div class="expr-group"></div>
+              <div class="expr-group logic-layer"></div>
+              <div class="expr-group visual-layer"></div>
             </div>
             <div class="expression-box" id="expressionTxt" style="visibility: hidden;"> - </div>
           </div>
@@ -308,7 +317,7 @@
 
             <div class="checkboxes">
               <div><input type="checkbox" id="showCoeffChk"/> Show Coefficients</div>
-              <div><input type="checkbox" id="showCoinValChk"/> Coin Values</div>
+              <div><input type="checkbox" id="showCoinValChk"/> Variable value</div>
             </div>
           </div>
         </div>

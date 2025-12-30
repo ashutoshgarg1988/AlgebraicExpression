@@ -9,7 +9,7 @@
 (function initEasyScreen() {
   let totalTxt = document.getElementById('totalTxt');
   let expressionTxt = document.getElementById('expressionTxt');
-  let allElemsOnCenterStage;
+  let allElemsOnCenterStage = [];
   // Select sliders
   const sliderX = document.querySelector(".slider-x");
   const sliderY = document.querySelector(".slider-y");
@@ -20,7 +20,7 @@
   // Drag and drop functionality
   let draggedData = null;
   let currentMergeTarget = null;
-
+  
   setCommonUI({
     btnHome: true,
     btnPlay: true,
@@ -59,24 +59,44 @@
     labelY.textContent = `y = ${sliderY.value}`;
     totalTxt.innerText = "0";
     resetCenterPanel();
+    if (modeToggle.checked) {
+      renderCenterExpression();
+    } else {
+      renderCoinsRow();
+    }
   });
 
   // Update X slider value
   sliderX.addEventListener("input", () => {
     labelX.textContent = `x = ${sliderX.value}`;
     getTotalValue();
+    if (modeToggle.checked) {
+      renderCenterExpression();
+    } else {
+      renderCoinsRow();
+    }
   });
 
   // Update Y slider value
   sliderY.addEventListener("input", () => {
     labelY.textContent = `y = ${sliderY.value}`;
     getTotalValue();
+    if (modeToggle.checked) {
+      renderCenterExpression();
+    } else {
+      renderCoinsRow();
+    }
   });
 
   // Clear button click functionality
   document.querySelector(".clear-btn")?.addEventListener("click", () => {
     SoundManager.play("click");
     resetCenterPanel();
+    if (modeToggle.checked) {
+      renderCenterExpression();
+    } else {
+      renderCoinsRow();
+    }
   });
 
   function resetCenterPanel() {
@@ -84,14 +104,84 @@
     totalTxt.innerText = 0;
     expressionTxt.innerText = "-";
     group = null;
+    allElemsOnCenterStage = [];
     updateCoefficientBadges();
+  }
+
+  function enforceCenterVisibility() {
+    const { coins, visual } = getExpressionGroup();
+    if (modeToggle.checked) {
+      // Algebra mode
+      visual.classList.add("active");
+      coins.classList.remove("active");
+    } else {
+      // Coins mode
+      coins.classList.add("active");
+      visual.classList.remove("active");
+      // HARD HIDE visual content
+      visual.innerHTML = "";
+    }
+  }
+
+
+  const modeToggle = document.getElementById("modeToggle");
+  // default mode = Coins
+  setDragMode("coins");
+  modeToggle.addEventListener("change", () => {
+    SoundManager.play("click");
+    setDragMode(modeToggle.checked ? "algebra" : "coins");
+    enforceCenterVisibility();
+  });
+
+  function setDragMode(mode) {
+    const { coins, visual } = getExpressionGroup();
+    if (mode === "coins") {
+      coins.classList.add("active");
+      visual.classList.remove("active");
+    } else {
+      visual.classList.add("active");
+      coins.classList.remove("active");
+    }
+    const coinItems = document.querySelectorAll(".tool-section.coins .drag-src");
+    const algebraItems = document.querySelectorAll(".tool-section.algebra .drag-src");
+    if (mode === "coins") {
+      enableDrag(coinItems);
+      disableDrag(algebraItems);
+    } else {
+      enableDrag(algebraItems);
+      disableDrag(coinItems);
+    }
+  }
+
+
+  function enableDrag(nodeList) {
+    nodeList.forEach(el => {
+      el.setAttribute("draggable", "true");
+      el.classList.remove("drag-disabled");
+    });
+  }
+
+  function disableDrag(nodeList) {
+    nodeList.forEach(el => {
+      el.removeAttribute("draggable");
+      el.classList.add("drag-disabled");
+    });
   }
 
   // Make toolbox items draggable
   document.querySelectorAll(".drag-src").forEach(src => {
-    src.setAttribute("draggable", "true");
     src.addEventListener("dragstart", e => {
-      e.dataTransfer.setData("text/plain", "dragging"); // required for Chrome
+      if (!src.getAttribute("draggable")) {
+        e.preventDefault();
+        return;
+      }
+      // 👇 HIDE algebra layer when dragging coins
+      if (src.dataset.type === "coin") {
+        const { visual, coins } = getExpressionGroup();
+        visual.classList.remove("active");
+        coins.classList.add("active");
+      }
+      e.dataTransfer.setData("text/plain", "dragging");
       draggedData = {
         type: src.dataset.type,
         symbol: src.dataset.symbol || "",
@@ -197,33 +287,60 @@
     }
     //  Build equation text properly
     const parts = [];
-    if (xCount !== 0) parts.push(`${xCount}x`);
-    if (yCount !== 0) parts.push(`${yCount}y`);
+    // X term
+    if (xCount !== 0) {
+      parts.push(formatTerm(xCount, "x", parts.length === 0));
+    }
+    // Y term
+    if (yCount !== 0) {
+      parts.push(formatTerm(yCount, "y", parts.length === 0));
+    }
+    // Constant term (from 1 / -1)
     if (constantCount !== 0) {
-      parts.push(
-        constantCount > 0
-          ? `+ ${constantCount}`
-          : `- ${Math.abs(constantCount)}`
-      );
+      parts.push(formatConstant(constantCount, parts.length === 0));
     }
     const equationTxt = parts.join(" ");
     totalTxt.innerText = totalVal;
     expressionTxt.innerText = `${equationTxt} = ${totalVal}`;
   }
 
+  function formatTerm(value, symbol, isFirst) {
+    const abs = Math.abs(value);
+    const sign = value < 0 ? "-" : "+";
+    const coeff = abs === 1 ? symbol : `${abs}${symbol}`;
+    if (isFirst) {
+      return value < 0 ? `-${coeff}` : coeff;
+    }
+    return `${sign} ${coeff}`;
+  }
+
+  function formatConstant(value, isFirst) {
+    const abs = Math.abs(value);
+    const sign = value < 0 ? "-" : "+";
+    if (isFirst) {
+      return value < 0 ? `-${abs}` : `${abs}`;
+    }
+    return `${sign} ${abs}`;
+  }
+
+
 
   //Log everything currently on stage
   function logAllWorkItems() {
-    const items = [...document.querySelectorAll("#workPanel .work-item")];
+    const items = [
+      ...workPanel.querySelectorAll(".coins-layer .work-item"),
+      ...workPanel.querySelectorAll(".logic-layer .work-item")
+    ];
     allElemsOnCenterStage = items.map(el => ({
       type: el.dataset.type,
       symbol: el.dataset.symbol || "",
-      value: Number(el.dataset.value),
+      value: Number(el.dataset.count) * Number(el.dataset.baseValue),
       text: el.innerText.trim(),
       x: parseInt(el.style.left),
       y: parseInt(el.style.top)
     }));
     getTotalValue();
+    renderCenterExpression();
     return allElemsOnCenterStage;
   }
 
@@ -231,20 +348,42 @@
   workPanel.addEventListener("drop", e => {
     e.preventDefault();
     if (!draggedData) return;
-    const isOperator = draggedData.symbol === "+" || draggedData.symbol === "-";
-    const existing = isOperator ? null : findExistingWorkItem(draggedData);
+    const existing = findExistingWorkItem(draggedData);
     if (existing) {
       mergeExistingItem(existing, draggedData);
     } else {
-      createWorkItem(draggedData, e.offsetX, e.offsetY, e);
+      createWorkItem(draggedData);
     }
     updateCoefficientBadges();
-    logAllWorkItems();
+    logAllWorkItems();       // updates allElemsOnCenterStage
+    const { coins, visual } = getExpressionGroup();
+    if (modeToggle.checked) {
+      // Algebra mode
+      coins.classList.remove("active");
+      visual.classList.add("active");
+      renderCenterExpression();
+    } else {
+      // Coins mode
+      visual.classList.remove("active");
+      coins.classList.add("active");
+      renderCoinsRow();
+    }
+  });
+
+  document.addEventListener("dragend", () => {
+    const { coins, visual } = getExpressionGroup();
+    if (modeToggle.checked) {
+      visual.classList.add("active");
+      coins.classList.remove("active");
+    } else {
+      coins.classList.add("active");
+      visual.classList.remove("active");
+    }
   });
 
 
-  // Create the dropped object
-  function createWorkItem(item) {
+  // Create the dropped object --- old code
+  /*function createWorkItem(item) {
     const original = document.querySelector(
       `.drag-src[data-type="${item.type}"][data-symbol="${item.symbol || ""}"][data-value="${item.value}"]`
     );
@@ -262,7 +401,41 @@
     el.dataset.value = item.value;
     getExpressionGroup().appendChild(el);
     updateCoefficientBadges();
+  }*/
+
+  function createWorkItem(item) {
+    const { logic, coins } = getExpressionGroup();
+    let el;
+    // ---- COINS ----
+    if (item.type === "coin") {
+      const original = document.querySelector(
+        `.drag-src[data-type="coin"][data-symbol="${item.symbol}"][data-value="${item.value}"]`
+      );
+      // Single clone used for BOTH logic + visual
+      const coinEl = original.cloneNode(true);
+      coinEl.classList.add("work-item");
+      coinEl.removeAttribute("draggable");
+      coinEl.style.cursor = "default";
+      coinEl.dataset.type = item.type;
+      coinEl.dataset.symbol = item.symbol;
+      coinEl.dataset.baseValue = item.value;
+      coinEl.dataset.count = 1;
+      coinEl.dataset.value = item.value;
+      coins.appendChild(coinEl);   // 👈 coins-layer ONLY
+      return;
+    }
+    // ---- ALGEBRA (logic only) ----
+    el = document.createElement("div");
+    el.className = "work-item";
+    el.dataset.type = item.type;
+    el.dataset.symbol = item.symbol;
+    el.dataset.baseValue = item.value;
+    el.dataset.count = 1;
+    el.dataset.value = item.value;
+    logic.appendChild(el);
   }
+
+
 
 
   const showCoeffChk = document.getElementById("showCoeffChk");
@@ -306,17 +479,73 @@
   }
 
   function getExpressionGroup() {
-    let group = workPanel.querySelector(".expr-group");
-    if (!group) {
-      group = document.createElement("div");
-      group.className = "expr-group";
-      workPanel.appendChild(group);
+    let logic = workPanel.querySelector(".logic-layer");
+    let coins = workPanel.querySelector(".coins-layer");
+    let visual = workPanel.querySelector(".visual-layer");
+    if (!logic) {
+      logic = document.createElement("div");
+      logic.className = "expr-group logic-layer";
+      workPanel.appendChild(logic);
     }
-    return group;
+    if (!coins) {
+      coins = document.createElement("div");
+      coins.className = "expr-group coins-layer";
+      workPanel.appendChild(coins);
+    }
+    if (!visual) {
+      visual = document.createElement("div");
+      visual.className = "expr-group visual-layer";
+      workPanel.appendChild(visual);
+    }
+    return { logic, coins, visual };
   }
 
+  function renderCenterExpression() {
+    // const group = workPanel.querySelector(".visual-layer");
+    const { visual } = getExpressionGroup();
+    if (!visual) return;
+    visual.innerHTML = "";
+    // group.innerHTML = "";
+    let xCount = 0, yCount = 0, constantCount = 0;
+    allElemsOnCenterStage.forEach(el => {
+      if (el.symbol === "x") xCount += el.value;
+      else if (el.symbol === "y") yCount += el.value;
+      else constantCount += el.value;
+    });
+    const terms = [];
+    if (xCount) terms.push({ value: xCount, symbol: "x" });
+    if (yCount) terms.push({ value: yCount, symbol: "y" });
+    if (constantCount) terms.push({ value: constantCount, symbol: "" });
+    terms.forEach((t, i) => {
+      if (i > 0) {
+        const s = document.createElement("span");
+        s.className = "expr-sign";
+        s.textContent = t.value < 0 ? "−" : "+";
+        visual.appendChild(s);
+      }
+      const el = document.createElement("span");
+      el.className = "text-item";
+      el.textContent = Math.abs(t.value) === 1 && t.symbol
+        ? t.symbol
+        : Math.abs(t.value) + t.symbol;
+      visual.appendChild(el);
+    });
+  }
 
-
+  function renderCoinsRow() {
+    const { coins } = getExpressionGroup();
+    const coinElems = [...coins.querySelectorAll(".btn.coin")];
+    coins.innerHTML = "";
+    coinElems.forEach((coin, i) => {
+      if (i > 0) {
+        const plus = document.createElement("span");
+        plus.className = "expr-sign";
+        plus.textContent = "+";
+        coins.appendChild(plus);
+      }
+      coins.appendChild(coin);
+    });
+  }
 })();
 
 
