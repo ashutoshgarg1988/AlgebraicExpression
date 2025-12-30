@@ -11,23 +11,16 @@
 
   const soundBtn = document.getElementById("soundBtn"); 
   let introMuted = false;
-console.log(soundBtn);
 
   if (soundBtn) {
     soundBtn.addEventListener("click", () => {
       SoundManager.play("click");
       introMuted = !introMuted;
-console.log(soundBtn);
-
       if (introMuted) {
-        console.log("yes");
-        
         SoundManager.stop("introduction"); 
         soundBtn.src = "assets/images/common/audio-off.svg";
         soundBtn.setAttribute("title", "Unmute");
-      } else {
-        console.log("no");
-        
+      } else {        
         SoundManager.playSceneBg("introduction"); 
         soundBtn.src = "assets/images/common/sound-btn.svg";
         soundBtn.setAttribute("title", "Mute");
@@ -39,7 +32,7 @@ console.log(soundBtn);
   if (skipBtn) {
     skipBtn.addEventListener("click", () => {
       SoundManager.play("click");
-SoundManager.stopAll()
+      SoundManager.stopAll()
       loadView("menu");
       setTimeout(() => {
         if (!SoundManager.isBgmMuted()) {
@@ -47,7 +40,6 @@ SoundManager.stopAll()
         }
       }, 500);         
      // SoundManager.stopAll({ keepBgm: true });
-
     });
   }
 })();

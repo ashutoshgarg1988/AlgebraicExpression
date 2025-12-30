@@ -1,3 +1,14 @@
+.title-audio-wrapper {
+  display: inline-block;
+  position: relative;
+  top: 40px;
+}
+
+.intro-title {
+  top: 20px;
+  left: 215px;
+  width: 400px;
+}
 /* Row Wrapper */
 .cards-row {
   position: absolute;
@@ -84,15 +95,49 @@
 
 /* Tooltip image */
 .tooltip-wrapper .tooltip-img img {
-  width: 100%;
+  /* width: 100%; */
   height: auto;
 }
 
-/* Show tooltip on hover */
-.tooltip-wrapper:hover .tooltip-img {
+/* Tooltip hidden by default */
+.tooltip-wrapper .tooltip-img {
+  display: none;
+}
+
+/* Tooltip visible when active */
+.tooltip-wrapper.active .tooltip-img {
   display: block;
 }
 
+/* Close button inside tooltip */
+.tooltip-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 50px;
+  cursor: pointer
+}
+
+/* Optional hover feedback */
+.tooltip-close:hover {
+  transform: scale(1.1);
+}
+
+
+.easy {
+  top: -20px;
+  left: 368px;
+}
+
+.warmup {
+  top: -20px;
+  left: 861px;
+}
+
+.challenge {
+  top: -20px;
+  right: -32px;
+}
 
 /* .cards-row {
   position: absolute;
